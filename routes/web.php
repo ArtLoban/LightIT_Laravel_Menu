@@ -15,6 +15,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
+
+    Route::get('/', 'DashboardController@index');
+    Route::resource('/users', 'UsersController');
+    Route::resource('/dishes', 'DishesController');
+    Route::resource('/categories', 'CategoriesController');
+    Route::resource('/ingredients', 'IngredientsController');
+});
+
+//Route::get('/admin', 'Admin\DashboardController@index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
