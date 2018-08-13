@@ -22,15 +22,7 @@ class CategoriesController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'description' => '',
-            'category_id' => '',
-            'price' => '',
-            'weight' => '',
-            'image' => '',
-        ]);
-
+        $this->validate($request, ['name' => 'required']);
         $category = new Category($request->all());
         $category->save();
 

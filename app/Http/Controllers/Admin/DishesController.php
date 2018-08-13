@@ -27,7 +27,16 @@ class DishesController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, ['name' => 'required|string']);
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'description' => '',
+            'category_id' => '',
+            'price' => '',
+            'weight' => '',
+            'image' => '',
+            'ingredient_id' => '',
+        ]);
+
         $dish = new Dish($request->all());
         $dish->save();
 
