@@ -7,7 +7,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Добавить тег
+                Добавить пользователя
                 <small>приятные слова..</small>
             </h1>
         </section>
@@ -18,32 +18,49 @@
             <!-- Default box -->
             <div class="box">
 
-                {!! Form::open(['route' => ['tags.update', $tag->id],
-                                'method' => 'put']) !!}
+                {!! Form::open([
+                    'route' => ['users.update', $user->id],
+                    'method' => 'put'
+                ]) !!}
 
                 <div class="box-header with-border">
-                    <h3 class="box-title">Меняем тег</h3>
+                    <h3 class="box-title">Добавляем пользователя</h3>
                 </div>
                 <div class="box-body">
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Название</label>
-                            <input type="text" class="form-control" name="title" id="exampleInputEmail1"
-                                   placeholder="" value="{{ $tag->title }}">
-                        </div>
 
                         @include('admin.errors')
 
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Имя</label>
+                            <input type="text" class="form-control" name="name" id="exampleInputEmail1" placeholder="" value="{{ $user->name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">E-mail</label>
+                            <input type="text" class="form-control" name="email" id="exampleInputEmail1" placeholder="" value="{{ $user->email }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Пароль</label>
+                            <input type="password" class="form-control" name="password" id="exampleInputEmail1" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label>Статус пользователя</label>
+                            <select class="form-control" name="role_id">
+                                <option value="1">Editor</option>
+                                <option value="2">Admin</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <a href="{{ route('tags.index')}}" class="btn btn-default">Назад</a>
-                    <button class="btn btn-warning pull-right">Изменить</button>
+                    <button class="btn btn-warning">Изменить</button>
+                    <a href="{{ route('users.index')}}" class="btn btn-default">Назад</a>
                 </div>
                 <!-- /.box-footer-->
 
                 {!! Form::close() !!}
+
             </div>
             <!-- /.box -->
 

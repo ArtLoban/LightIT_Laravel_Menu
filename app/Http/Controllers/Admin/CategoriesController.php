@@ -22,7 +22,15 @@ class CategoriesController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, ['name' => 'required']);
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'description' => '',
+            'category_id' => '',
+            'price' => '',
+            'weight' => '',
+            'image' => '',
+        ]);
+
         $category = new Category($request->all());
         $category->save();
 
@@ -50,7 +58,5 @@ class CategoriesController extends Controller
 
         return redirect()->route('categories.index');
     }
-
-
 
 }

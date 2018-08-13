@@ -8,7 +8,6 @@
         <section class="content-header">
             <h1>
                 Добавить пользователя
-                <small>приятные слова..</small>
             </h1>
         </section>
 
@@ -40,9 +39,9 @@
                             </div>
                             <div class="form-group">
                                 <label>Статус пользователя</label>
-                                <select class="form-control">
-                                    <option>Admin</option>
-                                    <option>Editor</option>
+                                <select class="form-control" name="role_id">
+                                    <option value="1">Editor</option>
+                                    <option value="2">Admin</option>
                                 </select>
                             </div>
                             {{--<div class="form-group">--}}

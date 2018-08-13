@@ -47,9 +47,6 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->role_id }}</td>
                                     <td>
-                                        <img src="" alt="" class="img-responsive" width="150">
-                                    </td>
-                                    <td>
                                         <a href="{{ route('users.edit', $user->id) }}" class="fa fa-pencil"></a>
                                         {!! Form::open(['route' => ['users.destroy', $user->id],
                                     'method' => 'delete']) !!}
