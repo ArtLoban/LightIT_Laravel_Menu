@@ -7,8 +7,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Добавить категорию
-                <small>приятные слова..</small>
+                Изменить категорию
             </h1>
         </section>
 
@@ -28,8 +27,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Название</label>
-                            <input type="text" class="form-control" name="title" id="exampleInputEmail1"
-                                   placeholder="" value="{{ $category->title }}">
+                            <input type="text" class="form-control" name="name" id="exampleInputEmail1"
+                                   placeholder="" value="{{ $category->name }}">
                         </div>
 
                             @include('admin.errors')
@@ -38,8 +37,8 @@
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
+                    <button class="btn btn-warning">Изменить</button>
                     <button class="btn btn-default">Назад</button>
-                    <button class="btn btn-warning pull-right">Изменить</button>
                 </div>
                 <!-- /.box-footer-->
 

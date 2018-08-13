@@ -39,17 +39,24 @@
                                 <input type="password" name="password" class="form-control" id="exampleInputEmail1" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputFile">Аватар</label>
-                                <input type="file" name="avatar" id="exampleInputFile">
-
-                                <p class="help-block">Какое-нибудь уведомление о форматах..</p>
+                                <label>Статус пользователя</label>
+                                <select class="form-control">
+                                    <option>Admin</option>
+                                    <option>Editor</option>
+                                </select>
                             </div>
+                            {{--<div class="form-group">--}}
+                                {{--<label for="exampleInputFile">Аватар</label>--}}
+                                {{--<input type="file" name="avatar" id="exampleInputFile">--}}
+
+                                {{--<p class="help-block">Какое-нибудь уведомление о форматах..</p>--}}
+                            {{--</div>--}}
                         </div>
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
+                        <button class="btn btn-success">Добавить</button>
                         <a href="{{ route('users.index')}}" class="btn btn-default">Назад</a>
-                        <button class="btn btn-success pull-right">Добавить</button>
                     </div>
                     <!-- /.box-footer-->
                 </div>

@@ -7,8 +7,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Добавить категорию
-            <small>приятные слова..</small>
+            Добавить категорию блюда
         </h1>
     </section>
 
@@ -27,7 +26,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Название</label>
-                        <input type="text" class="form-control" name="title" id="exampleInputEmail1" placeholder="">
+                        <input type="text" class="form-control" name="name" id="exampleInputEmail1" placeholder="">
                     </div>
 
                     @include('admin.errors')
@@ -36,8 +35,8 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
+                <button class="btn btn-success">Добавить</button>
                 <a href="{{ route('categories.index')}}" class="btn btn-default">Назад</a>
-                <button class="btn btn-success pull-right">Добавить</button>
             </div>
             <!-- /.box-footer-->
             {!! Form::close() !!}

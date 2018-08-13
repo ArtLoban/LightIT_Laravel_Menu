@@ -205,14 +205,14 @@
             <ul class="sidebar-menu">
                 <li class="header">MAIN NAVIGATION</li>
                 <li class="treeview">
-                    <a href="#">
+                    <a href="/admin">
                         <i class="fa fa-dashboard"></i> <span>Админ-панель</span>
                     </a>
                 </li>
                 <li><a href="#"><i class="fa fa-book"></i> <span>Блюда</span></a></li>
-                <li><a href="#"><i class="fa fa-list-ul"></i> <span>Категории блюд</span></a></li>
+                <li><a href="{{ route('categories.index') }}"><i class="fa fa-list-ul"></i> <span>Категории блюд</span></a></li>
                 <li><a href="#"><i class="fa fa-hand-pointer-o"></i> <span>Ингредиенты</span></a></li>
-                <li><a href="#"><i class="fa fa-users"></i> <span>Пользователи</span></a></li>
+                <li><a href="{{ route('users.index') }}"><i class="fa fa-users"></i> <span>Пользователи</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->

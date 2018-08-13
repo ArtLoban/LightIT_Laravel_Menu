@@ -7,14 +7,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Blank page
-        <small>it all starts here</small>
+        Список категорий блюд
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Examples</a></li>
-        <li class="active">Blank page</li>
-      </ol>
+      {{--<ol class="breadcrumb">--}}
+        {{--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>--}}
+        {{--<li><a href="#">Examples</a></li>--}}
+        {{--<li class="active">Blank page</li>--}}
+      {{--</ol>--}}
     </section>
 
     <!-- Main content -->
@@ -42,7 +41,7 @@
                 @foreach( $categories as $category)
                     <tr>
                         <td>{{ $category->id }}</td>
-                        <td>{{ $category->title }}</td>
+                        <td>{{ $category->name }}</td>
                         <td>
                             <a href="{{ route('categories.edit', $category->id) }}" class="fa fa-pencil"></a>
                             {!! Form::open(['route' => ['categories.destroy', $category->id],
