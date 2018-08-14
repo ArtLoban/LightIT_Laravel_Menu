@@ -29,13 +29,15 @@ class DishesController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string|max:255',
-            'description' => '',
-            'category_id' => '',
-            'price' => '',
-            'weight' => '',
-            'image' => '',
-            'ingredient_id' => '',
+            'description' => 'nullable|string',
+            'category_id' => 'nullable',
+            'price' => 'nullable',
+            'weight' => 'nullable',
+            'image' => 'nullable',
+            'ingredient_id' => 'nullable',
         ]);
+
+        dd($request->all());
 
         $dish = new Dish($request->all());
         $dish->save();

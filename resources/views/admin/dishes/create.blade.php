@@ -37,7 +37,8 @@
                     </div>
                     <div class="form-group">
                         <label>Категория блюда</label>
-                        <select class="form-control" name="category_id">
+                        <select name="category_id" class="form-control">
+                            <option></option>
                             @foreach($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
@@ -45,7 +46,7 @@
                     </div>
                     <div class="form-group">
                         <label>Ингредиенты</label>
-                        <select class="form-control select2 select2-hidden-accessible" multiple="" data-placeholder="Select here" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                        <select name="ingredient_id[]" class="form-control select2 select2-hidden-accessible" multiple data-placeholder="Select here" style="width: 100%;" tabindex="-1" aria-hidden="true">
                             @foreach($ingredients as $ingredient)
                                 <option value="{{ $ingredient->id }}">{{ $ingredient->name }}</option>
                             @endforeach
