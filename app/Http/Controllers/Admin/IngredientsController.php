@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Ingredient;
-use Illuminate\Http\Request;
+use App\Http\Requests\Ingredient\StoreRequest;
+use App\Http\Requests\Ingredient\UpdateRequest;
+use App\Services\Repositories\IngredientRepository;
 use App\Http\Controllers\Controller;
 
 class IngredientsController extends Controller
 {
+    private $ingredientRepository;
+
+    public function __construct(IngredientRepository $ingredientRepository)
+    {
+        $this->ingredientRepository = $ingredientRepository;
+    }
+
     public function index()
     {
-        $ingredients = Ingredient::all();
-
-        return view('admin.ingredients.index', ['ingredients' => $ingredients]);
+        return view('admin.ingredients.index', ['ingredients' => $this->ingredientRepository->all()]);
     }
 
     public function create()
@@ -20,33 +26,28 @@ class IngredientsController extends Controller
         return view('admin.ingredients.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $this->validate($request, ['name' => 'required|string']);
-        $ingredient = new Ingredient($request->all());
-        $ingredient->save();
+        $this->ingredientRepository->create($request->all());
 
         return redirect()->route('ingredients.index');
     }
 
     public function edit($id)
     {
-        $ingredient = Ingredient::find($id);
-        return view('admin.ingredients.edit', ['ingredient' => $ingredient]);
+        return view('admin.ingredients.edit', ['ingredient' => $this->ingredientRepository->find($id)]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        $this->validate($request, ['name' => 'required|string']);
-        $ingredient = Ingredient::find($id);
-        $ingredient->update($request->all());
+        $this->ingredientRepository->find($id)->update($request->all());
 
         return redirect()->route('ingredients.index');
     }
 
     public function destroy($id)
     {
-        Ingredient::find($id)->delete();
+        $this->ingredientRepository->find($id)->delete();
 
         return redirect()->route('ingredients.index');
     }

@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Http\Requests\Category\StoreRequest;
+use App\Http\Requests\Category\UpdateRequest;
+use App\Services\Repositories\CategoryRepository;
 use App\Http\Controllers\Controller;
 
 class CategoriesController extends Controller
 {
+    private $categoryRepository;
+
+    public function __construct(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
     public function index()
     {
-        $categories = Category::all();
-
-        return view('admin.categories.index', ['categories' => $categories]);
+        return view('admin.categories.index', ['categories' => $this->categoryRepository->all()]);
     }
 
     public function create()
@@ -20,33 +26,28 @@ class CategoriesController extends Controller
         return view('admin.categories.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $this->validate($request, ['name' => 'required']);
-        $category = new Category($request->all());
-        $category->save();
+        $this->categoryRepository->create($request->all());
 
         return redirect()->route('categories.index');
     }
 
     public function edit($id)
     {
-        $category = Category::find($id);
-        return view('admin.categories.edit', ['category' => $category]);
+        return view('admin.categories.edit', ['category' => $this->categoryRepository->find($id)]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        $this->validate($request, ['name' => 'required']);
-        $category = Category::find($id);
-        $category->update($request->all());
+        $this->categoryRepository->find($id)->update($request->all());
 
         return redirect()->route('categories.index');
     }
 
     public function destroy($id)
     {
-        Category::find($id)->delete();
+        $this->categoryRepository->find($id)->delete();
 
         return redirect()->route('categories.index');
     }

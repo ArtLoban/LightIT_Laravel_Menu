@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Dish\StoreRequest;
 use App\Models\Category;
 use App\Models\Dish;
 use App\Models\Ingredient;
+use App\Services\Repositories\DishRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class DishesController extends Controller
 {
-    public function index()
+    public function index(DishRepository $dishRepository)
     {
-        $dishes = Dish::all();
-
-        return view('admin.dishes.index', ['dishes' => $dishes]);
+        return view('admin.dishes.index', ['dishes' => $dishRepository->all()]);
     }
 
     public function create()
@@ -25,20 +25,8 @@ class DishesController extends Controller
         return view('admin.dishes.create', ['categories' => $categories, 'ingredients' => $ingredients]);
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'category_id' => 'nullable',
-            'price' => 'nullable',
-            'weight' => 'nullable',
-            'image' => 'nullable',
-            'ingredient_id' => 'nullable',
-        ]);
-
-        dd($request->all());
-
         $dish = new Dish($request->all());
         $dish->save();
 

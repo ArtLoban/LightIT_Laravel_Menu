@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Services\Repositories\UserRepository;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,10 +16,9 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(UserRepository $repository)
     {
-        $users = User::all();
-        return view('admin.users.index', ['users' => $users]);
+        return view('admin.users.index', ['users' => $repository->all()]);
     }
 
     public function create()

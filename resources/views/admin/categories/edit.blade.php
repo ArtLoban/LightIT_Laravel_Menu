@@ -38,7 +38,7 @@
                 <!-- /.box-body -->
                 <div class="box-footer">
                     <button class="btn btn-warning">Изменить</button>
-                    <button class="btn btn-default">Назад</button>
+                    <button class="{{ route('categories.index')}}">Назад</button>
                 </div>
                 <!-- /.box-footer-->
 
