@@ -15,4 +15,5 @@ class Permition extends Model
             'role_id'
         );
     }
+
 }

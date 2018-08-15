@@ -24,17 +24,17 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules =[
             'name' => 'required|string|max:255',
-            'email' => [
-                'required',
-                'string',
-                'email',
-                'max:255',
-                Rule::unique('users')->ignore($user->id),
-            ],
+            'email' => 'required|unique:users|string|email|max:255',
             'password' => 'nullable|string|min:6',
             'role_id' => 'required'
         ];
+
+        if ($this->updatedUserId) {
+            $rules['email'] = sprintf('required|unique:users,email,%s|string|email|max:255', $this->updatedUserId);
+        }
+
+        return $rules;
     }
 }

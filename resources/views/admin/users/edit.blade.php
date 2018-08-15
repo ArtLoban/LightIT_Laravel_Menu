@@ -30,7 +30,7 @@
                     <div class="col-md-6">
 
                         @include('admin.errors')
-
+                        <input type="hidden" name="updatedUserId" value="{{ $user->id }}">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Имя</label>
                             <input type="text" class="form-control" name="name" id="exampleInputEmail1" placeholder="" value="{{ $user->name }}">
