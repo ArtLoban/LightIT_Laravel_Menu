@@ -46,6 +46,7 @@
                         <div class="form-group">
                             <label>Статус пользователя</label>
                             <select class="form-control" name="role_id">
+                                <option value="" disabled selected>Select your option</option>
                                 <option value="1">Editor</option>
                                 <option value="2">Admin</option>
                             </select>

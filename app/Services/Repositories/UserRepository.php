@@ -13,6 +13,11 @@ class UserRepository extends Repository
         return User::class;
     }
 
+    public function getAllWith(array $relations)
+    {
+        return $this->className::with($relations)->get();
+    }
+
     /**
      * Store a newly created resource in storage with hashed password field.
      *

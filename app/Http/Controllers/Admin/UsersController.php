@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
+use App\Models\User;
 use App\Services\InputTransform\UserUpdateDataTransform;
 use App\Services\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
@@ -31,7 +32,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index', ['users' => $this->userRepository->all()]);
+        return view('admin.users.index', ['users' => $this->userRepository->getAllWith(['role'])]);
     }
 
     /**

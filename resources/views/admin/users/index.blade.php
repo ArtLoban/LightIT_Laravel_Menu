@@ -45,7 +45,7 @@
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ $user->role_id }}</td>
+                                    <td>{{ $user->role->name }}</td>
                                     <td>
                                         <a href="{{ route('users.edit', $user->id) }}" class="fa fa-pencil"></a>
                                         {!! Form::open(['route' => ['users.destroy', $user->id],
