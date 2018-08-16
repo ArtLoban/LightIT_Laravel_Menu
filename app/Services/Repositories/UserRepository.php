@@ -26,19 +26,4 @@ class UserRepository extends Repository
 
         return $this->className::create($params);
     }
-
-    /**
-     * @param array $params
-     * @return bool
-     */
-    public function update(array $params)
-    {
-        if ($params['password']) {
-            $params['password'] = Hash::make($params['password']);
-        } elseif ($params['password'] === null) {
-            unset($params['password']);
-        }
-
-        return $this->className::update($params);
-    }
 }

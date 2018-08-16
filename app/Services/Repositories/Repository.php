@@ -63,16 +63,6 @@ abstract class Repository
     }
 
     /**
-     * @param  Model $model
-     * @param array $params
-     * @return bool
-     */
-    public function AAAAAAupdate(Model $model, array $params)
-    {
-        return $model->update($params);
-    }
-
-    /**
      * @param int $id
      * @return Model|null
      */

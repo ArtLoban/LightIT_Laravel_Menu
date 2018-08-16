@@ -151,6 +151,7 @@ return [
         /*
          * Package Service Providers...
          */
+        App\Providers\HelpersServiceProvider::class,
 
         /*
          * Application Service Providers...

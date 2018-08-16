@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
+use App\Services\InputTransform\UserUpdateDataTransform;
 use App\Services\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
 
@@ -66,10 +67,9 @@ class UsersController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(UpdateRequest $request, UserUpdateDataTransform $transformer, $id)
     {
-        dd($request->all());
-        $this->userRepository->updateById($id, $request->all());
+        $this->userRepository->updateById($id, $transformer->transform($request->except('_token', '_method', 'updatedUserId')));
 
         return redirect()->route('users.index');
     }
