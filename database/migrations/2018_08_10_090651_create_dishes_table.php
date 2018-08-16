@@ -18,7 +18,7 @@ class CreateDishesTable extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->reference('id')->on('categories')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->decimal('price')->nullable();
             $table->integer('weight')->nullable();
             $table->string('image')->nullable();

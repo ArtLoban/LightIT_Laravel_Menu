@@ -2,7 +2,6 @@
 
 namespace App\Services\InputTransform;
 
-
 use App\Helpers\Hash\HashServiceInterface;
 
 /**

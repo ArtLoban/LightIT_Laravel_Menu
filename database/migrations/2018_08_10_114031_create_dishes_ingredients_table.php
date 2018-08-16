@@ -15,8 +15,10 @@ class CreateDishesIngredientsTable extends Migration
     {
         Schema::create('dishes_ingredients', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('dish_id');
-            $table->integer('ingredient_id');
+            $table->integer('dish_id')->unsigned();
+            $table->foreign('dish_id')->references('id')->on('dishes');
+            $table->integer('ingredient_id')->unsigned();
+            $table->foreign('ingredient_id')->references('id')->on('ingredients');
             $table->timestamps();
         });
     }
