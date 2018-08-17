@@ -11,4 +11,21 @@ class CategoryRepository extends Repository
         return Category::class;
     }
 
+    public function create(array $params)
+    {
+        $params['image'] = $this->uploadImage($params['image']);
+
+        return $this->className::create($params);
+    }
+
+    public function getImage(){
+
+        if( $this->image == null ){
+
+            return '/img/no_image.png';
+        }
+
+        return '/uploads/' . $this->image;
+    }
+
 }

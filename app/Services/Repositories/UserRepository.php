@@ -13,8 +13,13 @@ class UserRepository extends Repository
         return User::class;
     }
 
+    /**
+     * @param array $relations
+     * @return mixed
+     */
     public function getAllWith(array $relations)
     {
+//        dd($this->className::with($relations)->get());
         return $this->className::with($relations)->get();
     }
 
@@ -28,7 +33,6 @@ class UserRepository extends Repository
         if ($params['password']) {
             $params['password'] = Hash::make($params['password']);
         }
-
         return $this->className::create($params);
     }
 }

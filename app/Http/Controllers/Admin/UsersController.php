@@ -32,6 +32,8 @@ class UsersController extends Controller
      */
     public function index()
     {
+//        $user = $this->userRepository->getAllWith(['role']);
+//        dd($user->first()->role->name);
         return view('admin.users.index', ['users' => $this->userRepository->getAllWith(['role'])]);
     }
 
@@ -60,6 +62,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
+//        dd($this->userRepository->find($id)->with('role')->get());
+//        dd(get_class_methods($this->userRepository->find($id)->with('role')->get()));
+//        return view('admin.users.edit', ['user' => $this->userRepository->find($id)]);
         return view('admin.users.edit', ['user' => $this->userRepository->find($id)]);
     }
 

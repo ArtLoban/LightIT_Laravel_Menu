@@ -17,20 +17,30 @@
         <!-- Default box -->
         <div class="box">
 
-            {!! Form::open(['route' => 'categories.store']) !!}
+            {!! Form::open(['route' => 'categories.store', 'files' => true]) !!}
 
             <div class="box-header with-border">
                 <h3 class="box-title">Добавляем категорию</h3>
             </div>
             <div class="box-body">
                 <div class="col-md-6">
+
+                    @include('admin.errors')
+
                     <div class="form-group">
                         <label for="exampleInputEmail1">Название</label>
                         <input type="text" class="form-control" name="name" id="exampleInputEmail1" placeholder="">
                     </div>
+                    <div class="form-group">
+                        <label>Описание категории</label>
+                        <textarea class="form-control" name="description" rows="4" placeholder="Enter ..." value="{{ old('description') }}"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">Загрузить изображение категории</label>
+                        <input type="file" name="image" id="exampleInputFile">
 
-                    @include('admin.errors')
-
+                        <p class="help-block">уведомление о форматах..</p>
+                    </div>
                 </div>
             </div>
             <!-- /.box-body -->

@@ -5,6 +5,8 @@ namespace App\Services\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 abstract class Repository
 {
@@ -44,6 +46,15 @@ abstract class Repository
     }
 
     /**
+     * @param $params
+     * @return mixed
+     */
+    public function save()
+    {
+        return $this->className::save();
+    }
+
+    /**
      * @param int $id
      * @param array $params
      * @return bool
@@ -70,4 +81,5 @@ abstract class Repository
     {
         return $this->className::whereId($id)->first();
     }
+
 }

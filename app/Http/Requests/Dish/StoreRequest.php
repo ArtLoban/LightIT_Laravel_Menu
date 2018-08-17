@@ -31,7 +31,7 @@ class StoreRequest extends FormRequest
             'category_id' => 'nullable',
             'price' => 'nullable',
             'weight' => 'nullable',
-            'image' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,jpg,bmp,png|max:1024',
             'ingredient_id' => 'nullable',
         ];
     }

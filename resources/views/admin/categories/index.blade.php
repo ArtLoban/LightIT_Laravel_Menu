@@ -9,11 +9,6 @@
       <h1>
         Список категорий блюд
       </h1>
-      {{--<ol class="breadcrumb">--}}
-        {{--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>--}}
-        {{--<li><a href="#">Examples</a></li>--}}
-        {{--<li class="active">Blank page</li>--}}
-      {{--</ol>--}}
     </section>
 
     <!-- Main content -->
@@ -34,6 +29,8 @@
                 <tr>
                   <th>ID</th>
                   <th>Название</th>
+                  <th>Описание</th>
+                  <th>Изображение</th>
                   <th>Действия</th>
                 </tr>
                 </thead>
@@ -42,6 +39,10 @@
                     <tr>
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->name }}</td>
+                        <td>{{ $category->description }}</td>
+                        <td>
+                            <img src="{{ '/storage/uploads/'.$category->image }}" alt="" class="img-responsive" width="150">
+                        </td>
                         <td>
                             <a href="{{ route('categories.edit', $category->id) }}" class="fa fa-pencil"></a>
                             {!! Form::open(['route' => ['categories.destroy', $category->id],

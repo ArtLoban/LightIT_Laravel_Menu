@@ -13,7 +13,7 @@ class Category extends Model
     /**
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'description', 'image'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
