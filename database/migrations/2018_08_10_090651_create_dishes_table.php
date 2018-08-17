@@ -21,7 +21,7 @@ class CreateDishesTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->decimal('price')->nullable();
             $table->integer('weight')->nullable();
-            $table->string('image')->nullable();
+//            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

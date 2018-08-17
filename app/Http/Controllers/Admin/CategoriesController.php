@@ -29,7 +29,7 @@ class CategoriesController extends Controller
     public function store(StoreRequest $request)
     {
         dd($request->file('image')->store('public/uploads'));
-        dd(get_class_methods($request->file('image')));
+
         $this->categoryRepository->create($request->all());
 
         return redirect()->route('categories.index');
