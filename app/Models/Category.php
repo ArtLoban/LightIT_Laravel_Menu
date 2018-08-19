@@ -13,13 +13,15 @@ class Category extends Model
     /**
      * @var array
      */
-    protected $fillable = ['name', 'description', 'image'];
+    protected $fillable = ['name', 'description'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * Get all images of category
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
-    public function dishes()
+    public function images()
     {
-        return $this->hasMany(Dish::class);
+        return $this->morphMany('App\Models\Image', 'imageable');
     }
 }

@@ -6,13 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
-    public function entities()
+    /**
+     * @var array
+     */
+    protected $fillable = ['path', 'is_title', 'is_preview'];
+
+    /**
+     * Получить все модели, обладающие commentable
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
+    public function imageable()
     {
-        return $this->belongsToMany(
-            Image::class,
-            'entity_image',
-            'image_id',
-            'entity_id'
-        );
+        return $this->morphTo();
     }
 }

@@ -18,4 +18,14 @@ class Ingredient extends Model
         );
     }
 
+    /**
+     * Get all images of ingredient
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function images()
+    {
+        return $this->morphMany('App\Models\Image', 'imageable');
+    }
+
 }

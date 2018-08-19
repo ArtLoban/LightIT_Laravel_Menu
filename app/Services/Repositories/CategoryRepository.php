@@ -3,6 +3,7 @@
 namespace App\Services\Repositories;
 
 use App\Models\Category;
+use App\Services\UploadedFiles\ImageUpload;
 
 class CategoryRepository extends Repository
 {
@@ -11,21 +12,12 @@ class CategoryRepository extends Repository
         return Category::class;
     }
 
-    public function create(array $params)
+    public function createWithImage($request)
     {
-        $params['image'] = $this->uploadImage($params['image']);
+//        dd($this->className);
+        self::images()->attach($request->file('image')->getClientOriginalName());
 
-        return $this->className::create($params);
-    }
-
-    public function getImage(){
-
-        if( $this->image == null ){
-
-            return '/img/no_image.png';
-        }
-
-        return '/uploads/' . $this->image;
+        return $this->className::create($request);
     }
 
 }

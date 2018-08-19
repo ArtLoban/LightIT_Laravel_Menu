@@ -30,4 +30,14 @@ class Dish extends Model
             'ingredient_id'
         );
     }
+
+    /**
+     * Get all images of dish
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function images()
+    {
+        return $this->morphMany('App\Models\Image', 'imageable');
+    }
 }
