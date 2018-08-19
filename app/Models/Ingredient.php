@@ -12,7 +12,7 @@ class Ingredient extends Model
     {
         return $this->belongsToMany(
             Dish::class,
-            'dishes_ingredients',
+            'dish_ingredient',
             'ingredient_id',
             'dish_id'
         );

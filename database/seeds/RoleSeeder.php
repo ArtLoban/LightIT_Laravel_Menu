@@ -12,8 +12,6 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-//        factory(\App\Models\Role::class, 3)->create();
-
         DB::table('roles')->insert([
             ['name' => 'Editor'],
             ['name' => 'Admin'],

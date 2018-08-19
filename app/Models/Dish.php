@@ -25,7 +25,7 @@ class Dish extends Model
 
         return $this->belongsToMany(
             Ingredient::class,
-            'dishes_ingredients',
+            'dish_ingredient',
             'dish_id',
             'ingredient_id'
         );

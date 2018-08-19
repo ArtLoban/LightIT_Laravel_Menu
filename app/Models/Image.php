@@ -10,7 +10,7 @@ class Image extends Model
     {
         return $this->belongsToMany(
             Image::class,
-            'entities_images',
+            'entity_image',
             'image_id',
             'entity_id'
         );
