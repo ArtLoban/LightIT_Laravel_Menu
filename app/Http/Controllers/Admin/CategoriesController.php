@@ -58,7 +58,6 @@ class CategoriesController extends Controller
         $category = $this->categoryRepository->create($request->all());
 
         $data = $imageRepository->handleImage($category, $request);
-
         $imageRepository->create($data);
 
         return redirect()->route('categories.index');
@@ -81,6 +80,7 @@ class CategoriesController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         $this->categoryRepository->find($id)->update($request->all());
+//        dd($request->all());
 
         return redirect()->route('categories.index');
     }

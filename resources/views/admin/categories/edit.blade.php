@@ -29,6 +29,7 @@
 
                         @include('admin.errors')
 
+                        <input type="hidden" name="updatedCategoryId" value="{{ $category->id }}">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Название</label>
                             <input type="text" class="form-control" name="name" id="exampleInputEmail1"
@@ -36,7 +37,7 @@
                         </div>
                         <div class="form-group">
                             <label>Описание категории</label>
-                            <textarea class="form-control" name="description" rows="4" placeholder="Enter ..." value="{{ old('description') }}"></textarea>
+                            <textarea class="form-control" name="description" rows="4" placeholder="Enter ..." value="">{{ $category->description }}</textarea>
                         </div>
                         <div class="form-group">
                             <img src="{{ '/storage/uploads/'.$category->image }}" alt="" class="img-responsive" width="150">

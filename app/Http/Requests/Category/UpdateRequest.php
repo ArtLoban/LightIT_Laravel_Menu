@@ -23,8 +23,16 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required|string|unique:categories|max:255'
+        $rules =[
+            'name' => 'required|string|unique:categories|max:255',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,jpg,bmp,png|max:1024'
         ];
+
+        if ($this->updatedCategoryId) {
+            $rules['name'] = sprintf('required|string|unique:categories,name,%s|max:255', $this->updatedCategoryId);
+        }
+
+        return $rules;
     }
 }
