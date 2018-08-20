@@ -2,16 +2,17 @@
 
 namespace App\Services\Repositories;
 
-use App\Models\Ingredient;
+use App\Models\Image;
 use App\Services\ImageUploader\ImageUpload;
 
-class IngredientRepository extends Repository
+class ImageRepository extends Repository
 {
     /**
      * Instance of App\Services\ImageUploader\ImageUpload
      * @var ImageUpload
      */
-    private $imageUpload;
+    protected $imageUpload;
+
 
     /**
      * UserRepository constructor.
@@ -25,7 +26,10 @@ class IngredientRepository extends Repository
 
     protected function getClassName()
     {
-        return Ingredient::class;
+        return Image::class;
     }
+
+
+
 
 }

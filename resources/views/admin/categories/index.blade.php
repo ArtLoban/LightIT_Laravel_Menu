@@ -41,7 +41,12 @@
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->description }}</td>
                         <td>
-                            <img src="{{ '/storage/uploads/'.$category->image }}" alt="" class="img-responsive" width="150">
+                            <img src="{{ asset(
+                                $category->image
+                                    ? $category->image->path
+                                    : App\Services\ImageUploader\ImageUpload::DEFAULT_MO_IMAGE_PATH
+                                    ) }}"
+                                 alt="" class="img-responsive" width="150">
                         </td>
                         <td>
                             <a href="{{ route('categories.edit', $category->id) }}" class="fa fa-pencil"></a>

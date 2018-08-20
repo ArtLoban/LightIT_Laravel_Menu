@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Category\StoreRequest;
 use App\Http\Requests\Category\UpdateRequest;
-use App\Models\Category;
 use App\Services\Repositories\CategoryRepository;
 use App\Http\Controllers\Controller;
+use App\Services\ImageUploader\ImageUpload;
+use App\Services\Repositories\ImageRepository;
 
 class CategoriesController extends Controller
 {
@@ -44,12 +45,14 @@ class CategoriesController extends Controller
      * @param StoreRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request, ImageRepository $imageRepository)
     {
-        $path = $request->file('image')->store('public/uploads');
-//        dd($request->file('image')->store('public/uploads'));
-        $category = $this->categoryRepository->create($request->all());
-        $category->images()->create(['path' => $path]);
+
+        $category =  $this->categoryRepository->create($request->all());
+
+        $a = $imageRepository->handleImage($category, $request);
+
+        $imageRepository->create(['path' => $a, 'imageable_id' => 5, 'imageable_type' => 'string']);
 
         return redirect()->route('categories.index');
     }

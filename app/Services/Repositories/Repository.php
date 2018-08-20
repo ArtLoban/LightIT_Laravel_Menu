@@ -2,7 +2,6 @@
 
 namespace App\Services\Repositories;
 
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\UploadedFile;
@@ -80,6 +79,19 @@ abstract class Repository
     public function whereId(int $id)
     {
         return $this->className::whereId($id)->first();
+    }
+
+    public function handleImage($entityObject, $request)
+    {
+        // get image path
+        // get entity id and entity full class name
+        // return them to save in DB
+
+        $path = $this->imageUpload->getImagePath($request);
+
+        return $path;
+
+
     }
 
 }

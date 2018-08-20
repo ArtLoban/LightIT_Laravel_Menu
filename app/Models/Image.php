@@ -9,7 +9,13 @@ class Image extends Model
     /**
      * @var array
      */
-    protected $fillable = ['path', 'is_title', 'is_preview'];
+    protected $fillable = [
+        'path',
+        'is_title',
+        'is_preview',
+        'imageable_id',
+        'imageable_type'
+    ];
 
     /**
      * Получить все модели, обладающие commentable
