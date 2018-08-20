@@ -13,7 +13,6 @@ class ImageRepository extends Repository
      */
     protected $imageUpload;
 
-
     /**
      * UserRepository constructor.
      * @param ImageUpload $imageUpload
@@ -28,8 +27,5 @@ class ImageRepository extends Repository
     {
         return Image::class;
     }
-
-
-
 
 }

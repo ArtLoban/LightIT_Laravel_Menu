@@ -35,12 +35,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach( $categories as $category)
+                @foreach($categories as $category)
                     <tr>
                         <td>{{ $category->id }}</td>
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->description }}</td>
                         <td>
+                            {{--<span>{{ $category->image ? $category->image->path : null }}</span>--}}
+
                             <img src="{{ asset(
                                 $category->image
                                     ? $category->image->path

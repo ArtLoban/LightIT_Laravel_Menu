@@ -81,17 +81,24 @@ abstract class Repository
         return $this->className::whereId($id)->first();
     }
 
-    public function handleImage($entityObject, $request)
+    /**
+     * @param $entityObject
+     * @param $request
+     * @return array
+     */
+    public function handleImage($entityObject, $request) :array
     {
-        // get image path
-        // get entity id and entity full class name
-        // return them to save in DB
+        $entityId = $entityObject->id;
+        $entityClassName = get_class($entityObject);        // get entity id and entity full class name
+        $path = $this->imageUpload->getImagePath($request);  // get image path
 
-        $path = $this->imageUpload->getImagePath($request);
+        $data = [
+            'path' => $path,
+            'imageable_id' => $entityId,
+            'imageable_type' => $entityClassName
+        ];
 
-        return $path;
-
-
+        return $data;                               // return data to CategoriesController to save in DB
     }
 
 }

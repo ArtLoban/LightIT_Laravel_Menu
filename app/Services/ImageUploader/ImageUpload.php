@@ -25,6 +25,20 @@ class ImageUpload
      */
     private function getPath(UploadedFile $uploadedFile) :string
     {
-        return $uploadedFile->store('public/uploads');
+        $path =  $uploadedFile->store('public/uploads');
+//        dd($path);
+//        dd($this->editStoragePath($path));
+        return $this->editStoragePath($path);
+    }
+
+    /**
+     * Edit the path to storage folder
+     *
+     * @param string $path
+     * @return string
+     */
+    private function editStoragePath(string $path) :string
+    {
+        return str_replace('public', 'storage', $path);
     }
 }

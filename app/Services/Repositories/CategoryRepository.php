@@ -28,9 +28,4 @@ class CategoryRepository extends Repository
         return Category::class;
     }
 
-//    public function createWithImage($request)
-//    {
-//        return $this->className::create($request);
-//    }
-
 }

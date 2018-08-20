@@ -30,6 +30,14 @@ class CategoriesController extends Controller
      */
     public function index()
     {
+                        // GOOD EXAMPLE!!!
+                            // dd($this->categoryRepository->find(5)->image->path);            GOOD EXAMPLE!!!
+                            //  dd($this->categoryRepository->find(5)->image());           MorphOne
+                            //  dd($this->categoryRepository->find(5)->images());          MorphMany
+                            //  dd($this->categoryRepository->find(5)->image);       object Image
+                            //  dd($this->categoryRepository->find(5)->image->path);  Доступ к свойству path
+                        // GOOD EXAMPLE!!!
+
         return view('admin.categories.index', ['categories' => $this->categoryRepository->all()]);
     }
 
@@ -47,12 +55,11 @@ class CategoriesController extends Controller
      */
     public function store(StoreRequest $request, ImageRepository $imageRepository)
     {
+        $category = $this->categoryRepository->create($request->all());
 
-        $category =  $this->categoryRepository->create($request->all());
+        $data = $imageRepository->handleImage($category, $request);
 
-        $a = $imageRepository->handleImage($category, $request);
-
-        $imageRepository->create(['path' => $a, 'imageable_id' => 5, 'imageable_type' => 'string']);
+        $imageRepository->create($data);
 
         return redirect()->route('categories.index');
     }
