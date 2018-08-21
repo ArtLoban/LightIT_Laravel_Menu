@@ -35,6 +35,7 @@ class DishesController extends Controller
      */
     public function index(DishRepository $dishRepository)
     {
+//        dd($this->dishRepository->find(1)->ingredients());
         return view('admin.dishes.index', ['dishes' => $dishRepository->all()]);
     }
 
@@ -51,10 +52,30 @@ class DishesController extends Controller
         return view('admin.dishes.create', ['categories' => $categories, 'ingredients' => $ingredients]);
     }
 
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request, ImageRepository $imageRepository)
     {
-        $dish = new Dish($request->all());
-        $dish->save();
+//        dd($request->ingredient_id);
+        $dish = $this->dishRepository->create($request->all());
+//        dd($dish->ingredients());
+
+       // $dish->ingredients()->createMany([$request->ingredient_id]);
+
+//        $post = App\Post::find(1);
+//
+//        $post->comments()->createMany([
+//            [
+//                'message' => 'A new comment.',
+//            ],
+//            [
+//                'message' => 'Another new comment.',
+//            ],
+//        ]);
+
+
+        if($request->hasFile('image')) {
+            $data = $imageRepository->handleImage($dish, $request);
+            $imageRepository->create($data);
+        }
 
         return redirect()->route('dishes.index');
     }
@@ -67,10 +88,11 @@ class DishesController extends Controller
      */
     public function edit(CategoryRepository $categoryRepository, IngredientRepository $ingredientRepository, $id)
     {
-        return view('admin.dishes.edit', [
-            'dish' => $this->dishRepository->find($id),
-            'categories' => $categories = $categoryRepository->all(),
-            'ingredients' => $ingredients = $ingredientRepository->all()
+        return view('admin.dishes.edit')
+            ->with([
+                'dish' => $this->dishRepository->find($id),
+                'categories' => $categories = $categoryRepository->all(),
+                'ingredients' => $ingredients = $ingredientRepository->all()
             ]);
     }
 
@@ -83,9 +105,13 @@ class DishesController extends Controller
         return redirect()->route('dishes.index');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($id)
     {
-        Dish::find($id)->delete();
+        $this->dishRepository->find($id)->delete();
 
         return redirect()->route('dishes.index');
     }

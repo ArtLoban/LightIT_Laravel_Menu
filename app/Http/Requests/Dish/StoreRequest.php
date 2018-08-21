@@ -28,10 +28,10 @@ class StoreRequest extends FormRequest
         return [
             'name' => 'required|string|unique:dishes|max:255',
             'description' => 'nullable|string',
-            'category_id' => 'required|digits:100',
-            'ingredient_id' => 'required|digits:100',
-            'price' => 'nullable|numeric|max:9',
-            'weight' => 'nullable|numeric|integer|max:9',
+            'category_id' => 'required|integer',
+            'ingredient_id' => 'required',
+            'price' => 'nullable|numeric',
+            'weight' => 'nullable|numeric|integer',
             'image' => 'nullable|image|mimes:jpeg,jpg,bmp,png|max:1024',
         ];
     }

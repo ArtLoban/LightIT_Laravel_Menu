@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label>Описание блюда</label>
-                        <textarea class="form-control" name="description" rows="4" placeholder="Enter ..." value="{{ old('description') }}"></textarea>
+                        <textarea class="form-control" name="description" rows="4" placeholder="Enter ..." value="">{{ old('description') }}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Категория блюда</label>
@@ -62,7 +62,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">Загрузить изображение блюда</label>
-                        <input type="file" id="exampleInputFile">
+                        <input type="file" name="image" id="exampleInputFile">
 
                         <p class="help-block">уведомление о форматах..</p>
                     </div>

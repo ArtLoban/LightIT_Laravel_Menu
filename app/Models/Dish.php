@@ -12,8 +12,6 @@ class Dish extends Model
         'category_id',
         'price',
         'weight',
-        'image',
-        'ingredient_id'
         ];
 
     public function category()
