@@ -17,7 +17,7 @@
         <!-- Default box -->
         <div class="box">
 
-            {!! Form::open(['route' => 'dishes.store']) !!}
+            {!! Form::open(['route' => 'dishes.store', 'files' => true]) !!}
 
             <div class="box-header with-border">
                 <h3 class="box-title">Добавляем блюдо</h3>

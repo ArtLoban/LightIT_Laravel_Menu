@@ -17,21 +17,57 @@
             <!-- Default box -->
             <div class="box">
 
-                {!! Form::open(['route' => ['dishes.update', $dish->id],
-                                'method' => 'put']) !!}
+                {!! Form::open([
+                    'route' => ['dishes.update', $dish->id],
+                    'files' => true,
+                    'method' => 'put']) !!}
 
-                <div class="box-header with-border">
-                    <h3 class="box-title">Меняем категорию</h3>
-                </div>
                 <div class="box-body">
                     <div class="col-md-6">
+
+                        @include('admin.errors')
+
+                        <input type="hidden" name="updatedUserId" value="{{ $dish->id }}">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Название</label>
                             <input type="text" class="form-control" name="name" id="exampleInputEmail1"
                                    placeholder="" value="{{ $dish->name }}">
                         </div>
+                        <div class="form-group">
+                            <label>Описание блюда</label>
+                            <textarea class="form-control" name="description" rows="4" placeholder="Enter ..." value="{{ old('description') }}"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Категория блюда</label>
+                            <select name="category_id" class="form-control">
+                                <option></option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Ингредиенты</label>
+                            <select name="ingredient_id[]" class="form-control select2 select2-hidden-accessible" multiple data-placeholder="Select here" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                @foreach($ingredients as $ingredient)
+                                    <option value="{{ $ingredient->id }}">{{ $ingredient->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Цена, грн</label>
+                            <input type="text" class="form-control" name="price" id="exampleInputEmail1" placeholder="" value="{{ old('price') }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Вес, г</label>
+                            <input type="text" class="form-control" name="weight" id="exampleInputEmail1" placeholder="" value="{{ old('weight') }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">Загрузить изображение блюда</label>
+                            <input type="file" id="exampleInputFile">
 
-                            @include('admin.errors')
+                            <p class="help-block">уведомление о форматах..</p>
+                        </div>
 
                     </div>
                 </div>

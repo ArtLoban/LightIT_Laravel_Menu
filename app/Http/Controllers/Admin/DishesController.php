@@ -6,23 +6,47 @@ use App\Http\Requests\Dish\StoreRequest;
 use App\Models\Category;
 use App\Models\Dish;
 use App\Models\Ingredient;
+use App\Services\Repositories\CategoryRepository;
 use App\Services\Repositories\DishRepository;
+use App\Services\Repositories\ImageRepository;
+use App\Services\Repositories\IngredientRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class DishesController extends Controller
 {
+    /**
+     * @var DishRepository
+     */
+    private $dishRepository;
+
+    /**
+     * DishesController constructor.
+     * @param DishRepository $dishRepository
+     */
+    public function __construct(DishRepository $dishRepository)
+    {
+        $this->dishRepository = $dishRepository;
+    }
+
+    /**
+     * @param DishRepository $dishRepository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(DishRepository $dishRepository)
     {
-//        dd($dishRepository->find(1)->category->name);
-//        dd($dishRepository->find(1)->ingredients->toArray());
         return view('admin.dishes.index', ['dishes' => $dishRepository->all()]);
     }
 
-    public function create()
+    /**
+     * @param CategoryRepository $categoryRepository
+     * @param IngredientRepository $ingredientRepository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create(CategoryRepository $categoryRepository, IngredientRepository $ingredientRepository)
     {
-        $categories = Category::all();
-        $ingredients = Ingredient::all();
+        $categories = $categoryRepository->all();
+        $ingredients = $ingredientRepository->all();
 
         return view('admin.dishes.create', ['categories' => $categories, 'ingredients' => $ingredients]);
     }
@@ -35,10 +59,19 @@ class DishesController extends Controller
         return redirect()->route('dishes.index');
     }
 
-    public function edit($id)
+    /**
+     * @param CategoryRepository $categoryRepository
+     * @param IngredientRepository $ingredientRepository
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(CategoryRepository $categoryRepository, IngredientRepository $ingredientRepository, $id)
     {
-        $dish = Dish::find($id);
-        return view('admin.dishes.edit', ['dish' => $dish]);
+        return view('admin.dishes.edit', [
+            'dish' => $this->dishRepository->find($id),
+            'categories' => $categories = $categoryRepository->all(),
+            'ingredients' => $ingredients = $ingredientRepository->all()
+            ]);
     }
 
     public function update(Request $request, $id)

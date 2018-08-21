@@ -3,9 +3,8 @@
 namespace App\Http\Requests\Dish;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,6 @@ class StoreRequest extends FormRequest
      */
     public function authorize()
     {
-//        return Auth::getUser();
         return true;
     }
 
@@ -25,7 +23,8 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+
+        $rules =[
             'name' => 'required|string|unique:dishes|max:255',
             'description' => 'nullable|string',
             'category_id' => 'required|digits:100',
@@ -34,5 +33,11 @@ class StoreRequest extends FormRequest
             'weight' => 'nullable|numeric|integer|max:9',
             'image' => 'nullable|image|mimes:jpeg,jpg,bmp,png|max:1024',
         ];
+
+        if ($this->updatedDishId) {
+            $rules['name'] = sprintf('required|unique:dishes,name,%s|string|max:255', $this->updatedDishId);
+        }
+
+        return $rules;
     }
 }
