@@ -16,12 +16,11 @@ class CreateDishesTable extends Migration
         Schema::create('dishes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->integer('category_id')->unsigned()->index();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->decimal('price')->nullable();
             $table->integer('weight')->nullable();
-//            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

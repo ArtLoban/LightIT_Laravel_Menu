@@ -6,6 +6,7 @@ use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
 use App\Services\InputTransform\UserUpdateDataTransform;
+use App\Services\Repositories\ImageRepository;
 use App\Services\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
 
@@ -32,8 +33,6 @@ class UsersController extends Controller
      */
     public function index()
     {
-//        $user = $this->userRepository->getAllWith(['role']);
-//        dd($user->first()->role->name);
         return view('admin.users.index', ['users' => $this->userRepository->getAllWith(['role'])]);
     }
 
@@ -49,9 +48,14 @@ class UsersController extends Controller
      * @param StoreRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request, ImageRepository $imageRepository)
     {
-        $this->userRepository->create($request->all());
+        $user = $this->userRepository->create($request->all());
+
+        if($request->hasFile('image')) {
+            $data = $imageRepository->handleImage($user, $request);
+            $imageRepository->create($data);
+        }
 
         return redirect()->route('users.index');
     }
@@ -63,8 +67,7 @@ class UsersController extends Controller
     public function edit($id)
     {
 //        dd($this->userRepository->find($id)->with('role')->get());
-//        dd(get_class_methods($this->userRepository->find($id)->with('role')->get()));
-//        return view('admin.users.edit', ['user' => $this->userRepository->find($id)]);
+
         return view('admin.users.edit', ['user' => $this->userRepository->find($id)]);
     }
 
@@ -73,9 +76,15 @@ class UsersController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, UserUpdateDataTransform $transformer, $id)
+    public function update(UpdateRequest $request, UserUpdateDataTransform $transformer, ImageRepository $imageRepository, $id)
     {
         $this->userRepository->updateById($id, $transformer->transform($request->except('_token', '_method', 'updatedUserId')));
+        $user = $this->userRepository->find($id);
+
+        if($request->hasFile('image')) {
+            $data = $imageRepository->handleImage($user, $request);
+            $imageRepository->create($data);
+        }
 
         return redirect()->route('users.index');
     }

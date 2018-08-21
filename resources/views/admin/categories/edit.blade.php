@@ -40,7 +40,11 @@
                             <textarea class="form-control" name="description" rows="4" placeholder="Enter ..." value="">{{ $category->description }}</textarea>
                         </div>
                         <div class="form-group">
-                            <img src="{{ '/storage/uploads/'.$category->image }}" alt="" class="img-responsive" width="150">
+                            <img src="{{ asset(
+                                $category->image
+                                    ? $category->image->path
+                                    : App\Services\ImageUploader\ImageUpload::DEFAULT_MO_IMAGE_PATH
+                                    ) }}" alt="" class="img-responsive" width="150">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputFile">Загрузить изображение категории</label>

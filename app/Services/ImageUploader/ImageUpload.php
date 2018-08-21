@@ -26,8 +26,7 @@ class ImageUpload
     private function getPath(UploadedFile $uploadedFile) :string
     {
         $path =  $uploadedFile->store('public/uploads');
-//        dd($path);
-//        dd($this->editStoragePath($path));
+
         return $this->editStoragePath($path);
     }
 

@@ -31,7 +31,7 @@ class CategoriesController extends Controller
     public function index()
     {
                         // GOOD EXAMPLE!!!
-                            // dd($this->categoryRepository->find(5)->image->path);            GOOD EXAMPLE!!!
+//                             dd($this->categoryRepository->find(6)->image->path);         //   GOOD EXAMPLE!!!
                             //  dd($this->categoryRepository->find(5)->image());           MorphOne
                             //  dd($this->categoryRepository->find(5)->images());          MorphMany
                             //  dd($this->categoryRepository->find(5)->image);       object Image
@@ -57,8 +57,10 @@ class CategoriesController extends Controller
     {
         $category = $this->categoryRepository->create($request->all());
 
-        $data = $imageRepository->handleImage($category, $request);
-        $imageRepository->create($data);
+        if($request->hasFile('image')) {
+            $data = $imageRepository->handleImage($category, $request);
+            $imageRepository->create($data);
+        }
 
         return redirect()->route('categories.index');
     }
@@ -77,10 +79,15 @@ class CategoriesController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(UpdateRequest $request, ImageRepository $imageRepository, $id)
     {
-        $this->categoryRepository->find($id)->update($request->all());
-//        dd($request->all());
+        $category = $this->categoryRepository->find($id);
+        $category->update($request->all());
+
+        if($request->hasFile('image')) {
+            $data = $imageRepository->handleImage($category, $request);
+            $imageRepository->create($data);
+        }
 
         return redirect()->route('categories.index');
     }

@@ -14,6 +14,8 @@ class DishesController extends Controller
 {
     public function index(DishRepository $dishRepository)
     {
+//        dd($dishRepository->find(1)->category->name);
+//        dd($dishRepository->find(1)->ingredients->toArray());
         return view('admin.dishes.index', ['dishes' => $dishRepository->all()]);
     }
 

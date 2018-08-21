@@ -28,7 +28,9 @@ class UpdateRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|unique:users|string|email|max:255',
             'password' => 'nullable|string|min:6',
-            'role_id' => 'required'
+            'role_id' => 'required|digits:1',
+            'image' => 'nullable|image|mimes:jpeg,jpg,bmp,png|max:1024'
+
         ];
 
         if ($this->updatedUserId) {

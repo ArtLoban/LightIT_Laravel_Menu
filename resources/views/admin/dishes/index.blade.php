@@ -29,6 +29,12 @@
                 <tr>
                   <th>ID</th>
                   <th>Название</th>
+                  <th>Описание блюда</th>
+                  <th>Категория блюда</th>
+                  <th>Ингредиенты</th>
+                  <th>Цена, грн</th>
+                  <th>Вес, г</th>
+                  <th>Изображение</th>
                   <th>Действия</th>
                 </tr>
                 </thead>
@@ -37,6 +43,25 @@
                     <tr>
                         <td>{{ $dish->id }}</td>
                         <td>{{ $dish->name }}</td>
+                        <td>{{ $dish->description }}</td>
+                        <td>{{ $dish->category->name }}</td>
+                        <td>
+                            <ul>
+                                @foreach($dish->ingredients->toArray() as $ingredient)
+                                    <li>{{ $ingredient['name'] }}</li>
+                                @endforeach
+                            </ul>
+                        </td>
+                        <td>{{ $dish->price }}</td>
+                        <td>{{ $dish->weight }}</td>
+                        <td>
+                            <img src="{{ asset(
+                                $dish->image
+                                    ? $dish->image->path
+                                    : App\Services\ImageUploader\ImageUpload::DEFAULT_MO_IMAGE_PATH
+                                    ) }}"
+                                 alt="" class="img-responsive" width="150">
+                        </td>
                         <td>
                             <a href="{{ route('dishes.edit', $dish->id) }}" class="fa fa-pencil"></a>
                             {!! Form::open(['route' => ['dishes.destroy', $dish->id],

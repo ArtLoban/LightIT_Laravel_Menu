@@ -20,6 +20,7 @@
 
                 {!! Form::open([
                     'route' => ['users.update', $user->id],
+                    'files' => true,
                     'method' => 'put'
                 ]) !!}
 
@@ -50,6 +51,19 @@
                                 <option value="1">Editor</option>
                                 <option value="2">Admin</option>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <img src="{{ asset(
+                                $user->image
+                                    ? $user->image->path
+                                    : App\Services\ImageUploader\ImageUpload::DEFAULT_MO_IMAGE_PATH
+                                    ) }}" alt="" class="img-responsive" width="150">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">Загрузить аватар</label>
+                            <input type="file" name="image" id="exampleInputFile">
+
+                            <p class="help-block">Формат изображения: jpeg, jpg, bmp, png. Максимальный размер 1024 Мб</p>
                         </div>
                     </div>
                 </div>

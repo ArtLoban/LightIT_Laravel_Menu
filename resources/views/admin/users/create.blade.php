@@ -44,12 +44,12 @@
                                     <option value="2">Admin</option>
                                 </select>
                             </div>
-                            {{--<div class="form-group">--}}
-                                {{--<label for="exampleInputFile">Аватар</label>--}}
-                                {{--<input type="file" name="avatar" id="exampleInputFile">--}}
+                            <div class="form-group">
+                                <label for="exampleInputFile">Загрузить аватар</label>
+                                <input type="file" name="image" id="exampleInputFile">
 
-                                {{--<p class="help-block">Какое-нибудь уведомление о форматах..</p>--}}
-                            {{--</div>--}}
+                                <p class="help-block">Формат изображения: jpeg, jpg, bmp, png. Максимальный размер 1024 Мб</p>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->

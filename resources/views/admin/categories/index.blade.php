@@ -41,8 +41,6 @@
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->description }}</td>
                         <td>
-                            {{--<span>{{ $category->image ? $category->image->path : null }}</span>--}}
-
                             <img src="{{ asset(
                                 $category->image
                                     ? $category->image->path

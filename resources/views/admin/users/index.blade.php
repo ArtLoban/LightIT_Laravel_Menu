@@ -9,11 +9,6 @@
             <h1>
                 Пользователи
             </h1>
-            {{--<ol class="breadcrumb">--}}
-                {{--<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>--}}
-                {{--<li><a href="#">Examples</a></li>--}}
-                {{--<li class="active">Blank page</li>--}}
-            {{--</ol>--}}
         </section>
 
         <!-- Main content -->
@@ -35,6 +30,7 @@
                             <th>ID</th>
                             <th>Имя</th>
                             <th>E-mail</th>
+                            <th>Аватар</th>
                             <th>Роль</th>
                             <th>Действия</th>
                         </tr>
@@ -45,6 +41,14 @@
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td>
+                                        <img src="{{ asset(
+                                    $user->image
+                                        ? $user->image->path
+                                        : App\Services\ImageUploader\ImageUpload::DEFAULT_MO_IMAGE_PATH
+                                        ) }}"
+                                             alt="" class="img-responsive" width="150">
+                                    </td>
                                     <td>{{ $user->role->name }}</td>
                                     <td>
                                         <a href="{{ route('users.edit', $user->id) }}" class="fa fa-pencil"></a>

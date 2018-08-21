@@ -27,9 +27,11 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Название</th>
-                  <th>Действия</th>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Изображение</th>
+                    <th>Действия</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -37,6 +39,17 @@
                     <tr>
                         <td>{{ $ingredient->id }}</td>
                         <td>{{ $ingredient->name }}</td>
+                        <td>{{ $ingredient->description }}</td>
+                        <td>
+                            {{--<span>{{ $category->image ? $category->image->path : null }}</span>--}}
+
+                            <img src="{{ asset(
+                                $ingredient->image
+                                    ? $ingredient->image->path
+                                    : App\Services\ImageUploader\ImageUpload::DEFAULT_MO_IMAGE_PATH
+                                    ) }}"
+                                 alt="" class="img-responsive" width="150">
+                        </td>
                         <td>
                             <a href="{{ route('ingredients.edit', $ingredient->id) }}" class="fa fa-pencil"></a>
                             {!! Form::open(['route' => ['ingredients.destroy', $ingredient->id],

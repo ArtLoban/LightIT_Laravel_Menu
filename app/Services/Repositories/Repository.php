@@ -86,7 +86,7 @@ abstract class Repository
      * @param $request
      * @return array
      */
-    public function handleImage($entityObject, $request) :array
+    public function handleImage($entityObject, $request) : array
     {
         $entityId = $entityObject->id;
         $entityClassName = get_class($entityObject);        // get entity id and entity full class name
