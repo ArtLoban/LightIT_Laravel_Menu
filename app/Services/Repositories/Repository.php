@@ -69,7 +69,9 @@ abstract class Repository
             throw new ModelNotFoundException();
         }
 
-        return $model->update($params);
+        $model->update($params);
+
+        return $model;
     }
 
     /**
@@ -114,6 +116,22 @@ abstract class Repository
             $data = $imageRepository->handleImage($entityObject, $request);
             $imageRepository->create($data);
         }
+    }
+
+    public function delete(Model $model)
+    {
+        return $model->delete();
+    }
+
+    public function deleteById(int $id)
+    {
+        $model = $this->whereId($id);
+
+        if (! $model) {
+            throw new ModelNotFoundException();
+        }
+
+        return $this->delete($model);
     }
 
 }

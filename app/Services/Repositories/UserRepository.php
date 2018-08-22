@@ -4,8 +4,6 @@ namespace App\Services\Repositories;
 
 use App\Models\User;
 use App\Services\ImageUploader\ImageUpload;
-use Illuminate\Support\Facades\Hash;
-
 
 class UserRepository extends Repository
 {
@@ -47,7 +45,7 @@ class UserRepository extends Repository
     public function create(array $params)
     {
         if ($params['password']) {
-            $params['password'] = Hash::make($params['password']);
+            $params['password'] = bcrypt($params['password']);
         }
         return $this->className::create($params);
     }

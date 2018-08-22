@@ -24,10 +24,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
     Route::resource('/ingredients', 'IngredientsController');
     Route::resource('/roles', 'IngredientsController');
     Route::resource('/permitions', 'IngredientsController');
-});
+}); //->middleware('auth');
 
 //Route::get('/admin', 'Admin\DashboardController@index');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/', 'MenuController@index')->name('index');
+

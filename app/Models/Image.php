@@ -6,19 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
+    const PATH = 'path';
+    const IMAGEABLE_ID = 'imageable_id';
+    const IMAGEABLE_TYPE = 'imageable_type';
+
+
     /**
      * @var array
      */
     protected $fillable = [
-        'path',
+        self::PATH,
         'is_title',
         'is_preview',
-        'imageable_id',
-        'imageable_type'
+        self::IMAGEABLE_ID,
+        self::IMAGEABLE_TYPE,
     ];
 
     /**
-     * Получить все модели, обладающие commentable
+     * Получить все модели, обладающие imageable
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */

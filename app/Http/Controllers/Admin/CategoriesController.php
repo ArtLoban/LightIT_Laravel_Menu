@@ -75,11 +75,12 @@ class CategoriesController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, ImageRepository $imageRepository, $id)
+    public function update(UpdateRequest $request, ImageUpload $imageUploader, $id)
     {
-        $category = $this->categoryRepository->find($id);
-        $category->update($request->all());
-        $this->categoryRepository->saveImage($request, $category, $imageRepository);
+        $category = $this->categoryRepository->updateById($id, $request->input());
+        if ($request->has('image')) {
+            $imageUploader->store($request->file('image'), $category);
+        }
 
         return redirect()->route('categories.index');
     }

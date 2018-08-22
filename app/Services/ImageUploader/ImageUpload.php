@@ -2,11 +2,60 @@
 
 namespace App\Services\ImageUploader;
 
+use App\Models\Image;
+use App\Services\Repositories\ImageRepository;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 
 class ImageUpload
 {
     const DEFAULT_MO_IMAGE_PATH = '/storage/uploads/no_image.png';
+
+    /**
+     * @var ImageRepository
+     */
+    private $imageRepository;
+
+    /**
+     * ImageUpload constructor.
+     * @param ImageRepository $imageRepository
+     */
+    public function __construct(ImageRepository $imageRepository)
+    {
+        $this->imageRepository = $imageRepository;
+    }
+
+    /**
+     * Сохраняет загруженный файл из объекта формы UploadedFile для соотв. модели сущности
+     * @param UploadedFile $uploadedFile
+     * @param Model $model
+     * @return mixed
+     */
+    public function store(UploadedFile $uploadedFile, Model $model)
+    {
+        $params = $this->getStoreParams($uploadedFile, $model);
+        $this->removePreviousImage($model);
+
+        return $this->imageRepository->create($params);
+    }
+
+    private function removePreviousImage(Model $model)
+    {
+        if (method_exists($model, 'image') && $model->image) {
+            return $this->imageRepository->delete($model->image);
+        }
+
+        return false;
+    }
+
+    private function getStoreParams(UploadedFile $uploadedFile, Model $model)
+    {
+        return [
+            Image::PATH => $this->getPath($uploadedFile),
+            Image::IMAGEABLE_TYPE => get_class($model),
+            Image::IMAGEABLE_ID => $model->getKey(),
+        ];
+    }
 
 //    /**
 //     * @param $entityObject
@@ -34,20 +83,20 @@ class ImageUpload
      * @param $request
      * @return string
      */
-    public function getImagePath($request) : ?string
+    /*public function getImagePath($request) : ?string
     {
        $path = ($request->hasFile('image')) ? $this->getPath($request->file('image')) : null;
 
        return $path;
-    }
+    }*/
 
     /**
      * @param UploadedFile $uploadedFile
      * @return string
      */
-    private function getPath(UploadedFile $uploadedFile) :string
+    private function getPath(UploadedFile $uploadedFile): string
     {
-        $path =  $uploadedFile->store('public/uploads');
+        $path = $uploadedFile->store('public/uploads');
 
         return $this->editStoragePath($path);
     }
@@ -63,14 +112,11 @@ class ImageUpload
         return str_replace('public', 'storage', $path);
     }
 
-    /**
-     * @param int $entityId
-     * @param $entityObject
-     */
-    public function deleteImage(int $entityId, $entityObject) :void
+
+   /*private public function deleteImage(int $entityId, $entityObject) :void
     {
         if ($entityObject->find($entityId)->image) {
             $entityObject->find($entityId)->image->delete();
         }
-    }
+    }*/
 }
