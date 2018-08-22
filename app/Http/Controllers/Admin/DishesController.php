@@ -61,7 +61,7 @@ class DishesController extends Controller
     public function store(StoreRequest $request, ImageRepository $imageRepository)
     {
         $dish = $this->dishRepository->create($request->all());
-        $this->dishRepository->find($dish->id)->ingredients()->attach($request->ingredient_id);
+        $dish->ingredients()->attach($request->ingredient_id);
         $this->dishRepository->saveImage($request, $dish, $imageRepository);
 
         return redirect()->route('dishes.index');
@@ -85,11 +85,9 @@ class DishesController extends Controller
 
     public function update(UpdateRequest $request, ImageRepository $imageRepository, $id)
     {
-        $dish = $this->dishRepository->find($id)->update($request->all());
-        $this->dishRepository->find($id)->ingredients()->attach($request->ingredient_id);
-
-//        $dish->update($request->all());
-
+        $this->dishRepository->updateById($id, $request->all());
+        $dish = $this->dishRepository->find($id);
+        $dish->ingredients()->attach($request->ingredient_id);
         $this->dishRepository->saveImage($request, $dish, $imageRepository);
 
         return redirect()->route('dishes.index');

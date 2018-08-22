@@ -36,7 +36,6 @@ class UserRepository extends Repository
      */
     public function getAllWith(array $relations)
     {
-//        dd($this->className::with($relations)->get());
         return $this->className::with($relations)->get();
     }
 

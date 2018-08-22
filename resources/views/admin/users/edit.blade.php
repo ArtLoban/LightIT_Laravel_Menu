@@ -45,6 +45,10 @@
                             <input type="password" class="form-control" name="password" id="exampleInputEmail1" placeholder="">
                         </div>
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Подтверждение Пароля</label>
+                            <input type="password" name="password_confirmation" class="form-control" id="exampleInputEmail1" placeholder="">
+                        </div>
+                        <div class="form-group">
                             <label>Статус пользователя</label>
                             <select class="form-control" name="role_id">
                                 <option value="" disabled selected>Select your option</option>

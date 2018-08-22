@@ -92,6 +92,8 @@ abstract class Repository
         $entityClassName = get_class($entityObject);        // get entity id and entity full class name
         $path = $this->imageUpload->getImagePath($request);  // get image path
 
+        $this->imageUpload->deleteImage($entityId, $entityObject);
+
         $data = [
             'path' => $path,
             'imageable_id' => $entityId,
@@ -101,6 +103,11 @@ abstract class Repository
         return $data;                               // return data to CategoriesController to save in DB
     }
 
+    /**
+     * @param $request
+     * @param $entityObject
+     * @param $imageRepository
+     */
     public function saveImage($request, $entityObject, $imageRepository)
     {
         if($request->hasFile('image')) {

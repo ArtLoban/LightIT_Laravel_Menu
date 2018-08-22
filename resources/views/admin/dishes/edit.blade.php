@@ -96,7 +96,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputFile">Загрузить изображение блюда</label>
-                            <input type="file" id="exampleInputFile">
+                            <input type="file" name="image" id="exampleInputFile">
 
                             <p class="help-block">Формат изображения: jpeg, jpg, bmp, png. Максимальный размер 1024 Мб</p>
                         </div>

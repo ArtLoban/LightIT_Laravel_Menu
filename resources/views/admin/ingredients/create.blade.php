@@ -24,6 +24,9 @@
             </div>
             <div class="box-body">
                 <div class="col-md-6">
+
+                    @include('admin.errors')
+
                     <div class="form-group">
                         <label for="exampleInputEmail1">Название</label>
                         <input type="text" class="form-control" name="name" id="exampleInputEmail1" placeholder="">
@@ -38,9 +41,6 @@
 
                         <p class="help-block">уведомление о форматах..</p>
                     </div>
-
-                    @include('admin.errors')
-
                 </div>
             </div>
             <!-- /.box-body -->
