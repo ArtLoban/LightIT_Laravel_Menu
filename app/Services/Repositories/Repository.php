@@ -86,7 +86,7 @@ abstract class Repository
      * @param $request
      * @return array
      */
-    public function handleImage($entityObject, $request) : array
+    private function handleImage($entityObject, $request) : array
     {
         $entityId = $entityObject->id;
         $entityClassName = get_class($entityObject);        // get entity id and entity full class name
@@ -99,6 +99,14 @@ abstract class Repository
         ];
 
         return $data;                               // return data to CategoriesController to save in DB
+    }
+
+    public function saveImage($request, $entityObject, $imageRepository)
+    {
+        if($request->hasFile('image')) {
+            $data = $imageRepository->handleImage($entityObject, $request);
+            $imageRepository->create($data);
+        }
     }
 
 }

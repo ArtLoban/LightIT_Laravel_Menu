@@ -56,11 +56,7 @@ class CategoriesController extends Controller
     public function store(StoreRequest $request, ImageRepository $imageRepository)
     {
         $category = $this->categoryRepository->create($request->all());
-
-        if($request->hasFile('image')) {
-            $data = $imageRepository->handleImage($category, $request);
-            $imageRepository->create($data);
-        }
+        $this->categoryRepository->saveImage($request, $category, $imageRepository);
 
         return redirect()->route('categories.index');
     }
@@ -83,11 +79,7 @@ class CategoriesController extends Controller
     {
         $category = $this->categoryRepository->find($id);
         $category->update($request->all());
-
-        if($request->hasFile('image')) {
-            $data = $imageRepository->handleImage($category, $request);
-            $imageRepository->create($data);
-        }
+        $this->categoryRepository->saveImage($request, $category, $imageRepository);
 
         return redirect()->route('categories.index');
     }

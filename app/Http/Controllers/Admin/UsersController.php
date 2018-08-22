@@ -51,11 +51,7 @@ class UsersController extends Controller
     public function store(StoreRequest $request, ImageRepository $imageRepository)
     {
         $user = $this->userRepository->create($request->all());
-
-        if($request->hasFile('image')) {
-            $data = $imageRepository->handleImage($user, $request);
-            $imageRepository->create($data);
-        }
+        $this->userRepository->saveImage($request, $user, $imageRepository);
 
         return redirect()->route('users.index');
     }
@@ -80,11 +76,7 @@ class UsersController extends Controller
     {
         $this->userRepository->updateById($id, $transformer->transform($request->except('_token', '_method', 'updatedUserId')));
         $user = $this->userRepository->find($id);
-
-        if($request->hasFile('image')) {
-            $data = $imageRepository->handleImage($user, $request);
-            $imageRepository->create($data);
-        }
+        $this->userRepository->saveImage($request, $user, $imageRepository);
 
         return redirect()->route('users.index');
     }

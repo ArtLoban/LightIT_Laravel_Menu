@@ -27,7 +27,7 @@
 
                         @include('admin.errors')
 
-                        <input type="hidden" name="updatedUserId" value="{{ $dish->id }}">
+                        <input type="hidden" name="updatedDishId" value="{{ $dish->id }}">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Название</label>
                             <input type="text" class="form-control" name="name" id="exampleInputEmail1"

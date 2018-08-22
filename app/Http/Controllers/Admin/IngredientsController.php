@@ -47,11 +47,7 @@ class IngredientsController extends Controller
     public function store(StoreRequest $request, ImageRepository $imageRepository)
     {
         $ingredient = $this->ingredientRepository->create($request->all());
-
-        if($request->hasFile('image')) {
-            $data = $imageRepository->handleImage($ingredient, $request);
-            $imageRepository->create($data);
-        }
+        $this->ingredientRepository->saveImage($request, $ingredient, $imageRepository);
 
         return redirect()->route('ingredients.index');
     }
@@ -74,11 +70,7 @@ class IngredientsController extends Controller
     {
         $ingredient =  $this->ingredientRepository->find($id);
         $ingredient->update($request->all());
-
-        if($request->hasFile('image')) {
-            $data = $imageRepository->handleImage($ingredient, $request);
-            $imageRepository->create($data);
-        }
+        $this->ingredientRepository->saveImage($request, $ingredient, $imageRepository);
 
         return redirect()->route('ingredients.index');
     }
