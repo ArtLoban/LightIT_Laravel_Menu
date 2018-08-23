@@ -43,10 +43,18 @@
                             </div>
                             <div class="form-group">
                                 <label>Статус пользователя</label>
-                                <select class="form-control" name="role_id">
-                                    <option value="1">Editor</option>
-                                    <option value="2">Admin</option>
-                                </select>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="radio" name="role_id" value="1" checked>
+                                        Editor
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="radio" name="role_id" value="2">
+                                        Admin
+                                    </label>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputFile">Загрузить аватар</label>

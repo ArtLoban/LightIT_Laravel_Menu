@@ -21,12 +21,10 @@
                                     : App\Services\ImageUploader\ImageUpload::DEFAULT_MO_IMAGE_PATH
                                     ) }}" alt="Card image cap">
                     </div>
-                    <br>
                     <span>{{ $dish->description }}</span>
-                    <br>
-                    <br>
                     <p>Цена: {{ $dish->price }} грн</p>
                     <p>Вес: {{ $dish->price }} г</p>
+                    <p>Ингредиенты: {{ $dish->ingredients->implode('name', ', ')}}</p>
 
                 </div>
             </div>

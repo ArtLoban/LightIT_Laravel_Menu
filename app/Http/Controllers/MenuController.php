@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Services\Repositories\CategoryRepository;
 use App\Services\Repositories\DishRepository;
-use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
     /**
-     * Show the the main page.
+     * Shows the the main page.
      *
      * @return \Illuminate\Http\Response
      */
