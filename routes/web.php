@@ -23,6 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', 'IndexController@index')->name('/');
 
-Route::get('/menu', 'MenuController@index')->name('menu.index');
+Route::get('/menu', 'MenuController@index')->name('menu');
 Route::get('/menu/category/{id}', 'MenuController@show')->name('menu.category');
+Route::get('/menu/dish/{id}', 'MenuController@showDish')->name('menu.dish');
 

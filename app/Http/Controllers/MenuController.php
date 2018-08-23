@@ -17,7 +17,7 @@ class MenuController extends Controller
     {
         $categoriesList = $categoryRepository->all();
 
-        return view('menu.index', ['categories' => $categoriesList]);
+        return view('menu.menu', ['categories' => $categoriesList]);
     }
 
     public function show($id, CategoryRepository $categoryRepository, DishRepository $dishRepository)
@@ -28,7 +28,10 @@ class MenuController extends Controller
         return view('menu.category', ['category' => $category, 'dishes' => $dishes]);
     }
 
+    public function showDish($id, DishRepository $dishRepository)
+    {
+        $dish = $dishRepository->find($id);
 
-
-
+        return view('menu.dish', ['dish' => $dish]);
+    }
 }

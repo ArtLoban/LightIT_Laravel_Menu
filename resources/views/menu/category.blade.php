@@ -4,7 +4,14 @@
 
 <main role="main">
 
-    <div class="container">
+   <div class="container">
+
+       <div class="row">
+           <div class="row">
+               <a href="{{ route('menu') }}" class="btn btn-success">< Back to Menu</a>
+           </div>
+       </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="text-center">
@@ -29,9 +36,14 @@
                                     : App\Services\ImageUploader\ImageUpload::DEFAULT_MO_IMAGE_PATH
                                     ) }}" alt="Card image cap">
                         </tr>
-                        <tr>{{ $dish->name }} || </tr>
-                        <tr>{{ $dish->price }} || </tr>
-                        <tr>{{ $dish->weight }} || </tr>
+                        <tr>
+                            <a href="{{ route('menu.dish', $dish->id) }}">
+                                {{ $dish->name }}
+                            </a>
+                             ||
+                        </tr>
+                        <tr>{{ $dish->price }} грн || </tr>
+                        <tr>{{ $dish->weight }} г || </tr>
 
                         <hr>
                     @endforeach

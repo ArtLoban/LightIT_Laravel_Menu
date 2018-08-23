@@ -28,7 +28,7 @@ class UpdateRequest extends FormRequest
             'name' => 'required|string|unique:dishes|max:255',
             'description' => 'nullable|string',
             'category_id' => 'required|integer',
-            'ingredient_id' => 'required',
+            'ingredient_id' => 'integer',
             'price' => 'nullable|numeric|between:0,99999999.99',
             'weight' => 'nullable|integer',
             'image' => 'nullable|image|mimes:jpeg,jpg,bmp,png|max:1024',
