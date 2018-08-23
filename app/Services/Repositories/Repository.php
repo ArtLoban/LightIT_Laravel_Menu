@@ -24,6 +24,11 @@ abstract class Repository
         return $this->className::all();
     }
 
+    public function findBy(array $params)
+    {
+        return $this->className::where($params)->get();
+    }
+
     /**
      * @param array $params
      * @return mixed

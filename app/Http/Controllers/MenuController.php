@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Repositories\CategoryRepository;
+use App\Services\Repositories\DishRepository;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -11,8 +13,22 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CategoryRepository $categoryRepository)
     {
-        return view('index');
+        $categoriesList = $categoryRepository->all();
+
+        return view('menu.index', ['categories' => $categoriesList]);
     }
+
+    public function show($id, CategoryRepository $categoryRepository, DishRepository $dishRepository)
+    {
+        $category = $categoryRepository->find($id);
+        $dishes = $dishRepository->getDishesByCategoryId($id);
+
+        return view('menu.category', ['category' => $category, 'dishes' => $dishes]);
+    }
+
+
+
+
 }

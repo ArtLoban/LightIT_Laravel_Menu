@@ -11,4 +11,9 @@ class DishRepository extends Repository
         return Dish::class;
     }
 
+    public function getDishesByCategoryId(int $categoryId)
+    {
+        return $this->className::with('image')->where(['category_id' => $categoryId])->get();
+    }
+
 }

@@ -35,3 +35,11 @@ footer {
 footer p {
   margin-bottom: .25rem;
 }
+
+hr {
+  background: rgba(24, 51, 33, 0.67);
+}
+
+.banner-name{
+  color: darkolivegreen;
+}
