@@ -39,6 +39,11 @@ class ImageUpload
         return $this->imageRepository->create($params);
     }
 
+    /**
+     * @param Model $model
+     * @return bool|null
+     * @throws \Exception
+     */
     private function removePreviousImage(Model $model)
     {
         if (method_exists($model, 'image') && $model->image) {
@@ -48,7 +53,12 @@ class ImageUpload
         return false;
     }
 
-    private function getStoreParams(UploadedFile $uploadedFile, Model $model)
+    /**
+     * @param UploadedFile $uploadedFile
+     * @param Model $model
+     * @return array
+     */
+    private function getStoreParams(UploadedFile $uploadedFile, Model $model): array
     {
         return [
             Image::PATH => $this->getPath($uploadedFile),
@@ -56,39 +66,6 @@ class ImageUpload
             Image::IMAGEABLE_ID => $model->getKey(),
         ];
     }
-
-//    /**
-//     * @param $entityObject
-//     * @param $request
-//     * @return array
-//     */
-//    private function handleImage($entityObject, $request) : array
-//    {
-//        $entityId = $entityObject->id;
-//        $entityClassName = get_class($entityObject);        // get entity id and entity full class name
-//        $path = $this->imageUpload->getImagePath($request);  // get image path
-//
-//        $this->imageUpload->deleteImage($entityId, $entityObject);
-//
-//        $data = [
-//            'path' => $path,
-//            'imageable_id' => $entityId,
-//            'imageable_type' => $entityClassName
-//        ];
-//
-//        return $data;                               // return data to CategoriesController to save in DB
-//    }
-
-    /**
-     * @param $request
-     * @return string
-     */
-    /*public function getImagePath($request) : ?string
-    {
-       $path = ($request->hasFile('image')) ? $this->getPath($request->file('image')) : null;
-
-       return $path;
-    }*/
 
     /**
      * @param UploadedFile $uploadedFile
@@ -107,16 +84,8 @@ class ImageUpload
      * @param string $path
      * @return string
      */
-    private function editStoragePath(string $path) :string
+    private function editStoragePath(string $path): string
     {
         return str_replace('public', 'storage', $path);
     }
-
-
-   /*private public function deleteImage(int $entityId, $entityObject) :void
-    {
-        if ($entityObject->find($entityId)->image) {
-            $entityObject->find($entityId)->image->delete();
-        }
-    }*/
 }

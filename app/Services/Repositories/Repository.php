@@ -4,8 +4,6 @@ namespace App\Services\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 
 abstract class Repository
 {
@@ -54,6 +52,16 @@ abstract class Repository
     }
 
     /**
+     * @param Model $model
+     * @return bool|null
+     * @throws \Exception
+     */
+    public function delete(Model $model)
+    {
+        return $model->delete();
+    }
+
+    /**
      * @param int $id
      * @param array $params
      * @return bool
@@ -76,7 +84,7 @@ abstract class Repository
 
     /**
      * @param int $id
-     * @return Model|null
+     * @return mixed
      */
     public function whereId(int $id)
     {
@@ -84,45 +92,10 @@ abstract class Repository
     }
 
     /**
-     * @param $entityObject
-     * @param $request
-     * @return array
+     * @param int $id
+     * @return bool|null
+     * @throws \Exception
      */
-    private function handleImage($entityObject, $request) : array
-    {
-        $entityId = $entityObject->id;
-        $entityClassName = get_class($entityObject);        // get entity id and entity full class name
-        $path = $this->imageUpload->getImagePath($request);  // get image path
-
-        $this->imageUpload->deleteImage($entityId, $entityObject);
-
-        $data = [
-            'path' => $path,
-            'imageable_id' => $entityId,
-            'imageable_type' => $entityClassName
-        ];
-
-        return $data;                               // return data to CategoriesController to save in DB
-    }
-
-    /**
-     * @param $request
-     * @param $entityObject
-     * @param $imageRepository
-     */
-    public function saveImage($request, $entityObject, $imageRepository)
-    {
-        if($request->hasFile('image')) {
-            $data = $imageRepository->handleImage($entityObject, $request);
-            $imageRepository->create($data);
-        }
-    }
-
-    public function delete(Model $model)
-    {
-        return $model->delete();
-    }
-
     public function deleteById(int $id)
     {
         $model = $this->whereId($id);

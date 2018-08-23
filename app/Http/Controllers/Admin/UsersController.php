@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
-use App\Models\User;
+use App\Services\ImageUploader\ImageUpload;
 use App\Services\InputTransform\UserUpdateDataTransform;
-use App\Services\Repositories\ImageRepository;
 use App\Services\Repositories\UserRepository;
 use App\Http\Controllers\Controller;
 
@@ -46,12 +45,15 @@ class UsersController extends Controller
 
     /**
      * @param StoreRequest $request
+     * @param ImageUpload $imageUploader
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreRequest $request, ImageRepository $imageRepository)
+    public function store(StoreRequest $request, ImageUpload $imageUploader)
     {
         $user = $this->userRepository->create($request->all());
-        $this->userRepository->saveImage($request, $user, $imageRepository);
+        if ($request->has('image')) {
+            $imageUploader->store($request->file('image'), $user);
+        }
 
         return redirect()->route('users.index');
     }
@@ -69,14 +71,17 @@ class UsersController extends Controller
 
     /**
      * @param UpdateRequest $request
+     * @param UserUpdateDataTransform $transformer
+     * @param ImageUpload $imageUploader
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, UserUpdateDataTransform $transformer, ImageRepository $imageRepository, $id)
+    public function update(UpdateRequest $request, UserUpdateDataTransform $transformer, ImageUpload $imageUploader, $id)
     {
-        $this->userRepository->updateById($id, $transformer->transform($request->except('_token', '_method', 'updatedUserId')));
-        $user = $this->userRepository->find($id);
-        $this->userRepository->saveImage($request, $user, $imageRepository);
+        $user = $this->userRepository->updateById($id, $transformer->transform($request->except('_token', '_method', 'updatedUserId')));
+        if ($request->has('image')) {
+            $imageUploader->store($request->file('image'), $user);
+        }
 
         return redirect()->route('users.index');
     }

@@ -7,7 +7,6 @@ use App\Http\Requests\Category\UpdateRequest;
 use App\Services\Repositories\CategoryRepository;
 use App\Http\Controllers\Controller;
 use App\Services\ImageUploader\ImageUpload;
-use App\Services\Repositories\ImageRepository;
 
 class CategoriesController extends Controller
 {
@@ -51,12 +50,15 @@ class CategoriesController extends Controller
 
     /**
      * @param StoreRequest $request
+     * @param ImageUpload $imageUploader
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreRequest $request, ImageRepository $imageRepository)
+    public function store(StoreRequest $request, ImageUpload $imageUploader)
     {
         $category = $this->categoryRepository->create($request->all());
-        $this->categoryRepository->saveImage($request, $category, $imageRepository);
+        if ($request->has('image')) {
+            $imageUploader->store($request->file('image'), $category);
+        }
 
         return redirect()->route('categories.index');
     }
@@ -72,6 +74,7 @@ class CategoriesController extends Controller
 
     /**
      * @param UpdateRequest $request
+     * @param ImageUpload $imageUploader
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */

@@ -4,14 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Dish\StoreRequest;
 use App\Http\Requests\Dish\UpdateRequest;
-use App\Models\Category;
-use App\Models\Dish;
-use App\Models\Ingredient;
+use App\Services\ImageUploader\ImageUpload;
 use App\Services\Repositories\CategoryRepository;
 use App\Services\Repositories\DishRepository;
-use App\Services\Repositories\ImageRepository;
 use App\Services\Repositories\IngredientRepository;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class DishesController extends Controller
@@ -36,7 +32,6 @@ class DishesController extends Controller
      */
     public function index(DishRepository $dishRepository)
     {
-//        dd($this->dishRepository->find(1)->ingredients());
         return view('admin.dishes.index', ['dishes' => $dishRepository->all()]);
     }
 
@@ -55,14 +50,17 @@ class DishesController extends Controller
 
     /**
      * @param StoreRequest $request
-     * @param ImageRepository $imageRepository
+     * @param ImageUpload $imageUploader
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreRequest $request, ImageRepository $imageRepository)
+    public function store(StoreRequest $request, ImageUpload $imageUploader)
     {
         $dish = $this->dishRepository->create($request->all());
         $dish->ingredients()->attach($request->ingredient_id);
-        $this->dishRepository->saveImage($request, $dish, $imageRepository);
+
+        if ($request->has('image')) {
+            $imageUploader->store($request->file('image'), $dish);
+        }
 
         return redirect()->route('dishes.index');
     }
@@ -83,12 +81,20 @@ class DishesController extends Controller
             ]);
     }
 
-    public function update(UpdateRequest $request, ImageRepository $imageRepository, $id)
+    /**
+     * @param UpdateRequest $request
+     * @param ImageUpload $imageUploader
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(UpdateRequest $request, ImageUpload $imageUploader, $id)
     {
-        $this->dishRepository->updateById($id, $request->all());
-        $dish = $this->dishRepository->find($id);
+        $dish = $this->dishRepository->updateById($id, $request->input());
         $dish->ingredients()->attach($request->ingredient_id);
-        $this->dishRepository->saveImage($request, $dish, $imageRepository);
+
+        if ($request->has('image')) {
+            $imageUploader->store($request->file('image'), $dish);
+        }
 
         return redirect()->route('dishes.index');
     }

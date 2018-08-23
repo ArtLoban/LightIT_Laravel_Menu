@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Ingredient\StoreRequest;
 use App\Http\Requests\Ingredient\UpdateRequest;
-use App\Services\Repositories\ImageRepository;
+use App\Services\ImageUploader\ImageUpload;
 use App\Services\Repositories\IngredientRepository;
 use App\Http\Controllers\Controller;
 
@@ -42,12 +42,15 @@ class IngredientsController extends Controller
 
     /**
      * @param StoreRequest $request
+     * @param ImageUpload $imageUploader
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreRequest $request, ImageRepository $imageRepository)
+    public function store(StoreRequest $request, ImageUpload $imageUploader)
     {
         $ingredient = $this->ingredientRepository->create($request->all());
-        $this->ingredientRepository->saveImage($request, $ingredient, $imageRepository);
+        if ($request->has('image')) {
+            $imageUploader->store($request->file('image'), $ingredient);
+        }
 
         return redirect()->route('ingredients.index');
     }
@@ -63,14 +66,16 @@ class IngredientsController extends Controller
 
     /**
      * @param UpdateRequest $request
+     * @param ImageUpload $imageUploader
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, ImageRepository $imageRepository, $id)
+    public function update(UpdateRequest $request, ImageUpload $imageUploader, $id)
     {
-        $ingredient =  $this->ingredientRepository->find($id);
-        $ingredient->update($request->all());
-        $this->ingredientRepository->saveImage($request, $ingredient, $imageRepository);
+        $ingredient = $this->ingredientRepository->updateById($id, $request->input());
+        if ($request->has('image')) {
+            $imageUploader->store($request->file('image'), $ingredient);
+        }
 
         return redirect()->route('ingredients.index');
     }
