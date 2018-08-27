@@ -64,8 +64,6 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-//        dd($this->userRepository->find($id)->with('role')->get());
-
         return view('admin.users.edit', ['user' => $this->userRepository->find($id)]);
     }
 

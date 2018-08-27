@@ -12,11 +12,9 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(CategoryRepository $categoryRepository)
+    public function index(CategoryRepository $categoryRepository, DishRepository $dishRepository)
     {
-        $categoriesList = $categoryRepository->all();
-
-        return view('menu.menu', ['categories' => $categoriesList]);
+        return view('menu.menu', ['categories' => $categoryRepository->all()]);
     }
 
     public function show($id, CategoryRepository $categoryRepository, DishRepository $dishRepository)

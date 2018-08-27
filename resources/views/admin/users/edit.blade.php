@@ -52,13 +52,13 @@
                                 <label>Статус пользователя</label>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="radio" name="role_id" value="1">
+                                        <input type="radio" name="role_id" value="1" @if ($user->role_id == 1) {{ 'checked' }} @endif>
                                         Editor
                                     </label>
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input type="radio" name="role_id" value="2">
+                                        <input type="radio" name="role_id" value="2" @if ($user->role_id == 2) {{ 'checked' }} @endif>
                                         Admin
                                     </label>
                                 </div>

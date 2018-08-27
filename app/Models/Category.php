@@ -15,6 +15,11 @@ class Category extends Model
      */
     protected $fillable = ['name', 'description'];
 
+    public function dishes()
+    {
+        return $this->hasMany(Dish::class);
+    }
+
     /**
      * Get all images of category
      *
