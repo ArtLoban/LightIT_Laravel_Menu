@@ -131,7 +131,7 @@
                 <li><a href="{{ route('ingredients.index') }}"><i class="fa fa-hand-pointer-o"></i> <span>Ингредиенты</span></a></li>
                 <li><a href="{{ route('users.index') }}"><i class="fa fa-users"></i> <span>Пользователи</span></a></li>
                 <li><a href="{{ route('roles.index') }}"><i class="fa fa-user"></i> <span>Роли</span></a></li>
-                <li><a href="{{ route('permitions.index') }}"><i class="fa fa-key"></i> <span>Права</span></a></li>
+                {{--<li><a href="{{ route('permitions.index') }}"><i class="fa fa-key"></i> <span>Права</span></a></li>--}}
             </ul>
         </section>
         <!-- /.sidebar -->

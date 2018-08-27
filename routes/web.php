@@ -11,7 +11,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
     Route::resource('/dishes', 'DishesController');
     Route::resource('/categories', 'CategoriesController');
     Route::resource('/ingredients', 'IngredientsController');
-    Route::resource('/roles', 'IngredientsController');
+    Route::resource('/roles', 'RoleController');
     Route::resource('/permitions', 'IngredientsController');
 }); //->middleware('auth');
 

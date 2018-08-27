@@ -11,3 +11,8 @@ button.delete-task{
     padding: 0px;
 }
 
+.permissions-inline div{
+    display: inline-block;
+    padding-left: 25px;
+}
+

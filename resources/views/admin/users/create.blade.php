@@ -57,6 +57,57 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label>Permission</label>
+                                <div class="permissions-inline">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="" value="1" checked>
+                                            Manage Ingredients
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="" value="2">
+                                            Manage Categories
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="" value="2">
+                                            Manage Dishes
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="permissions-inline">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="" value="2">
+                                            See Users
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="" value="2">
+                                            Add Users
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="" value="2">
+                                            Edit Users
+                                        </label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="" value="2">
+                                            Delete Users
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="form-group">
                                 <label for="exampleInputFile">Загрузить аватар</label>
                                 <input type="file" name="image" id="exampleInputFile">
 
