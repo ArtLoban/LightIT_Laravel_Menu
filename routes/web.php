@@ -1,10 +1,10 @@
 <?php
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function(){
 
     Route::get('/', 'DashboardController@index')->name('admin-index');
     Route::resource('/users', 'UsersController');
@@ -13,11 +13,15 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function(){
     Route::resource('/ingredients', 'IngredientsController');
     Route::resource('/roles', 'RoleController');
     Route::resource('/permitions', 'IngredientsController');
-}); //->middleware('auth');
+});
 
 //Route::get('/admin', 'Admin\DashboardController@index');
 
 Auth::routes();
+Route::get('register', function () {
+    return abort('404');
+});
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 

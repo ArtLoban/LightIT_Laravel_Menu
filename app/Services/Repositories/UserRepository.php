@@ -32,4 +32,5 @@ class UserRepository extends Repository
         }
         return $this->className::create($params);
     }
+
 }
