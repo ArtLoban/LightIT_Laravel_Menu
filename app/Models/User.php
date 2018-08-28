@@ -47,4 +47,27 @@ class User extends Authenticatable
         return $this->morphOne('App\Models\Image', 'imageable');
     }
 
+    /**
+     * Determine if the user may perform the given permission.
+     *
+     * @param  Permission $permission
+     * @return boolean
+     */
+    public function hasPermission($permission)
+    {
+        $user = auth()->user();
+        $userPermissions = $user->role()->with('permissions')->get()->first()->permissions;
+
+        return $userPermissions->contains($permission->permission);
+
+//        foreach ($userPermissions as $userPermission) {
+//            return $userPermission->contains($permission->permission);
+//        }
+
+
+
+//        return $this->hasRole($permission->roles);
+
+        //определить, есть ли такой пермишн у юзера. Вернуть true, если есть и false, если нет
+    }
 }

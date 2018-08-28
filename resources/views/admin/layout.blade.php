@@ -129,7 +129,9 @@
                 <li><a href="{{ route('dishes.index') }}"><i class="fa fa-book"></i> <span>Блюда</span></a></li>
                 <li><a href="{{ route('categories.index') }}"><i class="fa fa-list-ul"></i> <span>Категории блюд</span></a></li>
                 <li><a href="{{ route('ingredients.index') }}"><i class="fa fa-hand-pointer-o"></i> <span>Ингредиенты</span></a></li>
-                <li><a href="{{ route('users.index') }}"><i class="fa fa-users"></i> <span>Пользователи</span></a></li>
+                @can('seeUsers')
+                    <li><a href="{{ route('users.index') }}"><i class="fa fa-users"></i> <span>Пользователи</span></a></li>
+                @endcan
                 <li><a href="{{ route('roles.index') }}"><i class="fa fa-user"></i> <span>Роли</span></a></li>
                 {{--<li><a href="{{ route('permitions.index') }}"><i class="fa fa-key"></i> <span>Права</span></a></li>--}}
             </ul>
