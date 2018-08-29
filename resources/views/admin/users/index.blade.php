@@ -43,7 +43,7 @@
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         <img src="{{ asset(
-                                    $user->image
+                                        $user->image
                                         ? $user->image->path
                                         : App\Services\ImageUploader\ImageUpload::DEFAULT_MO_IMAGE_PATH
                                         ) }}"

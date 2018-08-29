@@ -11,4 +11,9 @@ class ImageRepository extends Repository
         return Image::class;
     }
 
+    public function attachUsersImages(int $roleName, array $image)
+    {
+        $this->className::find($roleName)->imageable()->attach($image);
+    }
+
 }

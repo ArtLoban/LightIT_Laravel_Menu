@@ -30,7 +30,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-//        Auth::loginUsingId(8);
+        Auth::loginUsingId(5);
 
         $permissions = $this->getPermissions(); // Получаю список всех permisssions
 
