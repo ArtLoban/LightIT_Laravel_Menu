@@ -16,7 +16,7 @@ class DishSeeder extends Seeder
 
         for($id=1; $id<=25; $id++) {
             $array = $this->randomArray(1,25, mt_rand(1,5));
-            $dishRepository->attachIngredients($id, $array);
+            $dishRepository->attachIngredientsById($id, $array);
         }
     }
 

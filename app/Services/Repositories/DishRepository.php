@@ -21,10 +21,9 @@ class DishRepository extends Repository
      * @param array $array
      * @return mixed
      */
-    public function attachIngredients(int $id, array $array)
+    public function attachIngredientsById(int $id, array $array)
     {
         return $this->className::find($id)->ingredients()->attach($array);
-
     }
 
 }

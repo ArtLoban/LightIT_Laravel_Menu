@@ -26,11 +26,12 @@
                                         : App\Services\ImageUploader\ImageUpload::DEFAULT_MO_IMAGE_PATH
                                         ) }}" alt="Card image cap">
                                         <div class="card-body">
-                                            <h4 class="card-title">{{ $category->name }}</h4>
+                                            <h4 class="card-title">
+                                                <a href="{{ route('menu.category', $category->id) }}">{{ $category->name }}</a>
+                                            </h4>
                                             <ul class="list-group list-group-flush">
                                                 @foreach($category->dishes as $dish)
-                                                <li class="list-group-item">{{ $dish->name }} <span class="text-right">Цена: {{ $dish->price }}</span></li>
-
+                                                    <li class="list-group-item">{{ $dish->name }} <span class="text-right">Цена: {{ $dish->price }}</span></li>
                                                 @endforeach
                                             </ul>
                                         </div>
