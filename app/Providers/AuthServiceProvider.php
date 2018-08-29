@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Permission;
+use App\Models\User;
 use App\Services\Repositories\PermissionRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -29,36 +30,36 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Auth::loginUsingId(1);
+//        Auth::loginUsingId(8);
 
-        /*Gate::define('accessAdminPanel', function ($user) {
-            return $user->id == 5;
-        });*/
+        $permissions = $this->getPermissions(); // Получаю список всех permisssions
 
-        // Dynamically register permissions with Laravel's Gate
-        foreach ($this->getPermissions() as $permission) {
+        foreach ($permissions as $permission) {  // через цикл формирую правила для каждого permission в Laravel's Gate
 
-            $user = auth()->user();
-            $userPermissions = $user->role()->with('permissions')->get()->first()->permissions;
-//            $userPermissions->contains($permission->permission);
-            dd($permission->permission);
-            dd($userPermissions->contains($permission->permission));
+            Gate::define($permission->permission, function($user) use($permission) {
 
-            Gate::define($permission->permission, function ($user) use ($permission) {
+                $permissions = $user->getAllPermissions();  // Получаю список всех разрешений для залогиненого пользователя
 
-                $user = auth()->user();
-                $userPermissions = $user->role()->with('permissions')->get();
+                if ($permissions->contains('permission', $permission->permission)) { // СРавниваю есть ли у польз нужное разрешние
+                    return true;
+                }
 
-                return $userPermissions->contains($permission->permission);
+                return false;
             });
         }
 
-        /*foreach ($this->getPermissions() as $permission) {
-            Gate::define($permission->permission, function ($user) use ($permission) {
+        /*Gate::define('seeUsers', function($user) {
 
-                return $user->hasPermission($permission);
-            });
-        }*/
+            $permissions = $user->getAllPermissions();
+
+            if ($permissions->contains('permission', 'seeUsers')) {
+                return true;
+            }
+
+            return false;
+        });*/
+
+
     }
 
     /**
@@ -68,6 +69,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected function getPermissions()
     {
-        return Permission::with('roles')->get();
+        return Permission::all();
     }
 }
