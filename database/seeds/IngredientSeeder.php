@@ -11,6 +11,6 @@ class IngredientSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Ingredient::class, 10)->create();
+        factory(\App\Models\Ingredient::class, 30)->create();
     }
 }

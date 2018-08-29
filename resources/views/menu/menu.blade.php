@@ -6,7 +6,7 @@
 
     <div class="container">
         <div class="text-center">
-            <p><h3>Блюда</h3></p>
+            <p><h3>Меню</h3></p>
         </div>
     </div>
 
