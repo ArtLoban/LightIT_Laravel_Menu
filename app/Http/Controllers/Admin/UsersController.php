@@ -90,7 +90,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $this->userRepository->find($id)->delete();
+        $this->userRepository->deleteById($id);
 
         return redirect()->route('users.index');
     }

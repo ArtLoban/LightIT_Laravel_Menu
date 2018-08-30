@@ -3,6 +3,7 @@
 namespace App\Services\ImageUploader;
 
 use App\Models\Image;
+use App\Services\Image\Contracts\HasImage;
 use App\Services\Repositories\ImageRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
@@ -31,10 +32,10 @@ class ImageUpload
      * @param Model $model
      * @return mixed
      */
-    public function store(UploadedFile $uploadedFile, Model $model)
+    public function store(UploadedFile $uploadedFile, HasImage $owner)
     {
-        $params = $this->getStoreParams($uploadedFile, $model);
-        $this->removePreviousImage($model);
+        $params = $this->getStoreParams($uploadedFile, $owner);
+        $this->removePreviousImage($owner);
 
         return $this->imageRepository->create($params);
     }
@@ -44,10 +45,10 @@ class ImageUpload
      * @return bool|null
      * @throws \Exception
      */
-    private function removePreviousImage(Model $model)
+    private function removePreviousImage(HasImage $model)
     {
-        if (method_exists($model, 'image') && $model->image) {
-            return $this->imageRepository->delete($model->image);
+        if ($model->getImage()) {
+            return $this->imageRepository->delete($model->getImage());
         }
 
         return false;
@@ -58,12 +59,12 @@ class ImageUpload
      * @param Model $model
      * @return array
      */
-    private function getStoreParams(UploadedFile $uploadedFile, Model $model): array
+    private function getStoreParams(UploadedFile $uploadedFile, HasImage $owner): array
     {
         return [
             Image::PATH => $this->getPath($uploadedFile),
-            Image::IMAGEABLE_TYPE => get_class($model),
-            Image::IMAGEABLE_ID => $model->getKey(),
+            Image::IMAGEABLE_TYPE => $owner->ownerType(),
+            Image::IMAGEABLE_ID => $owner->ownerId(),
         ];
     }
 

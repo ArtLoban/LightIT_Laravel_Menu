@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Services\Image\Contracts\HasImage;
+use App\Services\Repositories\Contracts\HasMorphRelations;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasImage, HasMorphRelations
 {
     use Notifiable;
 
@@ -53,5 +55,27 @@ class User extends Authenticatable
     public function getAllPermissions()
     {
         return $this->role()->with('permissions')->get()->first()->permissions;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function ownerType(): string
+    {
+        return get_class($this);
+    }
+
+    public function ownerId(): int
+    {
+        return $this->getKey();
+    }
+
+    public function getMorphRelations(): array
+    {
+        return [
+            'image'
+        ];
     }
 }
