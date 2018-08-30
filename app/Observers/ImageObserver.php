@@ -2,20 +2,27 @@
 
 namespace App\Observers;
 
-use App\Image;
+use App\Models\Image;
+use Illuminate\Support\Facades\Storage;
 
 class ImageObserver
 {
     /**
      * Handle the image "deleted" event.
      *
-     * @param  \App\Image  $image
+     * @param  \App\Models\Image  $image
      * @return void
      */
-//    public function deleted(Image $image)
-//    {
-//        //
-//    }
+    public function deleted(Image $image)
+    {
+        $editedPath = $this->editPath($image->path);
+        Storage::delete($editedPath);
+    }
+
+    public function editPath(string $path): string
+    {
+        return str_replace('storage', 'public', $path);
+    }
 
 
 }

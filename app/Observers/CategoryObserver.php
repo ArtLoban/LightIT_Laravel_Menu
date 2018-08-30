@@ -2,21 +2,20 @@
 
 namespace App\Observers;
 
-use App\Models\User;
+use App\Models\Category;
 use App\Services\Repositories\Contracts\HasMorphRelations;
-use Illuminate\Support\Facades\Storage;
 
-class UserObserver
+class CategoryObserver
 {
     /**
-     * Handle the user "deleted" event.
+     * Handle the category "deleted" event.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\MOdels\Category  $category
      * @return
      */
-    public function deleted(User $user)
+    public function deleted(Category $category)
     {
-        return $user instanceof HasMorphRelations ? $this->deleteMorphRelations($user) : false;
+        return $category instanceof HasMorphRelations ? $this->deleteMorphRelations($category) : false;
     }
 
     private function deleteMorphRelations(HasMorphRelations $owner)

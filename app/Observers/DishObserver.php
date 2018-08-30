@@ -2,21 +2,20 @@
 
 namespace App\Observers;
 
-use App\Models\User;
+use App\Models\Dish;
 use App\Services\Repositories\Contracts\HasMorphRelations;
-use Illuminate\Support\Facades\Storage;
 
-class UserObserver
+class DishObserver
 {
     /**
-     * Handle the user "deleted" event.
+     * Handle the dish "deleted" event.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\MOdels\Dish  $dish
      * @return
      */
-    public function deleted(User $user)
+    public function deleted(Dish $dish)
     {
-        return $user instanceof HasMorphRelations ? $this->deleteMorphRelations($user) : false;
+        return $dish instanceof HasMorphRelations ? $this->deleteMorphRelations($dish) : false;
     }
 
     private function deleteMorphRelations(HasMorphRelations $owner)

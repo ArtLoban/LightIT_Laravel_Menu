@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Services\Image\Contracts\HasImage;
+use App\Services\Repositories\Contracts\HasMorphRelations;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Category
  * @package App
  */
-class Category extends Model
+class Category extends Model implements HasImage, HasMorphRelations
 {
     /**
      * @var array
@@ -34,4 +36,28 @@ class Category extends Model
     {
         return $this->morphOne('App\Models\Image', 'imageable');
     }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function ownerType(): string
+    {
+        return get_class($this);
+    }
+
+    public function ownerId(): int
+    {
+        return $this->getKey();
+    }
+
+    public function getMorphRelations(): array
+    {
+        return [
+            'image'
+        ];
+    }
+
+
 }
