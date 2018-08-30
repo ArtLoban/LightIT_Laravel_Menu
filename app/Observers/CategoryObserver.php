@@ -22,7 +22,7 @@ class CategoryObserver
     {
         $relations = $owner->getMorphRelations();
         foreach ($relations as $relation) {
-            $owner->{$relation}->delete();
+            return $owner->{$relation} ? $owner->{$relation}->delete() : false;
         }
     }
 }

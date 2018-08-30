@@ -14,6 +14,9 @@ class StoreRequest extends FormRequest
     public function authorize()
     {
         return true;
+
+        //$comment = Comment::find($this->route('comment'));   // EXAMPLE
+        //return $comment && $this->user()->can('update', $comment);
     }
 
     /**

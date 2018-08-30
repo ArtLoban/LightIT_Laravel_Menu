@@ -33,13 +33,16 @@
                 </li>
             </ul>
             <ul class="navbar-nav">
-                {{--<li class="nav-item">
+                <li class=""><a href="{{ route('login') }}">Кoрзина</a></li>
+            </ul>
+            {{--<ul class="navbar-nav">
+                <li class="nav-item">
                     <a class="nav-item text-right" href="{{ route('menu') }}">Some text <span class="sr-only">(current)</span></a>
-                </li>--}}
+                </li>
                 <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li class="{{ Request::is('login')?'active':'' }}"><a href="{{ route('login') }}">Login</a></li>
-                        {{--<li class="{{ Request::is('register')?'active':'' }}"><a href="{{ route('register') }}">Register</a></li>--}}
+                        <li class="{{ Request::is('register')?'active':'' }}"><a href="{{ route('register') }}">Register</a></li>
                     @else
                         <li class="dropdown my-username">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -61,7 +64,7 @@
                             </ul>
                         </li>
                     @endif
-            </ul>
+            </ul>--}}
         </div>
     </nav>
 </header>
