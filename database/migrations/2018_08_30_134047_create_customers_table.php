@@ -17,7 +17,7 @@ class CreateCustomersTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('phone_number', 10)->nullable();
-            $table->integer('session_id');
+            $table->integer('session_id')->nullable();
             $table->timestamps();
         });
     }

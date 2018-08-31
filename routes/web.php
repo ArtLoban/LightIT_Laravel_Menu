@@ -13,6 +13,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
     Route::resource('/ingredients', 'IngredientsController');
     Route::resource('/roles', 'RoleController');
     Route::resource('/permitions', 'IngredientsController');
+    Route::resource('/customers', 'CustomerController');
+    Route::resource('/orders', 'OrderController');
 });
 
 //Route::get('/admin', 'Admin\DashboardController@index');

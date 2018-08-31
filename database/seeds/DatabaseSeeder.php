@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             ImageSeeder::class,
             DishSeeder::class,
             OrderStatusSeeder::class,
-            OrderDeliverySeeder::class
+            OrderDeliverySeeder::class,
+            CustomerSeeder::class,
+
         ]);
 
         // $this->call(UsersTableSeeder::class);
