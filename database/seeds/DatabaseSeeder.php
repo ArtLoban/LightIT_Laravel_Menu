@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ImageSeeder::class,
             DishSeeder::class,
+            OrderStatusSeeder::class,
+            OrderDeliverySeeder::class
         ]);
 
         // $this->call(UsersTableSeeder::class);

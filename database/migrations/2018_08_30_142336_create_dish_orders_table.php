@@ -15,6 +15,12 @@ class CreateDishOrdersTable extends Migration
     {
         Schema::create('dish_orders', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('dish_id')->unsigned()->index();
+            $table->foreign('dish_id')->references('id')->on('dishes')->onDelete('cascade');
+            $table->integer('order_id')->unsigned()->index();
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->integer('dish_quantity');
+            $table->decimal('price', 16, 2);
             $table->timestamps();
         });
     }

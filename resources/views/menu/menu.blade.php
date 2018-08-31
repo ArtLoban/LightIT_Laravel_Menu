@@ -29,11 +29,11 @@
                                             <h4 class="card-title">
                                                 <a href="{{ route('menu.category', $category->id) }}">{{ $category->name }}</a>
                                             </h4>
-                                            <ul class="list-group list-group-flush">
+                                            {{--<ul class="list-group list-group-flush">
                                                 @foreach($category->dishes as $dish)
                                                     <li class="list-group-item">{{ $dish->name }} <span class="text-right">Цена: {{ $dish->price }}</span></li>
                                                 @endforeach
-                                            </ul>
+                                            </ul>--}}
                                         </div>
                                     </div><!-- Конец карточки -->
                                 @endforeach

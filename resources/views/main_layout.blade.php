@@ -12,7 +12,7 @@
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="/css/album.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
 
 </head>
 
@@ -72,9 +72,11 @@
 <section class="jumbotron text-center">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <h2 class="jumbotron-heading banner-name">Restaurant "У Ашота"</h2>
-                <p class="lead text-muted">Get fat in our little Restaurant</p>
+            <div class="col-12">
+                <div class="jumbotron-text">
+                    <h2 class="jumbotron-heading banner-name">Restaurant "У Ашота"</h2>
+                    <p class="lead text-muted">Get fat in our little Restaurant</p>
+                </div>
                 <hr>
             </div>
         </div>
@@ -100,5 +102,6 @@
 <script src="/js/popper.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/holder.min.js"></script>
+<script src="/js/main.js"></script>
 </body>
 </html>

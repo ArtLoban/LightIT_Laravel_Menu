@@ -30,7 +30,7 @@ class UpdateRequest extends FormRequest
             'category_id' => 'required|integer',
             'ingredient_id' => 'array',
             'ingredient_id.*' => 'integer',
-            'price' => 'nullable|numeric|between:0,99999999.99',
+            'price' => 'nullable|numeric|between:0,99999999.9',
             'weight' => 'nullable|integer',
             'image' => 'nullable|image|mimes:jpeg,jpg,bmp,png|max:1024',
         ];

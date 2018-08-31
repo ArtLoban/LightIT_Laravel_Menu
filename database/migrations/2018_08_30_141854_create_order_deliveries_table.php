@@ -16,6 +16,7 @@ class CreateOrderDeliveriesTable extends Migration
         Schema::create('order_deliveries', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->timestamps();
         });
     }
 
