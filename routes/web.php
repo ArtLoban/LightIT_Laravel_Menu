@@ -33,3 +33,7 @@ Route::get('/menu', 'MenuController@index')->name('menu');
 Route::get('/menu/category/{id}', 'MenuController@show')->name('menu.category');
 Route::get('/menu/dish/{id}', 'MenuController@showDish')->name('menu.dish');
 
+Route::get('/cart', 'Order\CartController@index')->name('cart');
+Route::post('/cart', 'Order\CartController@store')->name('cart.store');
+
+

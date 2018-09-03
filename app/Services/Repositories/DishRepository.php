@@ -26,4 +26,13 @@ class DishRepository extends Repository
         return $this->className::find($id)->ingredients()->attach($array);
     }
 
+    /**
+     * @param array $id
+     * @return mixed
+     */
+    public function getWithImageById(array $id)
+    {
+        return $this->className::with('image')->whereIn('id', $id)->get();
+    }
+
 }

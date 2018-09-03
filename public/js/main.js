@@ -7,6 +7,7 @@ $(document).ready(function() {
         $input.change();
         return false;
     });
+
     $('.plus').click(function () {
         var $input = $(this).parent().find('input');
         $input.val(parseInt($input.val()) + 1);

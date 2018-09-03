@@ -41,7 +41,7 @@
                                     </div>
                                     {!! Form::close() !!}
                                 </div>
-                                <a href="{{ route('menu') }}" class="btn btn-info order-dish">Заказать</a>
+                                <a href="{{ route('menu') }}" class="btn btn-info order-dish">В корзину</a>
                             </div>
                         </div>
                     </div>

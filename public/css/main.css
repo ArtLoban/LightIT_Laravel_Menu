@@ -67,6 +67,10 @@ hr {
   margin-bottom: 30px;
 }
 
+.cart-back-btn {
+  margin: 30px 20px;
+}
+
 .dish-item {
   background-color: rgba(0, 27, 0, 0.15);
   padding: 20px;
@@ -93,4 +97,29 @@ hr {
 
 .price-p {
   margin-left: 35px;
+}
+
+table.cart {
+  margin-bottom: 50px;
+}
+
+.shipping-conditions {
+  font-size: 14px;
+}
+
+.order-total {
+  font-size: 30px;
+}
+
+.product-remove {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(255, 33, 40, 0.66);
+}
+
+.product-remove:hover {
+  font-size: 18px;
+  font-weight: 900;
+  color: red;
+
 }

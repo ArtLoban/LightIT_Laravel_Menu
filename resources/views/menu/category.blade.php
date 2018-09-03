@@ -37,7 +37,7 @@
                     <div class="col-md-10">
                         @foreach($dishes as $dish)
                             <div class="row justify-content-between align-items-center">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <img class="" width="120" src="{{ asset(
                                                 $dish->image
                                                 ? $dish->image->path
@@ -45,19 +45,22 @@
                                                 ) }}" alt="Card image cap">
                                     <a href="{{ route('menu.dish', $dish->id) }}">{{ $dish->name }}</a>
                                 </div>
-                                <div class="col-6 text-right">
-                                    <span>{{ $dish->price }} грн</span>
-                                    <div class="item-counter">
-
-                                        {!! Form::open(['route' => 'categories.store']) !!}
+                                <div class="col-8 text-right">
+                                    {!! Form::open(['route' => 'cart.store']) !!}
+                                        <input type="hidden" name="dishId" value="{{ $dish->id }}">
+                                        <span>{{ $dish->price }} грн</span>
+                                        <div class="item-counter">
                                             <div class="number">
                                                 <span class="minus btn btn-sm btn-danger">-</span>
-                                                <input type="text" value="1" size="2"/>
+                                                <input type="text" name="dish-quantity" value="1" size="2"/>
                                                 <span class="plus btn btn-sm btn-success">+</span>
                                             </div>
-                                        {!! Form::close() !!}
-                                    </div>
-                                    <a href="{{ route('menu') }}" class="btn btn-info order-dish">Заказать</a>
+                                        </div>
+                                        <div class="d-inline">
+                                            <button type="submit" class="btn btn-info order-dish">В корзину</button>
+                                        </div>
+                                    {!! Form::close() !!}
+                                    <button type="button" id="save" class="btn btn-primary">Сохранить</button>
                                 </div>
                             </div>
                         @endforeach

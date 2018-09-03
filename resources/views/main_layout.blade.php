@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="/favicon.ico">
 
     <title>Album example for Bootstrap</title>
@@ -33,7 +34,7 @@
                 </li>
             </ul>
             <ul class="navbar-nav">
-                <li class=""><a href="{{ route('login') }}">Кoрзина</a></li>
+                <li class=""><a href="{{ route('cart') }}">Кoрзина</a></li>
             </ul>
             {{--<ul class="navbar-nav">
                 <li class="nav-item">
@@ -103,5 +104,37 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/holder.min.js"></script>
 <script src="/js/main.js"></script>
+<script>
+    $(function() {
+        $('#save').on('click',function(){
+            // var title = $('#title').val();
+            // var text = $('#text').val();
+            var title = 'artem';
+            var text = 'artem-tt';
+            alert($('meta[name="csrf-token"]').attr('content'));
+
+            $.ajax({
+                url: '{{ route('cart.store') }}',
+                type: "POST",
+                data: {title:title,text:text},
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (data) {
+                    // $('#addArticle').modal('hide');
+                    // $('#articles-wrap').removeClass('hidden').addClass('show');
+                    // $('.alert').removeClass('show').addClass('hidden');
+                    // var str = '<tr><td>'+data['id']+
+                    //     '</td><td><a href="/article/'+data['id']+'">'+data['title']+'</a>'+
+                    //     '</td><td><a href="/article/'+data['id']+'" class="delete" data-delete="'+data['id']+'">Удалить</a></td></tr>';
+                    // $('.table > tbody:last').append(str);
+                },
+                error: function (msg) {
+                    alert('Ошибка');
+                }
+            });
+        });
+    })
+</script>
 </body>
 </html>
