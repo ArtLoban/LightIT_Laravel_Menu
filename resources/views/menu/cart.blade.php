@@ -4,6 +4,7 @@
 
 <main role="main">
     <div class="container">
+
         <div class="row justify-content-center">
             <div class="col text-center">
                 <p>Ваша корзина пока пуста</p>

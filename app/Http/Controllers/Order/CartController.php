@@ -10,8 +10,10 @@ class CartController extends Controller
 {
     public function index(DishRepository $dishRepository)
     {
-//        dd(session()->all());
-//        $selectedDishes = session();
+//        dd(session()->all(), auth()->user());
+
+        $selectedDishes = session()->get('dishes');
+        dd($selectedDishes);
 //        $dishes = $dishRepository->getWithImageById($selectedDishes);
 
 //        return view('menu.cart', ['dishes' => $dishes]);
@@ -20,15 +22,8 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
-        session(['dishes.id' => $request->get('dishId'),
-                'dishes.quantity' => $request->get('dish-quantity')
-            ]);
-
-//        return redirect()->back();
-
-
-
-//        dd($request->all(), session()->getId());
+        session()->push('dishes', ['dishId' => $request->get('dishId'),
+                                    'dishQuantity' => $request->get('dishQuantity')
+                                ]);
     }
 }

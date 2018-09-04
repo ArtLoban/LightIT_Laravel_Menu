@@ -98,43 +98,11 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>window.jQuery || document.write('<script src="/js/jquery-slim.min.js"><\/script>')</script>
 <script src="/js/popper.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/holder.min.js"></script>
 <script src="/js/main.js"></script>
-<script>
-    $(function() {
-        $('#save').on('click',function(){
-            // var title = $('#title').val();
-            // var text = $('#text').val();
-            var title = 'artem';
-            var text = 'artem-tt';
-            alert($('meta[name="csrf-token"]').attr('content'));
-
-            $.ajax({
-                url: '{{ route('cart.store') }}',
-                type: "POST",
-                data: {title:title,text:text},
-                headers: {
-                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (data) {
-                    // $('#addArticle').modal('hide');
-                    // $('#articles-wrap').removeClass('hidden').addClass('show');
-                    // $('.alert').removeClass('show').addClass('hidden');
-                    // var str = '<tr><td>'+data['id']+
-                    //     '</td><td><a href="/article/'+data['id']+'">'+data['title']+'</a>'+
-                    //     '</td><td><a href="/article/'+data['id']+'" class="delete" data-delete="'+data['id']+'">Удалить</a></td></tr>';
-                    // $('.table > tbody:last').append(str);
-                },
-                error: function (msg) {
-                    alert('Ошибка');
-                }
-            });
-        });
-    })
-</script>
 </body>
 </html>

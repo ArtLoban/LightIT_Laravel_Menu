@@ -46,13 +46,13 @@
                                     <a href="{{ route('menu.dish', $dish->id) }}">{{ $dish->name }}</a>
                                 </div>
                                 <div class="col-8 text-right">
-                                    {!! Form::open(['route' => 'cart.store']) !!}
-                                        <input type="hidden" name="dishId" value="{{ $dish->id }}">
+                                    {!! Form::open(['route' => 'cart.store', 'class' => 'dish-order']) !!}
+                                        <input type="hidden" class="dishId" name="dishId" value="{{ $dish->id }}">
                                         <span>{{ $dish->price }} грн</span>
                                         <div class="item-counter">
                                             <div class="number">
                                                 <span class="minus btn btn-sm btn-danger">-</span>
-                                                <input type="text" name="dish-quantity" value="1" size="2"/>
+                                                <input type="text" class="dish-quantity" name="dish-quantity" value="1" size="2"/>
                                                 <span class="plus btn btn-sm btn-success">+</span>
                                             </div>
                                         </div>
@@ -60,7 +60,6 @@
                                             <button type="submit" class="btn btn-info order-dish">В корзину</button>
                                         </div>
                                     {!! Form::close() !!}
-                                    <button type="button" id="save" class="btn btn-primary">Сохранить</button>
                                 </div>
                             </div>
                         @endforeach

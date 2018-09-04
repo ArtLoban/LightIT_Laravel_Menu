@@ -15,3 +15,34 @@ $(document).ready(function() {
         return false;
     });
 });
+
+/*  AJAX request  */
+$(function() {
+    $('form.dish-order').submit(function (event) {
+        var url = $(this).attr('action');
+        var dishId = $(this).find('.dishId').val();
+        var dishQuantity = $(this).find('.dish-quantity').val();
+
+        // console.log(dishId);
+        // console.log(dishQuantity);
+
+        event.preventDefault();
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            // dataType: 'html',
+            data: {dishId: dishId, dishQuantity: dishQuantity},
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        })
+        .done(function (data) {
+            console.log(data);
+            console.log([dishId, dishQuantity]);
+        })
+        .fail(function () {
+            console.log("error");
+        })
+    })
+});
