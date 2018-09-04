@@ -2,28 +2,24 @@
 
 namespace App\Http\Controllers\Order;
 
+use App\Http\Requests\Cart\StoreRequest;
+use App\Services\CustomerOrderTransform\OrderTransform;
 use App\Services\Repositories\DishRepository;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class CartController extends Controller
 {
-    public function index(DishRepository $dishRepository)
+    public function index(DishRepository $dishRepository, OrderTransform $orderTransform)
     {
-//        dd(session()->all(), auth()->user());
+        $selectedDishes = $orderTransform->getOrderedDishesFromSession();
+        $dishes = $dishRepository->getWithImageById($selectedDishes);
 
-        $selectedDishes = session()->get('dishes');
-        dd($selectedDishes);
-//        $dishes = $dishRepository->getWithImageById($selectedDishes);
-
-//        return view('menu.cart', ['dishes' => $dishes]);
-        return view('menu.cart');
+        return view('menu.cart', ['dishes' => $dishes]);
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request, OrderTransform $orderTransform)
     {
-        session()->push('dishes', ['dishId' => $request->get('dishId'),
-                                    'dishQuantity' => $request->get('dishQuantity')
-                                ]);
+        $orderTransform->pushRequestIntoSession($request->only(['dishId', 'dishQuantity']));
     }
 }
