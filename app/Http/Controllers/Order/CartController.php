@@ -11,17 +11,10 @@ class CartController extends Controller
 {
     public function index(DishRepository $dishRepository, OrderTransform $orderTransform)
     {
+        dd(session()->all());
 //        session()->flush();
-//        dd(session()->all());
-
-//        session()->flush();
-
-//        dd(session()->get('dishes'));
-
-
 
         $selectedDishes = $orderTransform->getOrderedDishesFromSession();
-
         isset($selectedDishes) ? $dishes = $dishRepository->getWithImageById($selectedDishes) : $dishes = null;
 
         return view('menu.cart', ['dishes' => $dishes]);

@@ -10,16 +10,17 @@ class OrderTransform
      */
     public function pushRequestIntoSession(array $request)
     {
-//        session()->put('dishes', [$request['dishId'] => $request['dishQuantity']]);
+        $id = $request['dishId'];
 
-//        session()->push('dishes', $request['dishQuantity']);
-//        session()->push($request['dishId'], $request['dishQuantity']);
+        session()->push("dishes.$id", $request['dishQuantity']);
+
+//        session()->put('dishes', [$request['dishId'] => $request['dishQuantity']]);
 //        session()->push('dishes', [$request['dishId'] => $request['dishQuantity']]);
 
-        session()->push('dishes', [
-            'dishId' => $request['dishId'],
-            'dishQuantity' => $request['dishQuantity']
-         ]);
+//        session()->push('dishes', [
+//            'dishId' => $request['dishId'],
+//            'dishQuantity' => $request['dishQuantity']
+//         ]);
     }
 
     /**
