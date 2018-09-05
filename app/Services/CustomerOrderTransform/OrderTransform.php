@@ -11,11 +11,8 @@ class OrderTransform
     public function pushRequestIntoSession(array $request)
     {
         $id = $request['dishId'];
-
         session()->push("dishes.$id", $request['dishQuantity']);
 
-//        session()->put('dishes', [$request['dishId'] => $request['dishQuantity']]);
-//        session()->push('dishes', [$request['dishId'] => $request['dishQuantity']]);
 
 //        session()->push('dishes', [
 //            'dishId' => $request['dishId'],
@@ -24,20 +21,23 @@ class OrderTransform
     }
 
     /**
-     * @return array
+     * @return array|null
      */
     public function getOrderedDishesFromSession(): ?array
     {
-        $dishIds = session()->get('dishes');
+        $dishes = session()->get('dishes');
+        if ($dishes == null) {
+            return null;
+        }
 
-        return isset($dishIds) ? $this->normalizeArray($dishIds) : null;
+        return $dishIds = array_keys($dishes);
     }
 
     /**
      * @param array $array
      * @return array
      */
-    private function normalizeArray(array $array): array
+    /*private function normalizeArray(array $array): array
     {
         $result = [];
         foreach ($array as $val) {
@@ -47,11 +47,14 @@ class OrderTransform
         $result = array_unique($result);
 
         return $result;
-    }
+    }*/
 
-    private function deleteItemFromOrder()
+    /**
+     * @param int $id
+     */
+    public function deleteItemFromOrder(int $id)
     {
-
+        session()->forget("dishes.$id");
     }
 
 }

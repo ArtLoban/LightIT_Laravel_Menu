@@ -28,7 +28,10 @@
                         <tbody>
 
                             @foreach($dishes as $dish)
-                                <tr class="">
+                                {!! Form::open(['route' => 'cart.destroy', 'class' => 'dish-order']) !!}
+                                <input type="hidden" class="dishId" name="dishId" value="{{ $dish->id }}">
+
+                                <tr class="22">
                                     <td class="product-removal align-middle">
                                         <button class="remove-product">
                                             &times;
@@ -52,6 +55,7 @@
                                     </td>
                                     <td class="align-middle">subtotal</td>
                                 </tr>
+                                {!! Form::close() !!}
                             @endforeach
 
                         </tbody>

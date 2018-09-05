@@ -9,24 +9,42 @@ use App\Http\Controllers\Controller;
 
 class CartController extends Controller
 {
-    public function index(DishRepository $dishRepository, OrderTransform $orderTransform)
+    /**
+     * @var OrderTransform
+     */
+    private $orderTransform;
+
+    public function __construct(OrderTransform $orderTransform)
     {
-        dd(session()->all());
+        $this->orderTransform = $orderTransform;
+    }
+
+
+    public function index(DishRepository $dishRepository)
+    {
+//        dd(session()->all());
+
+//        session()->forget('dishes.10');
 //        session()->flush();
 
-        $selectedDishes = $orderTransform->getOrderedDishesFromSession();
+        $selectedDishes = $this->orderTransform->getOrderedDishesFromSession();
         isset($selectedDishes) ? $dishes = $dishRepository->getWithImageById($selectedDishes) : $dishes = null;
 
         return view('menu.cart', ['dishes' => $dishes]);
     }
 
-    public function store(StoreRequest $request, OrderTransform $orderTransform)
+    public function store(StoreRequest $request)
     {
-        $orderTransform->pushRequestIntoSession($request->only(['dishId', 'dishQuantity']));
+        $this->orderTransform->pushRequestIntoSession($request->only(['dishId', 'dishQuantity']));
     }
 
-    public function destroy($id)
+    /**
+     * Removes Dish id from Session
+     *
+     * @param $itemId
+     */
+    public function destroy(int $itemId)
     {
-
+        $this->orderTransform->deleteItemFromOrder($itemId);
     }
 }
