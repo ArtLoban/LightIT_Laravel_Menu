@@ -111,15 +111,17 @@ table.cart {
   font-size: 30px;
 }
 
-.product-remove {
+.remove-product {
+  /*background: transparent;*/
+  /*border: none;*/
+  /*padding: 0px;*/
   font-size: 18px;
   font-weight: 400;
   color: rgba(255, 33, 40, 0.66);
 }
 
-.product-remove:hover {
+.remove-product:hover {
   font-size: 18px;
   font-weight: 900;
   color: red;
-
 }

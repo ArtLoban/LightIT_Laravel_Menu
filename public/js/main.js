@@ -1,3 +1,5 @@
+/* Add Items to the Cart */
+
 $(document).ready(function() {
     $('.minus').click(function () {
         var $input = $(this).parent().find('input');
@@ -45,4 +47,35 @@ $(function() {
             console.log("error");
         })
     })
+});
+
+/* CART */
+
+$(document).ready(function() {
+
+    /* Set rates + misc */
+    var fadeTime = 300;
+
+    /* Assign actions */
+    $('.product-quantity input').change( function() {
+        updateQuantity(this);
+    });
+
+    $('.product-removal button').click( function() {
+        removeItem(this);
+    });
+
+
+
+    /* Remove item from cart */
+    function removeItem(removeButton)
+    {
+        /* Remove row from DOM and recalc cart total */
+        var productRow = $(removeButton).parent().parent();
+        productRow.slideUp(fadeTime, function() {
+            productRow.remove();
+            // recalculateCart();
+        });
+    }
+
 });

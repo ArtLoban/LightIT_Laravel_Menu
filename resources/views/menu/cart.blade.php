@@ -5,7 +5,7 @@
 <main role="main">
     <div class="container">
 
-        @if($dishes->isEmpty())
+        @if(is_null($dishes))
             <div class="row justify-content-center">
                 <div class="col text-center">
                     <p>Ваша корзина пока пуста</p>
@@ -29,7 +29,11 @@
 
                             @foreach($dishes as $dish)
                                 <tr class="">
-                                    <td class="product-remove align-middle">&times;</td>
+                                    <td class="product-removal align-middle">
+                                        <button class="remove-product">
+                                            &times;
+                                        </button>
+                                    </td>
                                     <td class="align-middle">
                                         <img class="" width="70" src="{{ asset(
                                                         $dish->image
@@ -40,7 +44,7 @@
                                     <td class="text-left align-middle">{{ $dish->name }}</td>
                                     <td class="align-middle">{{ $dish->price }}</td>
                                     <td class="align-middle">
-                                        <div class="number">
+                                        <div class="number product-quantity">
                                             <span class="minus btn btn-sm btn-danger">-</span>
                                             <input type="text" value="1" size="2"/>
                                             <span class="plus btn btn-sm btn-success">+</span>
