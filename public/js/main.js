@@ -61,11 +61,14 @@ $(document).ready(function() {
         updateQuantity(this);
     });
 
-    $('.product-removal button').click( function() {
+    $('.product-removal button').click( function(event) {
+        event.preventDefault();
         removeItem(this);
-        var item = $(this).parents();
-        console.log(item);
-        removeItemFromSession();
+
+        var item = $(this).siblings('input.dishId').val();
+        var url = $(this).parent().attr('action');
+        // console.log(url);
+        removeItemFromSession(item, url);
     });
 
 
@@ -74,35 +77,31 @@ $(document).ready(function() {
     function removeItem(removeButton)
     {
         /* Remove row from DOM and recalc cart total */
-        var productRow = $(removeButton).parent().parent();
+        var productRow = $(removeButton).parent().parent().parent();
         productRow.remove();
         // recalculateCart();
     }
 
     /* Remove item from session */
-    function removeItemFromSession() {
-        console.log('Hello!');
+    function removeItemFromSession(item, url) {
+        // console.log(item + '. Hello!');
 
-        // var url = $('form.dish-order').attr('action');
-        // var dishId = $(this).parent().attr();
-        // var dishId = $('form.dish-order').find('.dishId').val();
-
-        // $.ajax({
-        //     url: url,
-        //     type: 'POST',
-        //     // dataType: 'html',
-        //     data: {dishId: dishId},
-        //     headers: {
-        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //     }
-        // })
-        // .done(function (data) {
-        //     console.log(data);
-        //     console.log('Deleted');
-        // })
-        // .fail(function () {
-        //     console.log("Failed");
-        // })
+        $.ajax({
+            url: url,
+            type: 'DELETE',
+            // dataType: 'html',
+            data: {dishId: item},
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        })
+        .done(function (data) {
+            console.log(data);
+            console.log('Deleted');
+        })
+        .fail(function () {
+            console.log("Failed");
+        })
     }
 
 });

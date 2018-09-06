@@ -43,8 +43,9 @@ class CartController extends Controller
      *
      * @param $itemId
      */
-    public function destroy(int $itemId)
+    public function destroy($itemId)
     {
+//        echo 'Ok!'. $itemId;
         $this->orderTransform->deleteItemFromOrder($itemId);
     }
 }

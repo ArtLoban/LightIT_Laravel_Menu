@@ -35,6 +35,6 @@ Route::get('/menu/dish/{id}', 'MenuController@showDish')->name('menu.dish');
 
 Route::get('/cart', 'Order\CartController@index')->name('cart');
 Route::post('/cart', 'Order\CartController@store')->name('cart.store');
-Route::delete('/cart', 'Order\CartController@destroy')->name('cart.destroy');
+Route::delete('/cart/{id}', 'Order\CartController@destroy')->name('cart.destroy');
 
 

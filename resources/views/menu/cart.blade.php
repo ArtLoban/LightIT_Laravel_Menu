@@ -28,14 +28,17 @@
                         <tbody>
 
                             @foreach($dishes as $dish)
-                                {!! Form::open(['route' => 'cart.destroy', 'class' => 'dish-order']) !!}
-                                <input type="hidden" class="dishId" name="dishId" value="{{ $dish->id }}">
-
-                                <tr class="22">
+                                <tr>
                                     <td class="product-removal align-middle">
-                                        <button class="remove-product">
-                                            &times;
-                                        </button>
+                                        {!! Form::open(['route' => ['cart.destroy', $dish->id],
+                                                        'method' => 'delete',
+                                                        'class' => 'jq-form',
+                                                        ]) !!}
+                                            <input type="hidden" class="dishId" name="dishId" value="{{ $dish->id }}">
+                                            <button class="remove-product">
+                                                &times;
+                                            </button>
+                                        {!! Form::close() !!}
                                     </td>
                                     <td class="align-middle">
                                         <img class="" width="70" src="{{ asset(
@@ -55,7 +58,6 @@
                                     </td>
                                     <td class="align-middle">subtotal</td>
                                 </tr>
-                                {!! Form::close() !!}
                             @endforeach
 
                         </tbody>
