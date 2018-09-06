@@ -18,7 +18,9 @@ $(document).ready(function() {
     });
 });
 
-/*  AJAX request  */
+
+
+/*  AJAX Add-to-Cart request  */
 $(function() {
     $('form.dish-order').submit(function (event) {
         var url = $(this).attr('action');
@@ -49,12 +51,18 @@ $(function() {
     })
 });
 
+
+
+
 /* CART */
 
 $(document).ready(function() {
 
+    /* Get initial total price */
+    recalculateCart();
+
     /* Set rates + misc */
-    var fadeTime = 300;
+    var fadeTime = 50;
 
     /* Assign actions */
     $('.product-quantity input').change( function() {
@@ -67,9 +75,50 @@ $(document).ready(function() {
 
         var item = $(this).siblings('input.dishId').val();
         var url = $(this).parent().attr('action');
-        // console.log(url);
         removeItemFromSession(item, url);
     });
+
+
+    /* Recalculate cart */
+    function recalculateCart()
+    {
+        var total = 0;
+
+        /* Sum up row totals */
+        $('.product').each(function () {
+            total += parseFloat($(this).children('.product-line-price').text());
+        });
+        $('#cart-total').fadeOut(fadeTime, function() {
+            $(this).html(total);
+            $(this).fadeIn(fadeTime);
+        });
+        // $('#cart-total').html(subtotal);
+
+    }
+
+
+    /* Update quantity */
+    function updateQuantity(quantityInput)
+    {
+        /* Calculate line price */
+        var productRow = $(quantityInput).closest('.product');
+        console.log(productRow);
+        var price = parseFloat(productRow.children('.product-price').text());
+        console.log(price);
+        var quantity = $(quantityInput).val();
+        var linePrice = price * quantity;
+
+        /* Update line price display and recalc cart totals */
+        productRow.children('.product-line-price').each(function () {
+            $(this).fadeOut(fadeTime, function() {
+                $(this).text(linePrice.toFixed(1));
+                recalculateCart();
+                $(this).fadeIn(fadeTime);
+            });
+        });
+    }
+
+
 
 
 
@@ -79,8 +128,9 @@ $(document).ready(function() {
         /* Remove row from DOM and recalc cart total */
         var productRow = $(removeButton).parent().parent().parent();
         productRow.remove();
-        // recalculateCart();
+        recalculateCart();
     }
+
 
     /* Remove item from session */
     function removeItemFromSession(item, url) {

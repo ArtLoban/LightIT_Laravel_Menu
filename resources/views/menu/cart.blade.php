@@ -28,7 +28,7 @@
                         <tbody>
 
                             @foreach($dishes as $dish)
-                                <tr>
+                                <tr class="product">
                                     <td class="product-removal align-middle">
                                         {!! Form::open(['route' => ['cart.destroy', $dish->id],
                                                         'method' => 'delete',
@@ -48,15 +48,15 @@
                                                         ) }}" alt="Card image cap">
                                     </td>
                                     <td class="text-left align-middle">{{ $dish->name }}</td>
-                                    <td class="align-middle">{{ $dish->price }}</td>
+                                    <td class="align-middle product-price">{{ $dish->price }} грн</td>
                                     <td class="align-middle">
                                         <div class="number product-quantity">
                                             <span class="minus btn btn-sm btn-danger">-</span>
-                                            <input type="text" value="1" size="2"/>
+                                            <input type="text" value="{{ $quentity = array_sum(session()->get("dishes.$dish->id")) }}" size="2"/>
                                             <span class="plus btn btn-sm btn-success">+</span>
                                         </div>
                                     </td>
-                                    <td class="align-middle">subtotal</td>
+                                    <td class="align-middle product-line-price">{{ $quentity * $dish->price }} грн</td>
                                 </tr>
                             @endforeach
 
@@ -83,7 +83,7 @@
                             <p class="order-total">Итого</p>
                         </div>
                         <div class="col-9">
-                            <span class="order-total">1,990 грн</span>
+                            <span class="order-total" id="cart-total" >0</span><span class="order-total"> грн</span>
                         </div>
                         <div class="w-100"></div>
                         <div class="col">

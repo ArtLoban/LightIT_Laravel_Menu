@@ -34,22 +34,6 @@ class OrderTransform
     }
 
     /**
-     * @param array $array
-     * @return array
-     */
-    /*private function normalizeArray(array $array): array
-    {
-        $result = [];
-        foreach ($array as $val) {
-            $result[] = $val['dishId'];
-        }
-
-        $result = array_unique($result);
-
-        return $result;
-    }*/
-
-    /**
      * @param int $id
      */
     public function deleteItemFromOrder(int $id)

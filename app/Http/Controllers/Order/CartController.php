@@ -23,6 +23,8 @@ class CartController extends Controller
     public function index(DishRepository $dishRepository)
     {
 //        dd(session()->all());
+//        dd($this->orderTransform->getTotalPrice());
+
 
 //        session()->forget('dishes.10');
 //        session()->flush();
@@ -45,7 +47,6 @@ class CartController extends Controller
      */
     public function destroy($itemId)
     {
-//        echo 'Ok!'. $itemId;
         $this->orderTransform->deleteItemFromOrder($itemId);
     }
 }
