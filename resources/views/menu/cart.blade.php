@@ -50,13 +50,16 @@
                                     <td class="text-left align-middle">{{ $dish->name }}</td>
                                     <td class="align-middle product-price">{{ $dish->price }} грн</td>
                                     <td class="align-middle">
+                                        {!! Form::open(['route' => 'cart.store']) !!}
                                         <div class="number product-quantity">
-                                            <span class="minus btn btn-sm btn-danger">-</span>
-                                            <input type="text" value="{{ $quentity = array_sum(session()->get("dishes.$dish->id")) }}" size="2"/>
-                                            <span class="plus btn btn-sm btn-success">+</span>
+                                            <input type="hidden" class="dishId" name="dishId" value="{{ $dish->id }}">
+                                            <span class="jq-minus btn btn-sm btn-danger">-</span>
+                                            <input readonly class="quantity" type="text" value="{{ $quentity = array_sum(session()->get("dishes.$dish->id")) }}" size="2"/>
+                                            <span class="jq-plus btn btn-sm btn-success">+</span>
                                         </div>
+                                        {!! Form::close() !!}
                                     </td>
-                                    <td class="align-middle product-line-price">{{ $quentity * $dish->price }} грн</td>
+                                    <td class="align-middle product-line-price">{{ $quentity * $dish->price }}</td>
                                 </tr>
                             @endforeach
 
@@ -86,14 +89,17 @@
                             <span class="order-total" id="cart-total" >0</span><span class="order-total"> грн</span>
                         </div>
                         <div class="w-100"></div>
+
                         <div class="col">
-                            <a href="#" class="btn btn-success cart-back-btn">Перейти к оформлению</a>
+                            <input type="hidden" class="dishId" name="dishId" value="55">
+                            <button type="submit" class="btn btn-success">Перейти к оформлению</button>
+{{--                            <a href="{{ route('checkout.index') }}"></a>--}}
                         </div>
+
                     </div>
 
                 </div>
             </div>
-
         @endif
 
         <div class="row">

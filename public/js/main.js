@@ -7,14 +7,14 @@ $(document).ready(function() {
         count = count < 1 ? 1 : count;
         $input.val(count);
         $input.change();
-        return false;
+        // return false;
     });
 
     $('.plus').click(function () {
         var $input = $(this).parent().find('input');
         $input.val(parseInt($input.val()) + 1);
         $input.change();
-        return false;
+        // return false;
     });
 });
 
@@ -52,6 +52,58 @@ $(function() {
 });
 
 
+// /* Change Item quantity and update session */
+//
+// $(document).ready(function() {
+//     $('.jq-minus').click(function () {
+//         var $input = $(this).parent().find('input.quantity');
+//         var count = parseInt($input.val()) - 1;
+//         // count = count < 1 ? 1 : count;
+//         $input.val(count);
+//         $input.change();
+//         // return false;
+//
+//         var dishId = $(this).siblings('input.dishId').val();
+//         var url = $(this).parents('form').attr('action');
+//         var dishQuantity = -1;
+//
+//         // console.log(url);
+//         changeItemQuantityInSession(dishId, url, dishQuantity);
+//     });
+//
+//     $('.jq-plus').click(function () {
+//         var $input = $(this).parent().find('input.quantity');
+//         $input.val(parseInt($input.val()) + 1);
+//         $input.change();
+//         // return false;
+//         var dishId = $(this).siblings('input.dishId').val();
+//         var url = $(this).parents('form').attr('action');
+//         var dishQuantity = 1;
+//         changeItemQuantityInSession(dishId, url, dishQuantity);
+//     });
+//
+//
+//     function changeItemQuantityInSession(dishId, url, dishQuantity) {
+//         $.ajax({
+//             url: url,
+//             type: 'POST',
+//             // dataType: 'html',
+//             data: {dishId: dishId, dishQuantity: dishQuantity},
+//             headers: {
+//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//             }
+//         })
+//         .done(function (data) {
+//             console.log(data);
+//             console.log([dishId, dishQuantity]);
+//         })
+//         .fail(function () {
+//             console.log("error");
+//         })
+//     }
+// });
+
+
 
 
 /* CART */
@@ -65,7 +117,7 @@ $(document).ready(function() {
     var fadeTime = 50;
 
     /* Assign actions */
-    $('.product-quantity input').change( function() {
+    $('.product-quantity input.quantity').change( function() {
         updateQuantity(this);
     });
 
@@ -73,9 +125,9 @@ $(document).ready(function() {
         event.preventDefault();
         removeItem(this);
 
-        var item = $(this).siblings('input.dishId').val();
+        var dishId = $(this).siblings('input.dishId').val();
         var url = $(this).parent().attr('action');
-        removeItemFromSession(item, url);
+        removeItemFromSession(dishId, url);
     });
 
 
@@ -102,9 +154,9 @@ $(document).ready(function() {
     {
         /* Calculate line price */
         var productRow = $(quantityInput).closest('.product');
-        console.log(productRow);
+        // console.log(productRow);
         var price = parseFloat(productRow.children('.product-price').text());
-        console.log(price);
+        // console.log(price);
         var quantity = $(quantityInput).val();
         var linePrice = price * quantity;
 
@@ -120,27 +172,83 @@ $(document).ready(function() {
 
 
 
+    /* Change Item quantity and update session */
+
+    $('.jq-minus').click(function () {
+        var $input = $(this).parent().find('input.quantity');
+        var count = parseInt($input.val()) - 1;
+        var $dishId = $(this).siblings('input.dishId').val();
+        var $url = $(this).parents('form').attr('action');
+        var $urlDelete = $url + '/' + $dishId;
+        var $dishQuantity = -1;
+
+        if (count === 0) {
+            removeItem(this);
+            removeItemFromSession($dishId, $urlDelete);
+        }
+
+        // count = count < 1 ? 1 : count;
+        $input.val(count);
+        $input.change();
+        // return false;
+
+        changeItemQuantityInSession($dishId, $url, $dishQuantity);
+    });
+
+    $('.jq-plus').click(function () {
+        var $input = $(this).parent().find('input.quantity');
+        $input.val(parseInt($input.val()) + 1);
+        $input.change();
+        // return false;
+        var dishId = $(this).siblings('input.dishId').val();
+        var url = $(this).parents('form').attr('action');
+        var dishQuantity = 1;
+        changeItemQuantityInSession(dishId, url, dishQuantity);
+    });
+
+
+    function changeItemQuantityInSession($dishId, $url, $dishQuantity) {
+        $.ajax({
+            url: $url,
+            type: 'POST',
+            // dataType: 'html',
+            data: {dishId: $dishId, dishQuantity: $dishQuantity},
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        })
+        .done(function (data) {
+            console.log(data);
+            console.log([$dishId, $dishQuantity]);
+        })
+        .fail(function () {
+            console.log("error");
+        })
+    }
+
+
+
+
 
 
     /* Remove item from cart */
-    function removeItem(removeButton)
+    function removeItem($item)
     {
         /* Remove row from DOM and recalc cart total */
-        var productRow = $(removeButton).parent().parent().parent();
+        var productRow = $($item).parents('.product');
         productRow.remove();
         recalculateCart();
     }
 
 
     /* Remove item from session */
-    function removeItemFromSession(item, url) {
-        // console.log(item + '. Hello!');
+    function removeItemFromSession($dishId, $url) {
 
         $.ajax({
-            url: url,
+            url: $url,
             type: 'DELETE',
             // dataType: 'html',
-            data: {dishId: item},
+            data: {dishId: $dishId},
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }

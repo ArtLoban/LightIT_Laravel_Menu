@@ -52,7 +52,7 @@
                                         <div class="item-counter">
                                             <div class="number">
                                                 <span class="minus btn btn-sm btn-danger">-</span>
-                                                <input type="text" class="dish-quantity" name="dish-quantity" value="1" size="2"/>
+                                                <input readonly type="text" class="dish-quantity" name="dish-quantity" value="1" size="2"/>
                                                 <span class="plus btn btn-sm btn-success">+</span>
                                             </div>
                                         </div>

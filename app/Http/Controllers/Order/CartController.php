@@ -6,6 +6,7 @@ use App\Http\Requests\Cart\StoreRequest;
 use App\Services\CustomerOrderTransform\OrderTransform;
 use App\Services\Repositories\DishRepository;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
@@ -23,6 +24,7 @@ class CartController extends Controller
     public function index(DishRepository $dishRepository)
     {
 //        dd(session()->all());
+        dd(session()->get('dishes'));
 //        dd($this->orderTransform->getTotalPrice());
 
 
