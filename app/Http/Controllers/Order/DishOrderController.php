@@ -29,7 +29,8 @@ class DishOrderController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
+        $this->dishOrderRepository->storeOrderFromSession($request);
         return redirect()->route('checkout.index');
     }
 }

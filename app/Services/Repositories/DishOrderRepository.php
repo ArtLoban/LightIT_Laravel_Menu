@@ -11,4 +11,11 @@ class DishOrderRepository extends Repository
         return DishOrder::class;
     }
 
+    public function storeOrderFromSession($request)
+    {
+        if ($request->submit == 'submited') {
+            dd(session()->get('dishes'));
+        }
+    }
+
 }

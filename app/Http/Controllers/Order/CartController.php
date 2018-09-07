@@ -24,7 +24,7 @@ class CartController extends Controller
     public function index(DishRepository $dishRepository)
     {
 //        dd(session()->all());
-        dd(session()->get('dishes'));
+//        dd(session()->get('dishes'));
 //        dd($this->orderTransform->getTotalPrice());
 
 

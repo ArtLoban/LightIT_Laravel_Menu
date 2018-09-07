@@ -91,9 +91,9 @@
                         <div class="w-100"></div>
 
                         <div class="col">
-                            <input type="hidden" class="dishId" name="dishId" value="55">
-                            <button type="submit" class="btn btn-success">Перейти к оформлению</button>
-{{--                            <a href="{{ route('checkout.index') }}"></a>--}}
+                            {!! Form::open(['route' => 'checkout.store']) !!}
+                            <button class="btn btn-success" type="submit" name="submit" value="submited">Перейти к оформлению</button>
+                            {!! Form::close() !!}
                         </div>
 
                     </div>
