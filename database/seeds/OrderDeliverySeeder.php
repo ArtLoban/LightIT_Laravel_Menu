@@ -12,8 +12,8 @@ class OrderDeliverySeeder extends Seeder
     public function run()
     {
         DB::table('order_deliveries')->insert([
-           ['name' => 'Доставка'],
-           ['name' => 'Самовывоз'],
+            ['name' => 'Самовывоз'],
+            ['name' => 'Доставка клиенту'],
         ]);
     }
 }

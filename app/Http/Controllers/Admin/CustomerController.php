@@ -25,4 +25,15 @@ class CustomerController extends Controller
     {
         return view('admin.customers.index', ['customers' => $this->customerRepository->all()]);
     }
+
+    /**
+     * Display the specified customer.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        return view('admin.customers.show', ['customer' => $this->customerRepository->find($id)]);
+    }
 }

@@ -86,15 +86,20 @@
                             <p class="order-total">Итого</p>
                         </div>
                         <div class="col-9">
-                            <span class="order-total" id="cart-total" >0</span><span class="order-total"> грн</span>
+                            <span class="order-total" id="cart-total" >{{ session()->get('totalPrice') }}</span><span class="order-total"> грн</span>
                         </div>
                         <div class="w-100"></div>
 
                         <div class="col">
-                            {!! Form::open(['route' => 'checkout.store']) !!}
+                            <a href="{{ route('checkout.index') }}" class="btn btn-success cart-back-btn">Перейти к оформлению</a>
+                        </div>
+                        {{--<div class="col">
+                            {!! Form::open([
+                                'route' => ['checkout.store'],
+                                'method' => 'post']) !!}
                             <button class="btn btn-success" type="submit" name="submit" value="submited">Перейти к оформлению</button>
                             {!! Form::close() !!}
-                        </div>
+                        </div>--}}
 
                     </div>
 

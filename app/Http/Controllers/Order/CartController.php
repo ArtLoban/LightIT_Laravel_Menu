@@ -23,23 +23,20 @@ class CartController extends Controller
 
     public function index(DishRepository $dishRepository)
     {
-//        dd(session()->all());
-//        dd(session()->get('dishes'));
-//        dd($this->orderTransform->getTotalPrice());
-
-
-//        session()->forget('dishes.10');
-//        session()->flush();
-
         $selectedDishes = $this->orderTransform->getOrderedDishesFromSession();
         isset($selectedDishes) ? $dishes = $dishRepository->getWithImageById($selectedDishes) : $dishes = null;
 
         return view('menu.cart', ['dishes' => $dishes]);
     }
 
-    public function store(StoreRequest $request)
+    /*public function store(StoreRequest $request)
     {
         $this->orderTransform->pushRequestIntoSession($request->only(['dishId', 'dishQuantity']));
+    }*/
+
+    public function store(StoreRequest $request)
+    {
+        $this->orderTransform->pushRequestIntoSession($request->input('dishId'), $request->input('dishQuantity'));
     }
 
     /**

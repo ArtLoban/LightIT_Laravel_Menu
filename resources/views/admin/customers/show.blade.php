@@ -7,7 +7,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Список клиентов
+        Клиент
       </h1>
     </section>
 
@@ -28,14 +28,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach($customers as $customer)
-                        <tr>
-                            <td>{{ $customer->id }}</td>
-                            <td><a href="{{ route('customers.show', $customer->id) }}">{{ $customer->name }}</a></td>
-                            <td>{{ $customer->phone_number }}</td>
-                            <td><a href="#">Ссылка на список заказов</a></td>
-                        </tr>
-                    @endforeach
+                    <tr>
+                        <td>{{ $customer->id }}</td>
+                        <td>{{ $customer->name }}</td>
+                        <td>{{ $customer->phone_number }}</td>
+                        <td><a href="#">Ссылка на список заказов</a></td>
+                    </tr>
                 </tbody>
               </table>
             </div>
