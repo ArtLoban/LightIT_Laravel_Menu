@@ -30,22 +30,24 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach($orders as $order)
+                    @forelse($orders as $order)
                         <tr>
                             <td>{{ $order->id }}</td>
                             <td>
-                                <a href="{{ route('customers.show', $order->customer()->first()->id) }}">
-                                    {{ $order->customer()->first()->name }}
+                                <a href="{{ route('customers.show', $order->customer->id) }}">
+                                    {{ $order->customer->name }}
                                 </a>
                             </td>
-                            <td>{{ $order->customer()->first()->id }}</td>
-                            <td>{{ $order->delivery()->first()->name }}</td>
+                            <td>{{ $order->customer->getKey() }}</td>
+                            <td>{{ $order->delivery->name }}</td>
                             <td>
                                 <a href="#">{{ 'ссылка на список блюд' }}</a>
                             </td>
-                            <td>{{ $order->status()->first()->name }}</td>
+                            <td>{{ $order->status->name }}</td>
                         </tr>
-                    @endforeach
+                    @empty
+                        {{--No data available--}}
+                    @endforelse
                 </tbody>
               </table>
             </div>

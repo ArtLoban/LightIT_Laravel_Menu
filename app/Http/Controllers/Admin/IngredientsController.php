@@ -86,7 +86,7 @@ class IngredientsController extends Controller
      */
     public function destroy($id)
     {
-        $this->ingredientRepository->find($id)->delete();
+        $this->ingredientRepository->deleteById($id);
 
         return redirect()->route('ingredients.index');
     }

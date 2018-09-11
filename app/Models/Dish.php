@@ -38,7 +38,7 @@ class Dish extends Model implements HasImage, HasMorphRelations
     }
 
     /**
-     * Get all images of dish
+     * Get all images of Dish
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */

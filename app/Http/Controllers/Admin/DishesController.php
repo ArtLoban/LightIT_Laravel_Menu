@@ -105,7 +105,7 @@ class DishesController extends Controller
      */
     public function destroy($id)
     {
-        $this->dishRepository->find($id)->delete();
+        $this->dishRepository->deleteById($id);
 
         return redirect()->route('dishes.index');
     }

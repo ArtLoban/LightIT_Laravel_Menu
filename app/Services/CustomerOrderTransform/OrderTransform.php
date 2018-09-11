@@ -52,8 +52,8 @@ class OrderTransform
 
         foreach ($dishes as $key => $value) {
             $dishPrice = $this->dishRepository->find($key)->price;
-            $quentity = array_sum($value);
-            $totalPrice += ($dishPrice * $quentity);
+            $quantity = array_sum($value);
+            $totalPrice += ($dishPrice * $quantity);
         }
 
         session()->put('totalPrice', $totalPrice);

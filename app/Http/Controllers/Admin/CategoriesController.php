@@ -29,13 +29,13 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-                        // GOOD EXAMPLE!!!
-//                             dd($this->categoryRepository->find(6)->image->path);         //   GOOD EXAMPLE!!!
+                        // GOOD EXAMPLE!
+//                             dd($this->categoryRepository->find(5)->image->path);
                             //  dd($this->categoryRepository->find(5)->image());           MorphOne
                             //  dd($this->categoryRepository->find(5)->images());          MorphMany
                             //  dd($this->categoryRepository->find(5)->image);       object Image
                             //  dd($this->categoryRepository->find(5)->image->path);  Доступ к свойству path
-                        // GOOD EXAMPLE!!!
+                        // GOOD EXAMPLE!
 
         return view('admin.categories.index', ['categories' => $this->categoryRepository->all()]);
     }
@@ -94,7 +94,7 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $this->categoryRepository->find($id)->delete();
+        $this->categoryRepository->deleteById($id);
 
         return redirect()->route('categories.index');
     }
