@@ -51,6 +51,15 @@ abstract class Repository
      * @param $params
      * @return mixed
      */
+    public function with($params)
+    {
+        return $this->className::with($params);
+    }
+
+    /**
+     * @param $params
+     * @return mixed
+     */
     public function save()
     {
         return $this->className::save();

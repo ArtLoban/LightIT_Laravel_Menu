@@ -16,6 +16,9 @@
 
       <!-- Default box -->
       <div class="box">
+          <div>
+              <a href="{{ url()->previous() }}" class="btn btn-primary back-btn">Вернуться</a>
+          </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
@@ -24,7 +27,7 @@
                   <th>ID</th>
                   <th>Имя</th>
                   <th>Номер телефона</th>
-                  <th>Заказы</th>
+                  <th>Все заказы</th>
                 </tr>
                 </thead>
                 <tbody>

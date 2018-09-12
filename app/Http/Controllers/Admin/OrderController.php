@@ -20,4 +20,12 @@ class OrderController extends Controller
 
         return view('admin.orders.index', ['orders' => $orders]);
     }
+
+    public function show($id)
+    {
+        $order = $this->orderRepository->getWithRelation($id);
+
+        return view('admin.orders.show', ['order' => $order]);
+    }
+
 }

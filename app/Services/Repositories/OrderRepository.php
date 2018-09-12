@@ -17,6 +17,13 @@ class OrderRepository extends Repository
         return Order::class;
     }
 
+    /**
+     * Stores customer's Order into related tables using transaction
+     *
+     * @param array $requestData
+     * @param $customerRepository
+     * @param $dishRepository
+     */
     public function storeOrder(array $requestData, $customerRepository, $dishRepository)
     {
         DB::transaction(function() use ($requestData, $customerRepository, $dishRepository) {
@@ -38,7 +45,7 @@ class OrderRepository extends Repository
     }
 
     /**
-     * Stores order items from session into DishOrders model
+     * Stores Order items from session into DishOrders model
      *
      * @param $order
      * @param $dishRepository
@@ -59,6 +66,8 @@ class OrderRepository extends Repository
     }
 
     /**
+     * Returns price of the specific Dish
+     *
      * @param $id
      * @param $dishRepository
      * @return string
@@ -77,4 +86,16 @@ class OrderRepository extends Repository
     {
         return $this->className::with(['customer', 'delivery', 'status'])->get();
     }
+
+    /**
+     * Returns a specific Order with nested relations
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function getWithRelation($id)
+    {
+        return $this->className::with('dishOrders.dish')->whereId($id)->first();
+    }
+
 }

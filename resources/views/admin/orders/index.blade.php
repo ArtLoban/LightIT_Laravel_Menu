@@ -22,8 +22,9 @@
                 <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Клиент</th>
+                  <th>Имя клиента</th>
                   <th>Id клиента</th>
+                  <th>Дата</th>
                   <th>Метод доставки</th>
                   <th>Детали заказа</th>
                   <th>Статус заказа</th>
@@ -39,9 +40,12 @@
                                 </a>
                             </td>
                             <td>{{ $order->customer->getKey() }}</td>
+                            <td>{{ $order->created_at }}</td>
                             <td>{{ $order->delivery->name }}</td>
                             <td>
-                                <a href="#">{{ 'ссылка на список блюд' }}</a>
+                                <a href="{{ route('orders.show', $order->getKey()) }}">
+                                    {{ 'Перейти' }}
+                                </a>
                             </td>
                             <td>{{ $order->status->name }}</td>
                         </tr>
