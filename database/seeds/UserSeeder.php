@@ -33,6 +33,6 @@ class UserSeeder extends Seeder
 
         ]);
 
-        factory(\App\Models\User::class, 5)->create();
+        factory(\App\Models\User::class, 1)->create();
     }
 }

@@ -27,9 +27,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -69,29 +67,36 @@ class UsersController extends Controller
     }
 
     /**
+     * @param User $user
      * @param UpdateRequest $request
      * @param UserUpdateDataTransform $transformer
      * @param ImageUpload $imageUploader
-     * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, UserUpdateDataTransform $transformer, ImageUpload $imageUploader, $id)
+    public function update(
+        User $user,
+        UpdateRequest $request,
+        UserUpdateDataTransform $transformer,
+        ImageUpload $imageUploader)
     {
-        $user = $this->userRepository->updateById($id, $transformer->transform($request->except('_token', '_method', 'updatedUserId')));
+        $specificUser = $this->userRepository
+            ->updateById($user->getKey(), $transformer->transform($request->except('_token', '_method', 'updatedUserId')));
+
         if ($request->has('image')) {
-            $imageUploader->store($request->file('image'), $user);
+            $imageUploader->store($request->file('image'), $specificUser);
         }
 
         return redirect()->route('users.index');
     }
 
     /**
-     * @param $id
+     * @param User $user
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(User $user)
     {
-        $user->delete();
+        $this->userRepository->deleteById($user->getKey());
         return redirect()->route('users.index');
     }
 }

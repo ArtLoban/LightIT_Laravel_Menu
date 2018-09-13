@@ -10,7 +10,6 @@ class Image extends Model
     const IMAGEABLE_ID = 'imageable_id';
     const IMAGEABLE_TYPE = 'imageable_type';
 
-
     /**
      * @var array
      */
@@ -23,8 +22,6 @@ class Image extends Model
     ];
 
     /**
-     * Получить все модели, обладающие imageable
-     *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function imageable()

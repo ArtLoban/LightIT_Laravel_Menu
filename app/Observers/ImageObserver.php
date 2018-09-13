@@ -19,10 +19,12 @@ class ImageObserver
         Storage::delete($editedPath);
     }
 
+    /**
+     * @param string $path
+     * @return string
+     */
     public function editPath(string $path): string
     {
         return str_replace('storage', 'public', $path);
     }
-
-
 }

@@ -144,3 +144,9 @@ span.field-star {
 .submit-order {
   margin: 50px 0;
 }
+
+.auth-item a {
+  /*color: #fff;*/
+  color: #499cf5;
+  margin-left: 15px;
+}

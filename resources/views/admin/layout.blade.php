@@ -42,9 +42,7 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             Logout
                         </a>
 

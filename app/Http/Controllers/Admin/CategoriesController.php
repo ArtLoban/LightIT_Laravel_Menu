@@ -17,6 +17,8 @@ class CategoriesController extends Controller
     private $categoryRepository;
 
     /**
+     * Create a new CategoryRepository instance
+     *
      * CategoriesController constructor.
      * @param CategoryRepository $categoryRepository
      */
@@ -26,6 +28,8 @@ class CategoriesController extends Controller
     }
 
     /**
+     * Display a listing of the resource
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
@@ -42,6 +46,8 @@ class CategoriesController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
@@ -50,6 +56,8 @@ class CategoriesController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
      * @param StoreRequest $request
      * @param ImageUpload $imageUploader
      * @return \Illuminate\Http\RedirectResponse
@@ -65,7 +73,9 @@ class CategoriesController extends Controller
     }
 
     /**
-     * @param $id
+     * Show the form for editing the specified resource
+     *
+     * @param Category $category
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Category $category)
@@ -74,28 +84,33 @@ class CategoriesController extends Controller
     }
 
     /**
+     * Update the specified resource in storage
+     *
+     * @param Category $category
      * @param UpdateRequest $request
      * @param ImageUpload $imageUploader
-     * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update($id, UpdateRequest $request, ImageUpload $imageUploader)
+    public function update(Category $category, UpdateRequest $request, ImageUpload $imageUploader)
     {
-        $category = $this->categoryRepository->updateById($id, $request->input());
+        $updatedCategory = $this->categoryRepository->updateById($category->getKey(), $request->input());
         if ($request->has('image')) {
-            $imageUploader->store($request->file('image'), $category);
+            $imageUploader->store($request->file('image'), $updatedCategory);
         }
 
         return redirect()->route('categories.index');
     }
 
     /**
-     * @param $id
+     * Remove the specified resource from storage
+     *
+     * @param Category $category
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Category $category)
     {
-        $category->delete();
+        $this->categoryRepository->deleteById($category->getKey());
         return redirect()->route('categories.index');
     }
 

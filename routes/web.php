@@ -20,9 +20,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 //Route::get('/admin', 'Admin\DashboardController@index');
 
 Auth::routes();
-Route::get('register', function () {
+/*Route::get('/register', function () {
     return abort('404');
-});
+});*/
+
 
 
 Route::get('/home', 'HomeController@index')->name('home');

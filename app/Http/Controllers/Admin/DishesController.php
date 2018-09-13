@@ -67,9 +67,9 @@ class DishesController extends Controller
     }
 
     /**
+     * @param Dish $dish
      * @param CategoryRepository $categoryRepository
      * @param IngredientRepository $ingredientRepository
-     * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Dish $dish, CategoryRepository $categoryRepository, IngredientRepository $ingredientRepository)
@@ -82,30 +82,31 @@ class DishesController extends Controller
     }
 
     /**
+     * @param Dish $dish
      * @param UpdateRequest $request
      * @param ImageUpload $imageUploader
-     * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, ImageUpload $imageUploader, $id)
+    public function update(Dish $dish , UpdateRequest $request, ImageUpload $imageUploader)
     {
-        $dish = $this->dishRepository->updateById($id, $request->input());
-        $dish->ingredients()->attach($request->ingredient_id);
+        $updatedDish = $this->dishRepository->updateById($dish->getKey(), $request->input());
+        $updatedDish->ingredients()->attach($request->ingredient_id);
 
         if ($request->has('image')) {
-            $imageUploader->store($request->file('image'), $dish);
+            $imageUploader->store($request->file('image'), $updatedDish);
         }
 
         return redirect()->route('dishes.index');
     }
 
     /**
-     * @param $id
+     * @param Dish $dish
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Dish $dish)
     {
-        $dish->delete();
+        $this->dishRepository->deleteById($dish->getKey());
         return redirect()->route('dishes.index');
     }
 }
