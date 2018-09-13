@@ -19,13 +19,13 @@ class DishOrder extends Model
         'price',
     ];
 
-    public function orders()
+    public function order()
     {
-        return $this->belongsToMany(Order::class);
+        return $this->belongsTo(Order::class);
     }
 
-    public function dishes()
+    public function dish()
     {
-        return $this->belongsToMany(Dish::class);
+        return $this->belongsTo(Dish::class);
     }
 }

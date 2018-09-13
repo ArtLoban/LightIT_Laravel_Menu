@@ -30,13 +30,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'IndexController@index')->name('/');
 
 Route::get('/menu', 'MenuController@index')->name('menu');
-Route::get('/menu/category/{id}', 'MenuController@show')->name('menu.category');
-Route::get('/menu/dish/{id}', 'MenuController@showDish')->name('menu.dish');
+Route::get('/menu/category/{category}', 'MenuController@show')->name('menu.category');
+Route::get('/menu/dish/{dish}', 'MenuController@showDish')->name('menu.dish');
 
 Route::get('/cart', 'Order\CartController@index')->name('cart');
 Route::post('/cart', 'Order\CartController@store')->name('cart.store');
 Route::delete('/cart/{id}', 'Order\CartController@destroy')->name('cart.destroy');
 
-Route::resource('/checkout', 'Order\DishOrderController');
+//Route::resource('/checkout', 'Order\DishOrderController');
+
+Route::resource('/checkout', 'Order\OrderController');
 
 

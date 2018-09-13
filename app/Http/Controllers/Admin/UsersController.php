@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
+use App\Models\User;
 use App\Services\ImageUploader\ImageUpload;
 use App\Services\InputTransform\UserUpdateDataTransform;
 use App\Services\Repositories\UserRepository;
@@ -59,12 +60,12 @@ class UsersController extends Controller
     }
 
     /**
-     * @param $id
+     * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        return view('admin.users.edit', ['user' => $this->userRepository->find($id)]);
+        return view('admin.users.edit', ['user' => $user]);
     }
 
     /**
@@ -88,10 +89,9 @@ class UsersController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $this->userRepository->deleteById($id);
-
+        $user->delete();
         return redirect()->route('users.index');
     }
 }

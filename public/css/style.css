@@ -16,3 +16,7 @@ button.delete-task{
     padding-left: 25px;
 }
 
+div .back-btn {
+    margin: 15px 10px;
+}
+

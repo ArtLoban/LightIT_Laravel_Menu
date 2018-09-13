@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Order\DishOrder;
 use App\Services\Image\Contracts\HasImage;
 use App\Services\Repositories\Contracts\HasMorphRelations;
 use Illuminate\Database\Eloquent\Model;
@@ -31,8 +32,13 @@ class Dish extends Model implements HasImage, HasMorphRelations
         );
     }
 
+    public function dishOrders()
+    {
+        return $this->hasMany(DishOrder::class);
+    }
+
     /**
-     * Get all images of dish
+     * Get all images of Dish
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */

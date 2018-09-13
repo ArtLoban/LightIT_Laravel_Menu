@@ -5,6 +5,12 @@
 <main role="main">
     <div class="container">
 
+       {{-- @forelse($dishes as $dish)
+            <div>Hello</div>
+        @empty
+            <div>Buy</div>
+        @endforelse--}}
+
         @if(is_null($dishes))
             <div class="row justify-content-center">
                 <div class="col text-center">
@@ -52,7 +58,7 @@
                                     <td class="align-middle">
                                         {!! Form::open(['route' => 'cart.store']) !!}
                                         <div class="number product-quantity">
-                                            <input type="hidden" class="dishId" name="dishId" value="{{ $dish->id }}">
+                                            <input type="hidden" class="dishId" name="dishId" value="{{ $dish->getKey() }}">
                                             <span class="jq-minus btn btn-sm btn-danger">-</span>
                                             <input readonly class="quantity" type="text" value="{{ $quentity = array_sum(session()->get("dishes.$dish->id")) }}" size="2"/>
                                             <span class="jq-plus btn btn-sm btn-success">+</span>
@@ -86,18 +92,14 @@
                             <p class="order-total">Итого</p>
                         </div>
                         <div class="col-9">
-                            <span class="order-total" id="cart-total" >0</span><span class="order-total"> грн</span>
+                            <span class="order-total" id="cart-total" >{{ session()->get('totalPrice') }}</span><span class="order-total"> грн</span>
                         </div>
                         <div class="w-100"></div>
 
                         <div class="col">
-                            {!! Form::open(['route' => 'checkout.store']) !!}
-                            <button class="btn btn-success" type="submit" name="submit" value="submited">Перейти к оформлению</button>
-                            {!! Form::close() !!}
+                            <a href="{{ route('checkout.index') }}" class="btn btn-success cart-back-btn">Перейти к оформлению</a>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         @endif

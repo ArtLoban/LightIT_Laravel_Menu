@@ -2,22 +2,28 @@
 
 namespace App\Services\CustomerOrderTransform;
 
+use App\Services\Repositories\DishRepository;
 
 class OrderTransform
 {
+    const KEY = 'dishes';
+
+    /**
+     * @var DishRepository
+     */
+    private $dishRepository;
+
+    public function __construct(DishRepository $dishRepository)
+    {
+        return $this->dishRepository = $dishRepository;
+    }
+
     /**
      * @param array $request
      */
-    public function pushRequestIntoSession(array $request)
+    public function pushRequestIntoSession(int $dishId, int $dishQuantity)
     {
-        $id = $request['dishId'];
-        session()->push("dishes.$id", $request['dishQuantity']);
-
-
-//        session()->push('dishes', [
-//            'dishId' => $request['dishId'],
-//            'dishQuantity' => $request['dishQuantity']
-//         ]);
+        session()->push("dishes.$dishId", $dishQuantity);
     }
 
     /**
@@ -30,7 +36,27 @@ class OrderTransform
             return null;
         }
 
+        $this->countDishesTotalPrice($dishes);
+
         return $dishIds = array_keys($dishes);
+    }
+
+    /**
+     * Counts and puts into session total price of all dishes chosen by customer
+     *
+     * @param array $dishes
+     */
+    public function countDishesTotalPrice(array $dishes)
+    {
+        $totalPrice = 0;
+
+        foreach ($dishes as $key => $value) {
+            $dishPrice = $this->dishRepository->find($key)->price;
+            $quantity = array_sum($value);
+            $totalPrice += ($dishPrice * $quantity);
+        }
+
+        session()->put('totalPrice', $totalPrice);
     }
 
     /**
