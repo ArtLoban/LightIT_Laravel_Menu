@@ -24,7 +24,7 @@
                   <th>ID</th>
                   <th>Имя</th>
                   <th>Номер телефона</th>
-                  <th>Все заказы</th>
+                  <th>Заказ</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,7 +33,7 @@
                             <td>{{ $customer->id }}</td>
                             <td><a href="{{ route('customers.show', $customer->id) }}">{{ $customer->name }}</a></td>
                             <td>{{ $customer->phone_number }}</td>
-                            <td><a href="#">Ссылка на список заказов</a></td>
+                            <td><a href="#">Перейти</a></td>
                         </tr>
                     @endforeach
                 </tbody>

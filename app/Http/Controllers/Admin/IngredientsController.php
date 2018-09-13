@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Ingredient\StoreRequest;
 use App\Http\Requests\Ingredient\UpdateRequest;
+use App\Models\Ingredient;
 use App\Services\ImageUploader\ImageUpload;
 use App\Services\Repositories\IngredientRepository;
 use App\Http\Controllers\Controller;
@@ -56,12 +57,12 @@ class IngredientsController extends Controller
     }
 
     /**
-     * @param $id
+     * @param Ingredient $ingredient
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Ingredient $ingredient)
     {
-        return view('admin.ingredients.edit', ['ingredient' => $this->ingredientRepository->find($id)]);
+        return view('admin.ingredients.edit', ['ingredient' => $ingredient]);
     }
 
     /**
@@ -84,10 +85,9 @@ class IngredientsController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Ingredient $ingredient)
     {
-        $this->ingredientRepository->deleteById($id);
-
+        $ingredient->delete();
         return redirect()->route('ingredients.index');
     }
 

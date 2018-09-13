@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Dish;
 use App\Services\Repositories\CategoryRepository;
 use App\Services\Repositories\DishRepository;
 
@@ -12,23 +14,33 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(CategoryRepository $categoryRepository, DishRepository $dishRepository)
+    public function index(CategoryRepository $categoryRepository)
     {
         return view('menu.menu', ['categories' => $categoryRepository->all()]);
     }
 
-    public function show($id, CategoryRepository $categoryRepository, DishRepository $dishRepository)
+    /**
+     * Display the specified categoty and all it's dishes.
+     *
+     * @param Category $category
+     * @param DishRepository $dishRepository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(Category $category, DishRepository $dishRepository)
     {
-        $category = $categoryRepository->find($id);
-        $dishes = $dishRepository->getDishesByCategoryId($id);
+        $dishes = $dishRepository->getDishesByCategoryId($category->getKey());
 
         return view('menu.category', ['category' => $category, 'dishes' => $dishes]);
     }
 
-    public function showDish($id, DishRepository $dishRepository)
+    /**
+     * Display the specified dish.
+     *
+     * @param Dish $dish
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showDish(Dish $dish)
     {
-        $dish = $dishRepository->find($id);
-
         return view('menu.dish', ['dish' => $dish]);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Category\StoreRequest;
 use App\Http\Requests\Category\UpdateRequest;
+use App\Models\Category;
 use App\Services\Repositories\CategoryRepository;
 use App\Http\Controllers\Controller;
 use App\Services\ImageUploader\ImageUpload;
@@ -67,9 +68,9 @@ class CategoriesController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        return view('admin.categories.edit', ['category' => $this->categoryRepository->find($id)]);
+        return view('admin.categories.edit', ['category' => $category]);
     }
 
     /**
@@ -78,7 +79,7 @@ class CategoriesController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, ImageUpload $imageUploader, $id)
+    public function update($id, UpdateRequest $request, ImageUpload $imageUploader)
     {
         $category = $this->categoryRepository->updateById($id, $request->input());
         if ($request->has('image')) {
@@ -92,10 +93,9 @@ class CategoriesController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        $this->categoryRepository->deleteById($id);
-
+        $category->delete();
         return redirect()->route('categories.index');
     }
 

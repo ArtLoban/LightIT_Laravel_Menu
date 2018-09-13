@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Dish\StoreRequest;
 use App\Http\Requests\Dish\UpdateRequest;
+use App\Models\Dish;
 use App\Services\ImageUploader\ImageUpload;
 use App\Services\Repositories\CategoryRepository;
 use App\Services\Repositories\DishRepository;
@@ -71,11 +72,10 @@ class DishesController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(CategoryRepository $categoryRepository, IngredientRepository $ingredientRepository, $id)
+    public function edit(Dish $dish, CategoryRepository $categoryRepository, IngredientRepository $ingredientRepository)
     {
-        return view('admin.dishes.edit')
-            ->with([
-                'dish' => $this->dishRepository->find($id),
+        return view('admin.dishes.edit')->with([
+                'dish' => $dish,
                 'categories' => $categories = $categoryRepository->all(),
                 'ingredients' => $ingredients = $ingredientRepository->all()
             ]);
@@ -103,10 +103,9 @@ class DishesController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Dish $dish)
     {
-        $this->dishRepository->deleteById($id);
-
+        $dish->delete();
         return redirect()->route('dishes.index');
     }
 }
