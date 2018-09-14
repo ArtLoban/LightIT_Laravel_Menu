@@ -13,7 +13,7 @@
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="/css/main_admin.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
 
 </head>
 
@@ -56,7 +56,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="">Кабинет</a></li>
+                                <li><a href="{{ route('cabinet.index') }}">Кабинет</a></li>
                                 <li>
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">

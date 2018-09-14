@@ -35,11 +35,11 @@
                         <tr>
                             <td>{{ $order->id }}</td>
                             <td>
-                                <a href="{{ route('customers.show', $order->customer->id) }}">
-                                    {{ $order->customer->name }}
+                                <a href="{{ route('customers.show', $order->user->getKey()) }}">
+                                    {{ $order->user->name }}
                                 </a>
                             </td>
-                            <td>{{ $order->customer->getKey() }}</td>
+                            <td>{{ $order->user->getKey() }}</td>
                             <td>{{ $order->created_at }}</td>
                             <td>{{ $order->delivery->name }}</td>
                             <td>

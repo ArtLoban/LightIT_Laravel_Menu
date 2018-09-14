@@ -27,7 +27,7 @@
                     <div class="col-6">
                         <div class="text-center">
                             <p><h3>{{ $dish->name }}</h3></p>
-                            <p class="text-left price-p">{{ $dish->ingredients->implode('name', ', ')}}</p>
+                            <p class="text-left price-p">{{ $dish->ingredients->implode('name', ', ') }}</p>
                             <p class="text-right">Вес: {{ $dish->weight }} г</p>
                             <p class="text-left price-p lead">Цена: {{ $dish->price }} грн</p>
 

@@ -8,6 +8,7 @@ use App\Services\Repositories\CustomerRepository;
 use App\Services\Repositories\DishRepository;
 use App\Services\Repositories\OrderRepository;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -45,10 +46,18 @@ class OrderController extends Controller
      * @param DishRepository $dishRepository
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function store(StoreRequest $request, CustomerRepository $customerRepository, DishRepository $dishRepository)
+    /*public function store(StoreRequest $request, CustomerRepository $customerRepository, DishRepository $dishRepository)
     {
         $requestData = $request->except('_token');
         $this->orderRepository->storeOrder($requestData, $customerRepository, $dishRepository);
+
+        return view('menu.order_submited');
+    }*/
+
+    public function store(StoreRequest $request, DishRepository $dishRepository)
+    {
+        $requestData = $request->except('_token');
+        $this->orderRepository->storeOrder($requestData, Auth::user(), $dishRepository);
 
         return view('menu.order_submited');
     }

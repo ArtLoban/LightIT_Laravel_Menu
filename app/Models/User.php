@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Order\Order;
 use App\Services\Image\Contracts\HasImage;
 use App\Services\Repositories\Contracts\HasMorphRelations;
 use Illuminate\Notifications\Notifiable;
@@ -17,7 +18,7 @@ class User extends Authenticatable implements HasImage, HasMorphRelations
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id'
+        'name', 'email', 'phone_number','password', 'role_id'
     ];
 
     /**
@@ -35,6 +36,14 @@ class User extends Authenticatable implements HasImage, HasMorphRelations
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 
     /**

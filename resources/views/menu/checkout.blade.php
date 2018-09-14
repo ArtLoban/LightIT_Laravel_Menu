@@ -56,13 +56,26 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="InputName">Имя<span class="field-star"> *</span></label>
-                                    <input type="text" class="form-control" id="InputName" name="name">
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="InputName" name="name"
+                                        value="{{ auth()->user()->name }}"
+                                        placeholder="Ваше имя"
+                                    >
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="InputPhone">Телефон<span class="field-star"> *</span></label>
-                                    <input type="text" class="form-control" id="InputPhone" name="phone_number">
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="InputPhone"
+                                        name="phone_number"
+                                        value="{{ auth()->user()->phone_number }}"
+                                        placeholder="Ваш номер телефона"
+                                    >
                                 </div>
                             </div>
                         </div>

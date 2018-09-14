@@ -28,6 +28,7 @@ class OrderController extends Controller
     public function index()
     {
         $orders = $this->orderRepository->getAllWithRelations();
+//        dd($orders);
 
         return view('admin.orders.index', ['orders' => $orders]);
     }
