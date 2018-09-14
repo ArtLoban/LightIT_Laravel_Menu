@@ -3,26 +3,24 @@
 namespace App\Observers;
 
 use App\Models\Dish;
+use App\Services\Observers\Contracts\MorphRelationsDeleteInterface;
 use App\Services\Repositories\Contracts\HasMorphRelations;
 
 class DishObserver
 {
+    private $service;
+
     /**
-     * Handle the dish "deleted" event.
-     *
-     * @param  \App\MOdels\Dish  $dish
-     * @return
+     * CategoryObserver constructor.
+     * @param MorphRelationsDeleteInterface $service
      */
-    public function deleted(Dish $dish)
+    public function __construct(MorphRelationsDeleteInterface $service)
     {
-        return $dish instanceof HasMorphRelations ? $this->deleteMorphRelations($dish) : false;
+        $this->service = $service;
     }
 
-    private function deleteMorphRelations(HasMorphRelations $owner)
+    public function deleted(Dish $dish)
     {
-        $relations = $owner->getMorphRelations();
-        foreach ($relations as $relation) {
-            return $owner->{$relation} ? $owner->{$relation}->delete() : false;
-        }
+        return $dish instanceof HasMorphRelations ? $this->service->deleteMorphRelations($dish) : false;
     }
 }

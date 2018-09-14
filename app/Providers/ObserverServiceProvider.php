@@ -39,7 +39,10 @@ class ObserverServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
-//        $this->app->bind(MorphRelationsDeleteInterface::class, MorphRelationsDelete::class);
+        $this->app->bind(MorphRelationsDeleteInterface::class, MorphRelationsDelete::class);
+
+        /*$this->app->singleton('App\Services\Observers\Contracts\MorphRelationsDeleteInterface', function () {
+            return new MorphRelationsDelete();
+        });*/
     }
 }

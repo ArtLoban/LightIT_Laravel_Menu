@@ -28,6 +28,7 @@ class ImageUpload
 
     /**
      * Сохраняет загруженный файл из объекта формы UploadedFile для соотв. модели сущности
+     *
      * @param UploadedFile $uploadedFile
      * @param Model $model
      * @return mixed
@@ -41,6 +42,8 @@ class ImageUpload
     }
 
     /**
+     * Removes image if exists
+     *
      * @param Model $model
      * @return bool|null
      * @throws \Exception
@@ -69,6 +72,8 @@ class ImageUpload
     }
 
     /**
+     * Returns the path to stored image
+     *
      * @param UploadedFile $uploadedFile
      * @return string
      */

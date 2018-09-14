@@ -19,7 +19,8 @@ class OrderTransform
     }
 
     /**
-     * @param array $request
+     * @param int $dishId
+     * @param int $dishQuantity
      */
     public function pushRequestIntoSession(int $dishId, int $dishQuantity)
     {
@@ -27,6 +28,8 @@ class OrderTransform
     }
 
     /**
+     * Returns array of dish ids chosen by Customer and stored in session
+     *
      * @return array|null
      */
     public function getOrderedDishesFromSession(): ?array
@@ -60,6 +63,8 @@ class OrderTransform
     }
 
     /**
+     * Deletes dish id from session
+     *
      * @param int $id
      */
     public function deleteItemFromOrder(int $id)
