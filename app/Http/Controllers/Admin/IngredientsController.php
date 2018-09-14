@@ -66,28 +66,29 @@ class IngredientsController extends Controller
     }
 
     /**
+     * @param Ingredient $ingredient
      * @param UpdateRequest $request
      * @param ImageUpload $imageUploader
-     * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateRequest $request, ImageUpload $imageUploader, $id)
+    public function update(Ingredient $ingredient, UpdateRequest $request, ImageUpload $imageUploader)
     {
-        $ingredient = $this->ingredientRepository->updateById($id, $request->input());
+        $updatedIngredient = $this->ingredientRepository->updateById($ingredient->getKey(), $request->input());
         if ($request->has('image')) {
-            $imageUploader->store($request->file('image'), $ingredient);
+            $imageUploader->store($request->file('image'), $updatedIngredient);
         }
 
         return redirect()->route('ingredients.index');
     }
 
     /**
-     * @param $id
+     * @param Ingredient $ingredient
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Ingredient $ingredient)
     {
-        $ingredient->delete();
+        $this->ingredientRepository->deleteById($ingredient->getKey());
         return redirect()->route('ingredients.index');
     }
 

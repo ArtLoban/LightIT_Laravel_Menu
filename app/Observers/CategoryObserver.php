@@ -3,15 +3,15 @@
 namespace App\Observers;
 
 use App\Models\Category;
+use App\Services\Observers\Contracts\MorphRelationsDeleteInterface;
+use App\Services\Observers\MorphRelationsDelete;
 use App\Services\Repositories\Contracts\HasMorphRelations;
 
 class CategoryObserver
 {
     /**
-     * Handle the category "deleted" event.
-     *
-     * @param  \App\MOdels\Category  $category
-     * @return
+     * @param Category $category
+     * @return bool
      */
     public function deleted(Category $category)
     {
@@ -25,4 +25,10 @@ class CategoryObserver
             return $owner->{$relation} ? $owner->{$relation}->delete() : false;
         }
     }
+
+    /*public function deleted(Category $category, MorphRelationsDeleteInterface $service)
+    {
+        return $category instanceof HasMorphRelations ? $service->deleteMorphRelations($category) : false;
+    }*/
+
 }

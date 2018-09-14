@@ -19,11 +19,17 @@ class DishOrder extends Model
         'price',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function order()
     {
         return $this->belongsTo(Order::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function dish()
     {
         return $this->belongsTo(Dish::class);

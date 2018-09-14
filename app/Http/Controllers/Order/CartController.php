@@ -6,7 +6,6 @@ use App\Http\Requests\Cart\StoreRequest;
 use App\Services\CustomerOrderTransform\OrderTransform;
 use App\Services\Repositories\DishRepository;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
@@ -15,12 +14,19 @@ class CartController extends Controller
      */
     private $orderTransform;
 
+    /**
+     * CartController constructor.
+     * @param OrderTransform $orderTransform
+     */
     public function __construct(OrderTransform $orderTransform)
     {
         $this->orderTransform = $orderTransform;
     }
 
-
+    /**
+     * @param DishRepository $dishRepository
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(DishRepository $dishRepository)
     {
         $selectedDishes = $this->orderTransform->getOrderedDishesFromSession();
@@ -29,14 +35,15 @@ class CartController extends Controller
         return view('menu.cart', ['dishes' => $dishes]);
     }
 
-    /*public function store(StoreRequest $request)
-    {
-        $this->orderTransform->pushRequestIntoSession($request->only(['dishId', 'dishQuantity']));
-    }*/
-
+    /**
+     * @param StoreRequest $request
+     */
     public function store(StoreRequest $request)
     {
-        $this->orderTransform->pushRequestIntoSession($request->input('dishId'), $request->input('dishQuantity'));
+        $this->orderTransform->pushRequestIntoSession(
+                $request->input('dishId'),
+                $request->input('dishQuantity'
+            ));
     }
 
     /**

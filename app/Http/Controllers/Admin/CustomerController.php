@@ -22,16 +22,21 @@ class CustomerController extends Controller
         $this->customerRepository = $customerRepository;
     }
 
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         return view('admin.customers.index', ['customers' => $this->customerRepository->all()]);
     }
 
+
     /**
-     * Display the specified customer.
+     * Display the specified resource
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Customer $customer
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(Customer $customer)
     {

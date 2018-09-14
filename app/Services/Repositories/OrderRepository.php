@@ -24,18 +24,17 @@ class OrderRepository extends Repository
      * @param $customerRepository
      * @param $dishRepository
      */
-    public function storeOrder(array $requestData, $customerRepository, $dishRepository)
+    public function storeOrder(array $requestData, $currentUser, $dishRepository)
     {
-        DB::transaction(function() use ($requestData, $customerRepository, $dishRepository) {
-
-            $customer = $customerRepository->create([
+        DB::transaction(function() use ($requestData, $currentUser, $dishRepository)
+        {
+            $currentUser->update([
                 'name' => $requestData['name'],
                 'phone_number' => $requestData['phone_number'],
-                'session_id' => session()->getId(),
             ]);
 
             $order = $this->className::create([
-                'customer_id' => $customer->id,
+                'user_id' => $currentUser->getKey(),
                 'delivery_id' => $requestData['delivery_id'],
                 'status_id' => self::IN_PROGRESS_STATUS,
             ]);
@@ -84,7 +83,7 @@ class OrderRepository extends Repository
      */
     public function getAllWithRelations()
     {
-        return $this->className::with(['customer', 'delivery', 'status'])->get();
+        return $this->className::with(['user', 'delivery', 'status'])->get();
     }
 
     /**
@@ -96,6 +95,18 @@ class OrderRepository extends Repository
     public function getWithRelation($id)
     {
         return $this->className::with('dishOrders.dish')->whereId($id)->first();
+    }
+
+    /**
+     * Returns a Collection of Orders for specific User with nested relations
+     *
+     * @param $userId
+     * @return mixed
+     */
+    public function getAllUserOrdersWithRelations($userId)
+    {
+//        dd($this->className::where('user_id', 3)->with('dishOrders.dish')->first()->dishOrders->pluck('dish')->implode('name', ', '));
+        return $this->className::where('user_id', $userId)->with('dishOrders.dish', 'status')->get();
     }
 
 }

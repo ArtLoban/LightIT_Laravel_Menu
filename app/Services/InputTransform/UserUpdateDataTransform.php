@@ -4,10 +4,6 @@ namespace App\Services\InputTransform;
 
 use App\Helpers\Hash\HashServiceInterface;
 
-/**
- * Class UserUpdateDataTransform
- * @package App\Services\InputTransform
- */
 class UserUpdateDataTransform implements TransformerInterface
 {
     /**

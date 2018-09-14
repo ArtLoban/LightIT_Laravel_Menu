@@ -12,6 +12,8 @@ use App\Observers\DishObserver;
 use App\Observers\ImageObserver;
 use App\Observers\IngredientObserver;
 use App\Observers\UserObserver;
+use App\Services\Observers\Contracts\MorphRelationsDeleteInterface;
+use App\Services\Observers\MorphRelationsDelete;
 use Illuminate\Support\ServiceProvider;
 
 class ObserverServiceProvider extends ServiceProvider
@@ -38,5 +40,6 @@ class ObserverServiceProvider extends ServiceProvider
     public function register()
     {
         //
+//        $this->app->bind(MorphRelationsDeleteInterface::class, MorphRelationsDelete::class);
     }
 }
