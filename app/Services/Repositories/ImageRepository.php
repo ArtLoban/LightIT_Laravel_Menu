@@ -6,6 +6,9 @@ use App\Models\Image;
 
 class ImageRepository extends Repository
 {
+    /**
+     * @return string
+     */
     protected function getClassName()
     {
         return Image::class;

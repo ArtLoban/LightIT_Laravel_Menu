@@ -1,7 +1,7 @@
 @extends('user_cabinet.cabinet')
 
 @section('user_data')
-
+@if(! $orders->isEmpty())
     <div class="row justify-content-center">
         <div class="col-10">
             <div class="col">
@@ -28,23 +28,18 @@
                             <td>{{ $order->status->name }}</td>
                         </tr>
                     @endforeach
-                    {{--@foreach($dishes as $dish)
-                        <tr class="product">
-                            <td class="text-left align-left">
-                                {{ $dish->name }}
-                                <span class="checkout-quantity">
-                                            &times;
-                                    {{ $quentity = array_sum(session()->get("dishes.$dish->id")) }}
-                                </span>
-                            </td>
-                            <td class="text-right">{{ $quentity * $dish->price }} грн</td>
-                        </tr>
-                    @endforeach--}}
 
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+@else
+    <div class="row justify-content-center">
+        <div class="col">
+            <p class="text-center">У вас пока нет заказов</p>
+        </div>
+    </div>
+@endif
 
 @endsection

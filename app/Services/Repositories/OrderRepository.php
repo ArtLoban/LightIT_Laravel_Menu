@@ -105,7 +105,6 @@ class OrderRepository extends Repository
      */
     public function getAllUserOrdersWithRelations($userId)
     {
-//        dd($this->className::where('user_id', 3)->with('dishOrders.dish')->first()->dishOrders->pluck('dish')->implode('name', ', '));
         return $this->className::where('user_id', $userId)->with('dishOrders.dish', 'status')->get();
     }
 

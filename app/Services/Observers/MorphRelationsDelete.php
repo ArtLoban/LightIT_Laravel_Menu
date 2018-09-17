@@ -2,7 +2,6 @@
 
 namespace App\Services\Observers;
 
-
 use App\Services\Observers\Contracts\MorphRelationsDeleteInterface;
 
 class MorphRelationsDelete implements MorphRelationsDeleteInterface

@@ -6,11 +6,20 @@ use App\Models\Dish;
 
 class DishRepository extends Repository
 {
+    /**
+     * @return string
+     */
     protected function getClassName()
     {
         return Dish::class;
     }
 
+    /**
+     * Return Collection of Dish Models
+     *
+     * @param int $categoryId
+     * @return mixed
+     */
     public function getDishesByCategoryId(int $categoryId)
     {
         return $this->className::with('image')->where(['category_id' => $categoryId])->get();
