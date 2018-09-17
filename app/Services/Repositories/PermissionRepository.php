@@ -6,6 +6,9 @@ use App\Models\Permission;
 
 class PermissionRepository extends Repository
 {
+    /**
+     * @return string
+     */
     protected function getClassName()
     {
         return Permission::class;

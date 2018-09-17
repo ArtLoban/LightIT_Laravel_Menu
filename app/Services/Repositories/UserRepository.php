@@ -6,6 +6,9 @@ use App\Models\User;
 
 class UserRepository extends Repository
 {
+    /**
+     * @return mixed|string
+     */
     protected function getClassName()
     {
         return User::class;

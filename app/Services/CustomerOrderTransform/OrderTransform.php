@@ -6,6 +6,9 @@ use App\Services\Repositories\DishRepository;
 
 class OrderTransform
 {
+    /**
+     *
+     */
     const KEY = 'dishes';
 
     /**
@@ -13,6 +16,10 @@ class OrderTransform
      */
     private $dishRepository;
 
+    /**
+     * OrderTransform constructor.
+     * @param DishRepository $dishRepository
+     */
     public function __construct(DishRepository $dishRepository)
     {
         return $this->dishRepository = $dishRepository;

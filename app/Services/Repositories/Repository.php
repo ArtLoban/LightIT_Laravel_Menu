@@ -7,13 +7,22 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 abstract class Repository
 {
+    /**
+     * @var
+     */
     protected $className;
 
+    /**
+     * Repository constructor.
+     */
     public function __construct()
     {
         $this->className = $this->getClassName();
     }
 
+    /**
+     * @return mixed
+     */
     abstract protected function getClassName();
 
     /**
@@ -24,6 +33,10 @@ abstract class Repository
         return $this->className::all();
     }
 
+    /**
+     * @param array $params
+     * @return mixed
+     */
     public function findBy(array $params)
     {
         return $this->className::where($params)->get();

@@ -6,6 +6,9 @@ use App\Models\Ingredient;
 
 class IngredientRepository extends Repository
 {
+    /**
+     * @return string
+     */
     protected function getClassName()
     {
         return Ingredient::class;

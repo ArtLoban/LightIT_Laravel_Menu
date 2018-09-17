@@ -24,7 +24,7 @@ class UserUpdateDataTransform implements TransformerInterface
      * @param array $data
      * @return array
      */
-    public function transform(array $data)
+    public function transform(array $data): array
     {
         return is_null($data['password']) ? $this->removePasswordData($data) : $this->preparePasswordData($data);
     }
@@ -33,7 +33,7 @@ class UserUpdateDataTransform implements TransformerInterface
      * @param array $data
      * @return array
      */
-    private function preparePasswordData(array $data)
+    private function preparePasswordData(array $data): array
     {
         $data['password'] = $this->hashPassword($data['password']);
 
@@ -41,10 +41,12 @@ class UserUpdateDataTransform implements TransformerInterface
     }
 
     /**
+     * Remove password from array of parameters
+     *
      * @param array $params
      * @return array
      */
-    private function removePasswordData(array $params)
+    private function removePasswordData(array $params): array
     {
         unset($params['password']);
 
@@ -52,10 +54,12 @@ class UserUpdateDataTransform implements TransformerInterface
     }
 
     /**
+     * Make hash of password string
+     *
      * @param string $password
      * @return string
      */
-    private function hashPassword(string $password)
+    private function hashPassword(string $password): string
     {
         return $this->hashService->make($password);
     }

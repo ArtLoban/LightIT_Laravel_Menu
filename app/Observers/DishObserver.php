@@ -8,10 +8,13 @@ use App\Services\Repositories\Contracts\HasMorphRelations;
 
 class DishObserver
 {
+    /**
+     * @var MorphRelationsDeleteInterface
+     */
     private $service;
 
     /**
-     * CategoryObserver constructor.
+     * DishObserver constructor.
      * @param MorphRelationsDeleteInterface $service
      */
     public function __construct(MorphRelationsDeleteInterface $service)
@@ -19,6 +22,10 @@ class DishObserver
         $this->service = $service;
     }
 
+    /**
+     * @param Dish $dish
+     * @return bool|mixed
+     */
     public function deleted(Dish $dish)
     {
         return $dish instanceof HasMorphRelations ? $this->service->deleteMorphRelations($dish) : false;

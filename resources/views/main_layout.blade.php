@@ -29,12 +29,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
+                <li class="nav-item {{ Request::is('menu') ? 'cabinet-item-active':'' }}">
                     <a class="nav-item text-left" href="{{ route('menu') }}">Menu <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <ul class="navbar-nav">
-                <li class=""><a href="{{ route('cart') }}">Кoрзина</a></li>
+                <li class="{{ Request::is('cart') ? 'cabinet-item-active':'' }}">
+                    <a href="{{ route('cart') }}">Кoрзина</a>
+                </li>
             </ul>
 
             <ul class="navbar-nav">
