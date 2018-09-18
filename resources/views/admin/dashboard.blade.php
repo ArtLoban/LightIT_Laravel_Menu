@@ -12,11 +12,11 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col">
                 <!-- LINE CHART -->
                 <div class="box box-info">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Line Chart</h3>
+                        <h3 class="box-title">Динамика продаж блюд</h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -26,14 +26,13 @@
                     </div>
                     <div class="box-body">
                         <div class="chart">
-                            <canvas id="speedChart" width="600" height="400"></canvas>
-                            <canvas id="line-chart" width="800" height="450"></canvas>
                             {!! $chart->container() !!}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        {!! $chart->script() !!}
     </section>
     <!-- /.content -->
 </div>
