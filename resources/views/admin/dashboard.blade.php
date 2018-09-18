@@ -32,9 +32,26 @@
                 </div>
             </div>
         </div>
-        {!! $chart->script() !!}
+        <div class="row">
+            <div class="col-md-4">
+                {!! Form::open(['route' => 'dashboard.store']) !!}
+                <div class="form-group">
+                    <label>Список блюд, имеющих статистику</label>
+                    <select name="dish_id" class="form-control select2 select2-hidden-accessible" data-placeholder="Select here" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                        @foreach($dishOrders as $dishOrder)
+                            <option value="{{ $dishOrder->dish->getKey() }}">{{ $dishOrder->dish->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="box-footer">
+                    <button class="btn btn-success">Добавить кривую</button>
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
     </section>
     <!-- /.content -->
+    {!! $chart->script() !!}
 </div>
 
 @endsection

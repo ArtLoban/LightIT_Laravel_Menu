@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Helpers\ColorPicker\ColorPicker;
+use App\Helpers\ColorPicker\ColorPickerInterface;
 use App\Helpers\Hash\HashService;
 use App\Helpers\Hash\HashServiceInterface;
 use Illuminate\Support\ServiceProvider;
@@ -26,5 +28,6 @@ class HelpersServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(HashServiceInterface::class, HashService::class);
+        $this->app->bind(ColorPickerInterface::class, ColorPicker::class);
     }
 }

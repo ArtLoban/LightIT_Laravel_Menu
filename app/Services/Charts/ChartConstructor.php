@@ -2,30 +2,64 @@
 
 namespace App\Services\Charts;
 
+use App\Helpers\ColorPicker\ColorPickerInterface;
 use App\Services\Charts\Contracts\ChartInterface;
 use ConsoleTVs\Charts\Classes\Chartjs\Chart;
+use Illuminate\Database\Eloquent\Collection;
 
 class ChartConstructor extends Chart implements ChartInterface
 {
     /**
-     * Initializes the chart.
+     * Array of 20 HTML color names
      *
-     * @return void
+     * @var array
      */
-    public function __construct()
+    private $colors;
+
+    /**
+     * @var \App\Services\Charts\TransformChartData
+     */
+    private $dataTransformer;
+
+    /**
+     * ChartConstructor constructor.
+     * @param ColorPickerInterface $colors
+     * @param \App\Services\Charts\TransformChartData $dataTransformer
+     */
+    public function __construct(ColorPickerInterface $colors, TransformChartData $dataTransformer)
     {
         parent::__construct();
+        $this->colors = $colors->getColors();
+        $this->dataTransformer = $dataTransformer;
     }
 
-    public function getChart($dishOrderData)
+    /**
+     * @param Collection $collection
+     * @return ChartConstructor
+     */
+    public function getChart(Collection $collection): ChartConstructor
     {
-//        $this->labels(['One', 'Two', 'Three', 'Four', 'Five']);
-//        $this->dataset('Блюдо 1', 'line', [100, 65, 84, 45, 90])->color('red')->fill(false);
-//        $this->dataset('Блюдо 2', 'line', [25, 15, 84, 90, 50])->color('blue')->fill(false);
-//        $this->dataset('Блюдо 3', 'line', [5, 35, 51, 70, 25])->color('green')->fill(false);
+        $data = $this->dataTransformer->transform($collection);
 
-        $this->labels($dishOrderData['date']);
-        $this->dataset($dishOrderData['name'], 'line', $dishOrderData['quantity'])->color('red')->fill(false);
+        if (is_null($data)) {
+            $this->showFakeTrand();
+        } else {
+            $this->labels($data['date']);
+            $this->dataset($data['name'], 'line', $data['quantity'])->color($this->colors[0])->fill(false);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns ChartConstructor object with fake data in case when no data is available
+     *
+     * @return $this
+     */
+    private function showFakeTrand(): ChartConstructor
+    {
+        $this->labels([0, 1, 2, 3, 4, 5]);
+        $this->dataset('trand', 'line', [0, 1, 2, 3, 4, 5])->color($this->colors[0])->fill(false);
 
         return $this;
     }

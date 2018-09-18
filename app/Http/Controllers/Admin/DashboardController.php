@@ -15,8 +15,15 @@ class DashboardController extends Controller
      */
     public function index(ChartInterface $chartConstructor, DishOrderRepository $dishOrder)
     {
-        $chart = $chartConstructor->getChart($dishOrder->getDataByDishId(13));
+        $chart = $chartConstructor->getChart($dishOrder->getAllByDishIdWithDish(13));
+        $dishOrders = $dishOrder->all()->unique('dish_id');
 
-        return view('admin.dashboard', ['chart' => $chart]);
+        return view('admin.dashboard', ['chart' => $chart, 'dishOrders' => $dishOrders]);
     }
+
+    public function store()
+    {
+        return redirect()->back();
+    }
+
 }

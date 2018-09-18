@@ -139,7 +139,7 @@
             <ul class="sidebar-menu">
                 <li class="header">MAIN NAVIGATION</li>
                 <li class="treeview">
-                    <a href="{{ route('admin-index') }}">
+                    <a href="{{ route('dashboard.index') }}">
                         <i class="fa fa-dashboard"></i> <span>Админ-панель</span>
                     </a>
                 </li>
