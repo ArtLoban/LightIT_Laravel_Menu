@@ -9,7 +9,7 @@ class CustomerRepository extends Repository
     /**
      * @return string
      */
-    protected function getClassName()
+    protected function getClassName(): string
     {
         return Customer::class;
     }

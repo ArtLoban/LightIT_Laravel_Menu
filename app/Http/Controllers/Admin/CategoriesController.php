@@ -113,5 +113,4 @@ class CategoriesController extends Controller
         $this->categoryRepository->deleteById($category->getKey());
         return redirect()->route('categories.index');
     }
-
 }

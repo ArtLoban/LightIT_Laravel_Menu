@@ -9,7 +9,7 @@ class OrderStatusRepository extends Repository
     /**
      * @return string
      */
-    protected function getClassName()
+    protected function getClassName(): string
     {
         return OrderStatus::class;
     }

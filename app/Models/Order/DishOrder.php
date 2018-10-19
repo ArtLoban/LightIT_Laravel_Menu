@@ -34,5 +34,4 @@ class DishOrder extends Model
     {
         return $this->belongsTo(Dish::class);
     }
-
 }

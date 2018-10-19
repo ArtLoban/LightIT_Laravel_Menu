@@ -2,7 +2,6 @@
 
 namespace App\Helpers\ColorPicker;
 
-
 class ColorPicker implements ColorPickerInterface
 {
     /**

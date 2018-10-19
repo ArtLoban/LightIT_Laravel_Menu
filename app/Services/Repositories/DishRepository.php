@@ -9,7 +9,7 @@ class DishRepository extends Repository
     /**
      * @return string
      */
-    protected function getClassName()
+    protected function getClassName(): string
     {
         return Dish::class;
     }
@@ -52,5 +52,4 @@ class DishRepository extends Repository
     {
         return $this->className::whereIn('id', $ids)->get();
     }
-
 }

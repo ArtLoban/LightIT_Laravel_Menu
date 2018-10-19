@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 abstract class Repository
 {
     /**
-     * @var
+     * @var string
      */
     protected $className;
 
@@ -21,9 +21,9 @@ abstract class Repository
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    abstract protected function getClassName();
+    abstract protected function getClassName(): string ;
 
     /**
      * @return mixed
@@ -91,7 +91,7 @@ abstract class Repository
     /**
      * @param int $id
      * @param array $params
-     * @return bool
+     * @return Model
      */
     public function updateById(int $id, array $params)
     {
@@ -133,5 +133,4 @@ abstract class Repository
 
         return $this->delete($model);
     }
-
 }

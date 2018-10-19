@@ -10,7 +10,7 @@ class DishOrderRepository extends Repository
     /**
      * @return string
      */
-    protected function getClassName()
+    protected function getClassName(): string
     {
         return DishOrder::class;
     }

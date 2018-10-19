@@ -22,7 +22,6 @@ class CustomerController extends Controller
         $this->customerRepository = $customerRepository;
     }
 
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -30,7 +29,6 @@ class CustomerController extends Controller
     {
         return view('admin.customers.index', ['customers' => $this->customerRepository->all()]);
     }
-
 
     /**
      * Display the specified resource

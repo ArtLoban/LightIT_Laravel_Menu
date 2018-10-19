@@ -9,7 +9,7 @@ class PermissionRepository extends Repository
     /**
      * @return string
      */
-    protected function getClassName()
+    protected function getClassName(): string
     {
         return Permission::class;
     }

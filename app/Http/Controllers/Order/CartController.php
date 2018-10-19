@@ -41,17 +41,17 @@ class CartController extends Controller
     public function store(StoreRequest $request)
     {
         $this->orderTransform->pushRequestIntoSession(
-                $request->input('dishId'),
-                $request->input('dishQuantity'
-            ));
+            $request->input('dishId'),
+            $request->input('dishQuantity'
+        ));
     }
 
     /**
      * Removes Dish id from Session
      *
-     * @param $itemId
+     * @param int $itemId
      */
-    public function destroy($itemId)
+    public function destroy(int $itemId)
     {
         $this->orderTransform->deleteItemFromOrder($itemId);
     }

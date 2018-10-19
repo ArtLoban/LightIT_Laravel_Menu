@@ -9,9 +9,8 @@ class IngredientRepository extends Repository
     /**
      * @return string
      */
-    protected function getClassName()
+    protected function getClassName(): string
     {
         return Ingredient::class;
     }
-
 }

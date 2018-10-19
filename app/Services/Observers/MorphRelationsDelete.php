@@ -17,5 +17,4 @@ class MorphRelationsDelete implements MorphRelationsDeleteInterface
             return $owner->{$relation} ? $owner->{$relation}->delete() : false;
         }
     }
-
 }

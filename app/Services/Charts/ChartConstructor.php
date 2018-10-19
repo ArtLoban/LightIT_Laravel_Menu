@@ -45,7 +45,9 @@ class ChartConstructor extends Chart implements ChartInterface
             $this->showFakeTrand();
         } else {
             $this->labels($data['date']);
-            $this->dataset($data['name'], 'line', $data['quantity'])->color($this->colors[0])->fill(false);
+            $this->dataset($data['name'], 'line', $data['quantity'])
+                ->color($this->colors[0])
+                ->fill(false);
         }
 
         return $this;
@@ -59,7 +61,9 @@ class ChartConstructor extends Chart implements ChartInterface
     private function showFakeTrand(): ChartConstructor
     {
         $this->labels([0, 1, 2, 3, 4, 5]);
-        $this->dataset('trand', 'line', [0, 1, 2, 3, 4, 5])->color($this->colors[0])->fill(false);
+        $this->dataset('trand', 'line', [0, 1, 2, 3, 4, 5])
+            ->color($this->colors[0])
+            ->fill(false);
 
         return $this;
     }

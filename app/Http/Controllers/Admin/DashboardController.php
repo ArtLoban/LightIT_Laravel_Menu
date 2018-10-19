@@ -21,9 +21,11 @@ class DashboardController extends Controller
         return view('admin.dashboard', ['chart' => $chart, 'dishOrders' => $dishOrders]);
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store()
     {
         return redirect()->back();
     }
-
 }

@@ -100,6 +100,4 @@ class Dish extends Model implements HasImage, HasMorphRelations
             'image'
         ];
     }
-
-
 }

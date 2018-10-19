@@ -42,5 +42,4 @@ class OrderController extends Controller
         $specificOrder = $this->orderRepository->getWithRelation($order->getKey());
         return view('admin.orders.show', ['order' => $specificOrder]);
     }
-
 }

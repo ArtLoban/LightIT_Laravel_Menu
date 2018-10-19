@@ -7,9 +7,9 @@ use App\Models\User;
 class UserRepository extends Repository
 {
     /**
-     * @return mixed|string
+     * @return string
      */
-    protected function getClassName()
+    protected function getClassName(): string
     {
         return User::class;
     }
@@ -35,5 +35,4 @@ class UserRepository extends Repository
         }
         return $this->className::create($params);
     }
-
 }

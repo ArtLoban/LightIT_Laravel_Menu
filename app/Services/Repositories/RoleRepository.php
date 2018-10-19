@@ -7,9 +7,9 @@ use App\Models\Role;
 class RoleRepository extends Repository
 {
     /**
-     * @return mixed|string
+     * @return string
      */
-    protected function getClassName()
+    protected function getClassName(): string
     {
         return Role::class;
     }

@@ -12,7 +12,7 @@ interface HasImage
     public function getImage();
 
     /**
-     * @return string\
+     * @return string
      */
     public function ownerType(): string;
 

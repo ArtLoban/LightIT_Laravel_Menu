@@ -12,13 +12,13 @@ class OrderRepository extends Repository
     const CANCELED_STATUS = 3;
     const NOT_FOUND_STATUS = 4;
 
-    protected function getClassName()
+    protected function getClassName(): string
     {
         return Order::class;
     }
 
     /**
-     * Stores customer's Order into related tables using transaction
+     * Store customer's Order into related tables using transaction
      *
      * @param array $requestData
      * @param $customerRepository
@@ -44,7 +44,7 @@ class OrderRepository extends Repository
     }
 
     /**
-     * Stores Order items from session into DishOrders model
+     * Store Order items from session into DishOrders model
      *
      * @param $order
      * @param $dishRepository
@@ -65,13 +65,13 @@ class OrderRepository extends Repository
     }
 
     /**
-     * Returns price of the specific Dish
+     * Return price of the specific Dish
      *
      * @param $id
      * @param $dishRepository
      * @return string
      */
-    private function findDishPriceById($id, $dishRepository): string
+    private function findDishPriceById(int $id, $dishRepository): string
     {
         return $dishRepository->find($id)->price;
     }
@@ -103,9 +103,8 @@ class OrderRepository extends Repository
      * @param $userId
      * @return mixed
      */
-    public function getAllUserOrdersWithRelations($userId)
+    public function getAllUserOrdersWithRelations(int $userId)
     {
         return $this->className::where('user_id', $userId)->with('dishOrders.dish', 'status')->get();
     }
-
 }

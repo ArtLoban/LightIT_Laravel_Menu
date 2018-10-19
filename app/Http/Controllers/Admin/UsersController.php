@@ -77,8 +77,8 @@ class UsersController extends Controller
         User $user,
         UpdateRequest $request,
         UserUpdateDataTransform $transformer,
-        ImageUpload $imageUploader)
-    {
+        ImageUpload $imageUploader
+    ) {
         $specificUser = $this->userRepository
             ->updateById($user->getKey(), $transformer->transform($request->except('_token', '_method', 'updatedUserId')));
 

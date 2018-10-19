@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\UpdateRequest;
 use App\Services\Repositories\OrderRepository;
 use App\Services\Repositories\UserRepository;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CabinetController extends Controller
@@ -42,5 +41,4 @@ class CabinetController extends Controller
         $userRepository->updateById($request->user()->getKey(), $request->all());
         return back()->with('msg', 'Данные обновлены');
     }
-
 }

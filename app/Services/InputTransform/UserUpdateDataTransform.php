@@ -63,5 +63,4 @@ class UserUpdateDataTransform implements TransformerInterface
     {
         return $this->hashService->make($password);
     }
-
 }

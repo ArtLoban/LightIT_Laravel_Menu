@@ -9,7 +9,7 @@ class ImageRepository extends Repository
     /**
      * @return string
      */
-    protected function getClassName()
+    protected function getClassName(): string
     {
         return Image::class;
     }
@@ -24,5 +24,4 @@ class ImageRepository extends Repository
     {
         $this->className::find($roleName)->imageable()->attach($image);
     }
-
 }

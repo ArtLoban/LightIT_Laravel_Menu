@@ -78,5 +78,4 @@ class OrderTransform
     {
         session()->forget("dishes.$id");
     }
-
 }
